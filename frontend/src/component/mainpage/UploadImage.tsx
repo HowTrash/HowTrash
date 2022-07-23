@@ -44,33 +44,59 @@ function UploadImage() {
     }
   };
 
-  const sendImage = async () => {
+  // const sendImage: () => Promise<any> = async () => {
+  //   const trashFormData = new FormData();
+  //   trashFormData.append("filename", respondImg as any);
+
+  //   await Api.post(
+  //     `/trash/mainpage/users/f446242a-a219-44b9-aef7-86932259f799/result`,
+  //     trashFormData
+  //   )
+  //     .then((res) => {
+  //       const sendAxiosTrashResult: rs.TrashResult = {
+  //         state: {
+  //           trashName: res.data[0].name,
+  //           throwWay: res.data[0].way,
+  //           imgSrc: urlImg,
+  //         },
+  //       };
+  //       navigate(`/mainpage/resultpage`, { state: sendAxiosTrashResult.state });
+  //     })
+  //     .catch((error) => {
+  //       console.log("An error occurred:", error.response);
+  //     });
+  // };
+
+  // const onClickImgResult = () => {
+  //   if (isImg === null) return alert("no image");
+  //   else {
+  //     sendImage();
+  //   }
+  // };
+  const sendImage: () => Promise<any> = async () => {
     const trashFormData = new FormData();
     trashFormData.append("filename", respondImg as any);
 
-    await Api.post(
+    return await Api.post(
       `/trash/mainpage/users/f446242a-a219-44b9-aef7-86932259f799/result`,
       trashFormData
-    )
-      .then((res) => {
-        const sendAxiosTrashResult: rs.TrashResult = {
-          state: {
-            trashName: res.data[0].name,
-            throwWay: res.data[0].way,
-            imgSrc: urlImg,
-          },
-        };
-        navigate(`/mainpage/resultpage`, { state: sendAxiosTrashResult.state });
-      })
-      .catch((error) => {
-        console.log("An error occurred:", error.response);
-      });
+    );
   };
 
   const onClickImgResult = () => {
     if (isImg === null) return alert("no image");
     else {
-      sendImage();
+      (async () => {
+        const res = await sendImage();
+        // const tN = res.data[0].name;
+        navigate(`/mainpage/resultpage`, {
+          state: {
+            trashName: res.data[0].name,
+            throwWay: res.data[0].way,
+            imgSrc: urlImg,
+          },
+        });
+      })();
     }
   };
 
