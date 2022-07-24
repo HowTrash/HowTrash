@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useState } from "react";
-import axios from "axios";
 import Api from "../utils/customApi";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -18,7 +17,6 @@ import {
   styled,
 } from "@mui/material";
 import TrashCan from "../../src/images/trashcan";
-import { ConstructionOutlined } from "@mui/icons-material";
 
 const style = {
   position: "absolute",
@@ -168,15 +166,6 @@ const Register = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleOverlab = async (props: Array<string>, event: any) => {
-    event.preventDefault();
-    console.log(props);
-    const res = await Api.get(
-      `/user/?case=${props[0]}&value=${props[1] as string}`
-    );
-    console.log(res.data.result);
-  };
-
   const onBlurInfo = async (props: Array<string>, event: any) => {
     const res = await Api.get(
       `/user/?case=${props[0]}&value=${props[1] as string}`
@@ -243,11 +232,11 @@ const Register = () => {
                 autoFocus
                 onChange={(e) => setId(e.target.value)}
                 onBlur={(event) => {
-                  onBlurInfo(["name", id as string], event);
+                  onBlurInfo(["name", id], event);
                 }}
                 error={nameError !== "" || false}
               />
-              <span style={{ color: "red", fontSize: 15, fontStyle: "bold" }}>
+              <span style={{ color: "red", fontSize: 15, fontWeight: "bold" }}>
                 {checkid}
               </span>
 
@@ -285,11 +274,13 @@ const Register = () => {
                 autoComplete="email"
                 onChange={(e) => setEmail(e.target.value)}
                 onBlur={(event) => {
-                  onBlurInfo(["email", email as string], event);
+                  onBlurInfo(["email", email], event);
                 }}
                 error={emailError !== "" || false}
               />
-              <span>{checkEmail}</span>
+              <span style={{ color: "red", fontSize: 15, fontWeight: "bold" }}>
+                {checkEmail}
+              </span>
 
               <FormHelperTexts>{emailError}</FormHelperTexts>
               <UserInfoTf
@@ -302,10 +293,12 @@ const Register = () => {
                 id="nickname"
                 onChange={(e) => setNickname(e.target.value)}
                 onBlur={(event) => {
-                  onBlurInfo(["alias", nickname as string], event);
+                  onBlurInfo(["alias", nickname], event);
                 }}
               />
-              <span>{checkAilas}</span>
+              <span style={{ color: "red", fontSize: 15, fontWeight: "bold" }}>
+                {checkAilas}
+              </span>
 
               <React.Fragment>
                 <Button
