@@ -1,9 +1,22 @@
 import * as React from "react";
 import { useState } from "react";
 import axios from "axios";
+import Api from "../utils/customApi";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { FormHelperText,Modal,Backdrop,Button,CssBaseline,TextField,Box,Typography,Container,Link,styled} from "@mui/material";
+import {
+  FormHelperText,
+  Modal,
+  Backdrop,
+  Button,
+  CssBaseline,
+  TextField,
+  Box,
+  Typography,
+  Container,
+  Link,
+  styled,
+} from "@mui/material";
 import TrashCan from "../../src/images/trashcan";
 import { ConstructionOutlined } from "@mui/icons-material";
 
@@ -67,35 +80,39 @@ const FormHelperTexts = styled(FormHelperText)`
   font-size: 16px;
 `;
 
-
 interface User {
-  name : FormDataEntryValue | null;
-  pw : FormDataEntryValue | null;
-  alias : FormDataEntryValue | null;
-  email : FormDataEntryValue | null;
-};
+  name: FormDataEntryValue | null;
+  pw: FormDataEntryValue | null;
+  alias: FormDataEntryValue | null;
+  email: FormDataEntryValue | null;
+}
 
-
-const Register= () => {
+const Register = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordState, setPasswordState] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [nameError, setNameError] = useState("");
   const [registerError, setRegisterError] = useState("");
 
+  const [id, setId] = useState("");
+  const [email, setEmail] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [checkid, setCheckid] = useState("");
+  const [checkEmail, setCheckEmail] = useState("");
+  const [checkAilas, setCheckAlias] = useState("");
 
   //form 비교
-  const handleSubmit = (e : React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const data = new FormData(e.currentTarget);
 
-    const user : User = { 
+    const user: User = {
       name: data.get("name"),
       pw: data.get("password"),
       alias: data.get("nickname"),
       email: data.get("email"),
-    }
+    };
 
     const rePassword = data.get("rePassword");
     // console.log(email, name, password, rePassword);
@@ -120,7 +137,10 @@ const Register= () => {
 
     // 이름 유효성 검사
     const nameRegex = /^[가-힣a-zA-Z]+$/;
-    if (!nameRegex.test(user.name as string) || (user.name as string).length < 1)
+    if (
+      !nameRegex.test(user.name as string) ||
+      (user.name as string).length < 1
+    )
       setNameError("올바른 이름을 입력해주세요.");
     else setNameError("");
 
@@ -128,11 +148,10 @@ const Register= () => {
     if (
       emailRegex.test(user.email as string) &&
       passwordRegex.test(user.pw as string) &&
-      user.pw as string === rePassword &&
+      (user.pw as string) === rePassword &&
       nameRegex.test(user.name as string)
     ) {
-      axios
-        .post<User>("http://localhost:8080/user/signup/", user)
+      Api.post<User>(`/user/`, user)
         .then((response) => {
           // Handle success.
           handleOpen();
@@ -143,12 +162,38 @@ const Register= () => {
           console.log("An error occurred:", error.response);
         });
     }
-
   };
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleOverlab = async (props: Array<string>, event: any) => {
+    event.preventDefault();
+    console.log(props);
+    const res = await Api.get(
+      `/user/?case=${props[0]}&value=${props[1] as string}`
+    );
+    console.log(res.data.result);
+  };
+
+  const onBlurInfo = async (props: Array<string>, event: any) => {
+    const res = await Api.get(
+      `/user/?case=${props[0]}&value=${props[1] as string}`
+    );
+    if (props[0] == "name") {
+      if (res.data.result == false) setCheckid("사용중");
+      else setCheckid("사용가능~~~");
+    }
+    if (props[0] == "email") {
+      if (res.data.result == false) setCheckEmail("사용중");
+      else setCheckEmail("사용가능~~~");
+    }
+    if (props[0] == "alias") {
+      if (res.data.result == false) setCheckAlias("사용중");
+      else setCheckAlias("사용가능~~~");
+    }
+  };
 
   return (
     <Container
@@ -180,6 +225,7 @@ const Register= () => {
               회원가입
             </Typography>
             <Box
+              textAlign="left"
               component="form"
               color="info.contrastText"
               onSubmit={handleSubmit}
@@ -190,15 +236,22 @@ const Register= () => {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                name="name"
+                label="ID"
+                type="name"
+                id="name"
                 autoFocus
-                error={emailError !== "" || false}
+                onChange={(e) => setId(e.target.value)}
+                onBlur={(event) => {
+                  onBlurInfo(["name", id as string], event);
+                }}
+                error={nameError !== "" || false}
               />
-              <FormHelperTexts>{emailError}</FormHelperTexts>
+              <span style={{ color: "red", fontSize: 15, fontStyle: "bold" }}>
+                {checkid}
+              </span>
 
+              <FormHelperTexts>{nameError}</FormHelperTexts>
               <UserInfoTf
                 margin="normal"
                 required
@@ -210,7 +263,6 @@ const Register= () => {
                 error={passwordState !== "" || false}
               />
               <FormHelperTexts>{passwordState}</FormHelperTexts>
-
               <UserInfoTf
                 margin="normal"
                 required
@@ -227,14 +279,19 @@ const Register= () => {
                 margin="normal"
                 required
                 fullWidth
-                name="name"
-                label="name"
-                type="name"
-                id="name"
-                error={nameError !== "" || false}
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                onChange={(e) => setEmail(e.target.value)}
+                onBlur={(event) => {
+                  onBlurInfo(["email", email as string], event);
+                }}
+                error={emailError !== "" || false}
               />
-              <FormHelperTexts>{nameError}</FormHelperTexts>
+              <span>{checkEmail}</span>
 
+              <FormHelperTexts>{emailError}</FormHelperTexts>
               <UserInfoTf
                 margin="normal"
                 required
@@ -243,7 +300,12 @@ const Register= () => {
                 label="nickname"
                 type="nickname"
                 id="nickname"
+                onChange={(e) => setNickname(e.target.value)}
+                onBlur={(event) => {
+                  onBlurInfo(["alias", nickname as string], event);
+                }}
               />
+              <span>{checkAilas}</span>
 
               <React.Fragment>
                 <Button
@@ -304,6 +366,6 @@ const Register= () => {
       </ThemeProvider>
     </Container>
   );
-}
+};
 
 export default Register;
