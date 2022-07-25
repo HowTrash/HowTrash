@@ -1,6 +1,5 @@
 import React, { PureComponent, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import axios from 'axios';
 
 interface Content {
   trash_kind: string;
@@ -10,8 +9,22 @@ interface Content {
 interface Contentlist {
   list: Array<Content>;
 }
-
-function TrashChart({ list }: Contentlist) {
+/*
+const trashlist : Contentlist = 
+ {list:[
+  {
+    trash_kind:"오왕",
+    cnt:0
+  },
+  {
+  trash_kind:"asf",
+  cnt:0
+},
+]}
+*/
+function TrashChart( {list} : Contentlist) {
+  //const[BasicList,setBasicList] = useState(trashlist.list);
+  //setBasicList(trashlist.list);
   console.log("잘 받아와졌는지?", list);
   return (
     <ResponsiveContainer width="100%" height="100%">

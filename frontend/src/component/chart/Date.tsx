@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Typography, Button, Grid } from '@mui/material';
+import { Typography, Button, Grid, Box } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -28,7 +28,7 @@ function formatDate(date: Date) {
 function Dates({ onClickRetrieve }: { onClickRetrieve: any }) { // 함수의 반환 : onClickRetrieve
 
   const [StartDate, setStartDate] = React.useState<string | null>(null);
-  const [StartLock,setStartLock] = React.useState<Date | null> (null);
+  const [StartLock, setStartLock] = React.useState<Date | null>(null);
   const [EndDate, setEndDate] = React.useState<string | null>(null);
 
   const HandleStartChange = (date: Date) => {
@@ -81,33 +81,48 @@ function Dates({ onClickRetrieve }: { onClickRetrieve: any }) { // 함수의 반
         direction="row"
         justifyContent="center"
         alignItems="center"
-        sx={{ paddingTop: 3 }}
+        sx={{ paddingTop: 2 }}
         onSubmit={HandleSubmit}
         noValidate
       >
         <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DatePicker
-            label="시작 날짜"
-            inputFormat="yyyy/MM/dd"
-            value={StartDate}
-            onChange={HandleStartChange as any}
-            renderInput={(params) => <TextField size="small" {...params} sx={{ width: '35%' }} />}
-          />
-          <Typography color="black" fontWeight="bold" sx={{ fontSize: "medium", mx: 2 }}>to</Typography>
-          <DatePicker
-            label="종료 날짜"
-            inputFormat="yyyy/MM/dd"
-            value={EndDate}
-            onChange={HandleEndChange as any}
-            minDate={StartLock}
-            renderInput={(params) => <TextField size="small" {...params} sx={{ width: '35%' }} />}
-          />
-          <Button
-            type="submit"
-            variant="contained"
-            sx={{ height: 40, color: 'white', fontWeight: 'bold', fontSize: 18, marginLeft: 3, backgroundColor: "#759F98" }}
-          >
-            조회</Button>
+          <Grid container
+            direction="row"
+            justifyContent="center"
+            alignItems="center">
+            <Box margin="4px">
+              <DatePicker
+                label="시작 날짜"
+                inputFormat="yyyy/MM/dd"
+                value={StartDate}
+                onChange={HandleStartChange as any}
+                renderInput={(params) => <TextField size="small" {...params} sx={{ width: '100%' }} />}
+              />
+            </Box>
+            <Box margin="4px"
+            justifyContent="center"
+            alignItems="center">
+              <Typography color="black" fontWeight="bold" sx={{ fontSize: "medium", mx: 2 }}>to</Typography>
+              </Box>
+              <Box margin="4px">
+              <DatePicker
+                label="종료 날짜"
+                inputFormat="yyyy/MM/dd"
+                value={EndDate}
+                onChange={HandleEndChange as any}
+                minDate={StartLock}
+                renderInput={(params) => <TextField size="small" {...params} sx={{ width: '100%' }} />}
+              />
+            </Box>
+            <Box margin="4px">
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{ height: 40, color: 'white', fontWeight: 'bold', fontSize: 18, marginLeft: 3, backgroundColor: "#759F98" }}
+            >
+              조회</Button>
+              </Box>
+          </Grid>
         </LocalizationProvider>
       </Grid>
     </ThemeProvider>
