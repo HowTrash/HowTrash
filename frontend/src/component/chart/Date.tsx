@@ -15,7 +15,7 @@ const theme = createTheme({
   },
 });
 
-function formatNowDate(date: Date) {
+function formatDate(date: Date) {
   return (
     [
       date.getFullYear(),
@@ -23,33 +23,23 @@ function formatNowDate(date: Date) {
       date.getDate().toString().padStart(2, '0')
     ].join('-')
   );
-} // 오늘 & 현재
-const DateNow = formatNowDate(new Date());
-
-function formatBeforeDate(date: Date) {
-  return (
-    [
-      date.getFullYear(),
-      (date.getMonth() + 1).toString().padStart(2, '0'),
-      (date.getDate() - 7).toString().padStart(2, '0')
-    ].join('-')
-  );
-} // 일주일 전
-const DateBefore = formatBeforeDate(new Date());
+} // 날짜 상태
 
 function Dates({ onClickRetrieve }: { onClickRetrieve: any }) { // 함수의 반환 : onClickRetrieve
 
-  const [StartDate, setStartDate] = React.useState(DateBefore);
-  const [EndDate, setEndDate] = React.useState(DateNow);
-  const [UserData, setUserData] = React.useState<string[]>([]);
+  const [StartDate, setStartDate] = React.useState<string | null>(null);
+  const [StartLock,setStartLock] = React.useState<Date | null> (null);
+  const [EndDate, setEndDate] = React.useState<string | null>(null);
 
   const HandleStartChange = (date: Date) => {
-    const dateresult = formatNowDate(date);
+    const dateresult = formatDate(date);
+    const datepad = date;
     setStartDate(dateresult);
+    setStartLock(datepad);
   };
 
   const HandleEndChange = (date: Date) => {
-    const dateresult = formatNowDate(date);
+    const dateresult = formatDate(date);
     setEndDate(dateresult);
   };
 
@@ -57,23 +47,32 @@ function Dates({ onClickRetrieve }: { onClickRetrieve: any }) { // 함수의 반
     event.preventDefault();
     console.log(StartDate);
     console.log(EndDate);
-    {
-      axios
-        .get(`http://localhost:8080/trash/mypage/users/7eccf55d-fc68-451e-a8e7-5af673334be9/statistics/period/${StartDate}/${EndDate}`)
-        .then((response) => {
-          // Handle success.
-          const responseUserData = response.data;
-          console.log("data saved!");
-          console.log(response.data);
-          setUserData(response.data);
-          onClickRetrieve(responseUserData);
-        })
-        .catch((error) => {
-          // Handle error.
-          console.log("An error occurred:", error.response);
-        });
-    }
+    fetchUserData();
   };
+
+  const fetchUserData = () => {
+    const periodStr = StartDate !== null || EndDate !== null ? '/period' : '';
+    const startDateStr = StartDate !== null ? `/${StartDate}` : '';
+    const endDateStr = EndDate !== null ? `/${EndDate}` : '';
+
+    axios
+      .get(`http://localhost:8080/trash/mypage/users/7dc8601a-c554-42c2-9d7b-feb6500e24ff/statistics${periodStr}${startDateStr}${endDateStr}`)
+      .then((response) => {
+        // Handle success.
+        const responseUserData = response.data;
+        console.log("data saved!");
+        console.log(response.data);
+        onClickRetrieve(responseUserData);
+      })
+      .catch((error) => {
+        // Handle error.
+        console.log("An error occurred:", error.response);
+      });
+  }
+
+  React.useEffect(() => {
+    fetchUserData();
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -100,7 +99,7 @@ function Dates({ onClickRetrieve }: { onClickRetrieve: any }) { // 함수의 반
             inputFormat="yyyy/MM/dd"
             value={EndDate}
             onChange={HandleEndChange as any}
-            minDate={StartDate}
+            minDate={StartLock}
             renderInput={(params) => <TextField size="small" {...params} sx={{ width: '35%' }} />}
           />
           <Button

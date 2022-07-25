@@ -1,5 +1,6 @@
 import React, { PureComponent, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import axios from 'axios';
 
 interface Content {
   trash_kind: string;
