@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Api from "src/utils/customApi";
 import { rs } from "src/utils/types";
+import { setToken } from "src/module/tokenManager";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
   Divider,
@@ -88,15 +89,14 @@ function Login() {
         params: { name: data.get("name"), pw: data.get("password") },
       }).then((res) => res.data as rs.UserAuth);
       setSaveInfo(result);
-      console.log(result);
-      if (result.access_token !== null) {
-        localStorage.clear();
-        localStorage.setItem("access_token", result.access_token);
-        console.log("아이디는?", localStorage.getItem("access_token"));
+      console.log("받아온 결과1", result.access_token);
+      console.log("받아온 결과2", result.refresh_token);
 
+      if (result.access_token !== null) {
+        setToken(result.access_token, result.refresh_token);
         alert("로그인 성공♻️");
 
-        window.location.replace("/mainpage");
+        // window.location.replace("/mainpage");
       } else {
         alert("아이디와 비밀번호를 다시 확인해주세요.");
         // Handle error.

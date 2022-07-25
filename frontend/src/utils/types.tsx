@@ -3,6 +3,17 @@ export namespace rs {
     access_token: string;
     refresh_token: string;
   }
+  export interface TokenInfo {
+    value: string;
+    expiry: Date;
+  }
+  export interface TokenDecode {
+    name: string;
+    alias: string;
+    email: string;
+    exp: string;
+    token_type: string;
+  }
 
   export interface Trash {
     img: string;
