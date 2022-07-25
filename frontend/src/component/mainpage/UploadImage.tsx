@@ -4,12 +4,13 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Resizer from "react-image-file-resizer";
 import Api from "../../utils/customApi";
+import { rs } from "src/utils/types";
 
 function UploadImage() {
-  const [image, setImage] = useState(null); //image 존재 여부
-  const [preview, setPreview] = useState<string>(""); //이미지 주소값
+  const [isImg, setIsImg] = useState(null);
+  const [urlImg, setUrlImg] = useState<string>("");
+  const [respondImg, setRespondImg] = useState(null);
   const navigate = useNavigate();
-  const [resFile, setResFile] = useState(null); //넘겨줄 파일 이름으로 할려했으나 파일이면 string 말고 file로 해야함
 
   const resizeFile = (file: Blob) =>
     new Promise((resolve) => {
@@ -26,46 +27,77 @@ function UploadImage() {
         "file" // 저장 형식
       );
     });
-  const formdata = new FormData();
 
   const onChangeImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
       const file: any =
         event.target.files instanceof FileList ? event.target.files[0] : null;
 
-      setResFile(file);
+      setRespondImg(file);
 
       const img: any = await resizeFile(file);
-      setImage(img);
-      setPreview(URL.createObjectURL(img));
+      setIsImg(img);
+      setUrlImg(URL.createObjectURL(img));
       console.log("success upload image!");
-      console.log({ preview });
     } catch (err) {
       console.log(err);
     }
   };
 
-  const sendImage = async () => {
-    formdata.append("filename", resFile as any);
-    console.log(formdata);
-    await Api.post(
+  // const sendImage: () => Promise<any> = async () => {
+  //   const trashFormData = new FormData();
+  //   trashFormData.append("filename", respondImg as any);
+
+  //   await Api.post(
+  //     `/trash/mainpage/users/f446242a-a219-44b9-aef7-86932259f799/result`,
+  //     trashFormData
+  //   )
+  //     .then((res) => {
+  //       const sendAxiosTrashResult: rs.TrashResult = {
+  //         state: {
+  //           trashName: res.data[0].name,
+  //           throwWay: res.data[0].way,
+  //           imgSrc: urlImg,
+  //         },
+  //       };
+  //       navigate(`/mainpage/resultpage`, { state: sendAxiosTrashResult.state });
+  //     })
+  //     .catch((error) => {
+  //       console.log("An error occurred:", error.response);
+  //     });
+  // };
+
+  // const onClickImgResult = () => {
+  //   if (isImg === null) return alert("no image");
+  //   else {
+  //     sendImage();
+  //   }
+  // };
+  const sendImage: () => Promise<any> = async () => {
+    const trashFormData = new FormData();
+    trashFormData.append("filename", respondImg as any);
+
+    return await Api.post(
       `/trash/mainpage/users/f446242a-a219-44b9-aef7-86932259f799/result`,
-      formdata
-    )
-      .then((res) => res.data)
-      .catch((error) => {
-        // Handle error.
-        console.log("An error occurred:", error.response);
-      });
+      trashFormData
+    );
   };
 
   const onClickImgResult = () => {
-    if (image === null) return alert("no image");
+    if (isImg === null) return alert("no image");
     else {
-      navigate("/mainpage/resultpage", { state: preview });
+      (async () => {
+        const res = await sendImage();
+        // const tN = res.data[0].name;
+        navigate(`/mainpage/resultpage`, {
+          state: {
+            trashName: res.data[0].name,
+            throwWay: res.data[0].way,
+            imgSrc: urlImg,
+          },
+        });
+      })();
     }
-
-    sendImage();
   };
 
   return (
@@ -87,14 +119,14 @@ function UploadImage() {
           }}
           component="label"
         >
-          <img src={preview}></img>
+          <img src={urlImg}></img>
           <input
             type="file"
             hidden
             required
             onChange={(e) => onChangeImage(e)}
           />
-          {image ? null : (
+          {isImg ? null : (
             <Box>
               {" "}
               <CloudUploadIcon
