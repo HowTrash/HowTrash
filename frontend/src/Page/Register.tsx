@@ -99,6 +99,11 @@ const Register = () => {
   const [checkEmail, setCheckEmail] = useState("");
   const [checkAilas, setCheckAlias] = useState("");
 
+  const emailRegex =
+    /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+  const passwordRegex = /^[가-힣a-zA-Z]+$/;
+  const nameRegex = /^[가-힣a-zA-Z]+$/;
+
   //form 비교
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -113,34 +118,15 @@ const Register = () => {
     };
 
     const rePassword = data.get("rePassword");
-    // console.log(email, name, password, rePassword);
-
-    // 이메일 유효성 체크
-    const emailRegex =
-      /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-    if (!emailRegex.test(user.email as string))
-      setEmailError("올바른 이메일 형식이 아닙니다.");
-    else setEmailError("");
-
     // 비밀번호 유효성 체크
-    const passwordRegex = /^[가-힣a-zA-Z]+$/;
     if (!passwordRegex.test(user.pw as string))
-      setPasswordState("비밀번호를 입력해주세요!");
+      setPasswordState("비밀번호를 형식에 맞춰 입력해주세요!");
     else setPasswordState("");
 
     // 비밀번호 같은지 체크
     if (user.pw !== rePassword)
       setPasswordError("비밀번호가 일치하지 않습니다.");
     else setPasswordError("");
-
-    // 이름 유효성 검사
-    const nameRegex = /^[가-힣a-zA-Z]+$/;
-    if (
-      !nameRegex.test(user.name as string) ||
-      (user.name as string).length < 1
-    )
-      setNameError("올바른 이름을 입력해주세요.");
-    else setNameError("");
 
     // 모두 통과되면 완료출력
     if (
@@ -153,6 +139,7 @@ const Register = () => {
         .then((response) => {
           // Handle success.
           handleOpen();
+
           console.log("Well done!");
         })
         .catch((error) => {
@@ -170,14 +157,29 @@ const Register = () => {
     const res = await Api.get(
       `/user/?case=${props[0]}&value=${props[1] as string}`
     );
+
     if (props[0] == "name") {
-      if (res.data.result == false) setCheckid("사용중");
-      else setCheckid("사용가능~~~");
+      if (!nameRegex.test(id as string) || (id as string).length < 1) {
+        setNameError("올바른 이름을 입력해주세요.");
+        setCheckid("");
+      } else {
+        setNameError("");
+
+        if (res.data.result == false) setCheckid("사용중");
+        else setCheckid("사용가능~~~");
+      }
     }
     if (props[0] == "email") {
-      if (res.data.result == false) setCheckEmail("사용중");
-      else setCheckEmail("사용가능~~~");
+      if (!emailRegex.test(email as string)) {
+        setEmailError("올바른 이메일 형식이 아닙니다.");
+      } else {
+        setEmailError("");
+
+        if (res.data.result == false) setCheckEmail("사용중");
+        else setCheckEmail("사용가능~~~");
+      }
     }
+
     if (props[0] == "alias") {
       if (res.data.result == false) setCheckAlias("사용중");
       else setCheckAlias("사용가능~~~");
@@ -236,10 +238,16 @@ const Register = () => {
                 }}
                 error={nameError !== "" || false}
               />
-              <span style={{ color: "red", fontSize: 15, fontWeight: "bold" }}>
+              <span
+                style={{
+                  color: "red",
+                  fontSize: 15,
+                  fontWeight: "bold",
+                  marginLeft: 13,
+                }}
+              >
                 {checkid}
               </span>
-
               <FormHelperTexts>{nameError}</FormHelperTexts>
               <UserInfoTf
                 margin="normal"
@@ -278,7 +286,14 @@ const Register = () => {
                 }}
                 error={emailError !== "" || false}
               />
-              <span style={{ color: "red", fontSize: 15, fontWeight: "bold" }}>
+              <span
+                style={{
+                  color: "red",
+                  fontSize: 15,
+                  fontWeight: "bold",
+                  marginLeft: 13,
+                }}
+              >
                 {checkEmail}
               </span>
 
@@ -296,7 +311,14 @@ const Register = () => {
                   onBlurInfo(["alias", nickname], event);
                 }}
               />
-              <span style={{ color: "red", fontSize: 15, fontWeight: "bold" }}>
+              <span
+                style={{
+                  color: "red",
+                  fontSize: 15,
+                  fontWeight: "bold",
+                  marginLeft: 13,
+                }}
+              >
                 {checkAilas}
               </span>
 
