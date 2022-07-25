@@ -247,9 +247,8 @@ const Register = () => {
               <span
                 style={{
                   color: "red",
-                  fontSize: 15,
-                  fontWeight: "bold",
-                  marginLeft: 13,
+                  fontSize: 13,
+                  marginLeft: 8,
                 }}
               >
                 {checkName}
@@ -295,9 +294,8 @@ const Register = () => {
               <span
                 style={{
                   color: "red",
-                  fontSize: 15,
-                  fontWeight: "bold",
-                  marginLeft: 13,
+                  fontSize: 13,
+                  marginLeft: 8,
                 }}
               >
                 {checkEmail}
@@ -320,9 +318,8 @@ const Register = () => {
               <span
                 style={{
                   color: "red",
-                  fontSize: 15,
-                  fontWeight: "bold",
-                  marginLeft: 13,
+                  fontSize: 13,
+                  marginLeft: 8,
                 }}
               >
                 {checkAilas}
