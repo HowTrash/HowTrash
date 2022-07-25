@@ -90,12 +90,12 @@ const Register = () => {
   const [passwordState, setPasswordState] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [nameError, setNameError] = useState("");
-  const [registerError, setRegisterError] = useState("");
+  const [aliasError, setAliasError] = useState("");
 
-  const [id, setId] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [checkid, setCheckid] = useState("");
+  const [alias, setAlias] = useState("");
+  const [checkName, setCheckName] = useState("");
   const [checkEmail, setCheckEmail] = useState("");
   const [checkAilas, setCheckAlias] = useState("");
 
@@ -103,6 +103,7 @@ const Register = () => {
     /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
   const passwordRegex = /^[가-힣a-zA-Z]+$/;
   const nameRegex = /^[가-힣a-zA-Z]+$/;
+  const aliasRegex = /^[가-힣a-zA-Z]+$/;
 
   //form 비교
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -113,7 +114,7 @@ const Register = () => {
     const user: User = {
       name: data.get("name"),
       pw: data.get("password"),
-      alias: data.get("nickname"),
+      alias: data.get("alias"),
       email: data.get("email"),
     };
 
@@ -133,7 +134,8 @@ const Register = () => {
       emailRegex.test(user.email as string) &&
       passwordRegex.test(user.pw as string) &&
       (user.pw as string) === rePassword &&
-      nameRegex.test(user.name as string)
+      nameRegex.test(user.name as string) &&
+      aliasRegex.test(user.alias as string)
     ) {
       Api.post<User>(`/user/`, user)
         .then((response) => {
@@ -159,14 +161,13 @@ const Register = () => {
     );
 
     if (props[0] == "name") {
-      if (!nameRegex.test(id as string) || (id as string).length < 1) {
+      if (!nameRegex.test(name as string) || (name as string).length < 1) {
         setNameError("올바른 이름을 입력해주세요.");
-        setCheckid("");
+        setCheckName("");
       } else {
         setNameError("");
-
-        if (res.data.result == false) setCheckid("사용중");
-        else setCheckid("사용가능~~~");
+        if (res.data.result == false) setCheckName("사용 중인 아이디입니다.");
+        else setCheckName("사용 가능한 아이디 입니다.");
       }
     }
     if (props[0] == "email") {
@@ -174,15 +175,20 @@ const Register = () => {
         setEmailError("올바른 이메일 형식이 아닙니다.");
       } else {
         setEmailError("");
-
-        if (res.data.result == false) setCheckEmail("사용중");
-        else setCheckEmail("사용가능~~~");
+        if (res.data.result == false) setCheckEmail("사용 중인 이메일 입니다.");
+        else setCheckEmail("사용 가능한 이메일 입니다.");
       }
     }
 
     if (props[0] == "alias") {
-      if (res.data.result == false) setCheckAlias("사용중");
-      else setCheckAlias("사용가능~~~");
+      if (!aliasRegex.test(alias as string) || (alias as string).length < 1) {
+        setAliasError("올바른 이름을 입력해주세요.");
+        setCheckName("");
+      } else {
+        setAliasError("");
+        if (res.data.result == false) setCheckAlias("사용 중인 닉네임 입니다.");
+        else setCheckAlias("사용 가능한 닉네임 입니다.");
+      }
     }
   };
 
@@ -232,9 +238,9 @@ const Register = () => {
                 type="name"
                 id="name"
                 autoFocus
-                onChange={(e) => setId(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
                 onBlur={(event) => {
-                  onBlurInfo(["name", id], event);
+                  onBlurInfo(["name", name], event);
                 }}
                 error={nameError !== "" || false}
               />
@@ -246,7 +252,7 @@ const Register = () => {
                   marginLeft: 13,
                 }}
               >
-                {checkid}
+                {checkName}
               </span>
               <FormHelperTexts>{nameError}</FormHelperTexts>
               <UserInfoTf
@@ -302,13 +308,13 @@ const Register = () => {
                 margin="normal"
                 required
                 fullWidth
-                name="nickname"
-                label="nickname"
-                type="nickname"
-                id="nickname"
-                onChange={(e) => setNickname(e.target.value)}
+                name="alias"
+                label="Nickname"
+                type="alias"
+                id="alias"
+                onChange={(e) => setAlias(e.target.value)}
                 onBlur={(event) => {
-                  onBlurInfo(["alias", nickname], event);
+                  onBlurInfo(["alias", alias], event);
                 }}
               />
               <span
@@ -338,7 +344,6 @@ const Register = () => {
                 >
                   가입하기
                 </Button>
-                <FormHelperTexts>{registerError}</FormHelperTexts>
 
                 <Modal
                   aria-labelledby="modal-title"
