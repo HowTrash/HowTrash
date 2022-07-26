@@ -42,6 +42,7 @@ function App() {
           <Route path="/howto" element={<Howto />} />
           <Route path="/register" element={<Register />} />
           <Route path="/mainpage/resultpage" element={<SearchResult />} />
+          {/* mypage 에 접근 못하게 라우팅 */}
           <Route element={<AuthRouter />}>
             <Route path="/mypage" element={<MyPage />}>
               <Route index element={<MyTrashcan />} />

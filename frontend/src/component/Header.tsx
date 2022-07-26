@@ -45,10 +45,10 @@ function Header() {
   };
 
   const token = localStorage.getItem("access_token");
-  console.log(token);
+  console.log("해더에서 찾은 토큰", token);
 
   function deleteToken() {
-    localStorage.removeItem("access_token");
+    localStorage.clear();
   }
 
   return (

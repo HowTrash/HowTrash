@@ -98,10 +98,10 @@ function Login() {
         setToken(result.access_token, result.refresh_token);
         alert("로그인 성공♻️");
 
-        checkAccessToken();
-        checkRefreshToken();
+        // checkAccessToken();
+        // checkRefreshToken();
         decodeToken(result.access_token);
-        window.location.replace("/mainpage");
+        // window.location.replace("/mainpage");
       } else {
         alert("아이디와 비밀번호를 다시 확인해주세요.");
         // Handle error.

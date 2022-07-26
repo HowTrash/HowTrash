@@ -7,7 +7,7 @@ const setToken = (accessToken: string, refreshtoken: string) => {
   console.log("잘 들r어왔나?", accessToken);
   axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
   const today = new Date();
-  const accessExpires = new Date().setTime(today.getTime() + 1000 * 60 * 5); // 만료 30분
+  const accessExpires = new Date().setTime(today.getTime() + 1000 * 60 * 3); // 만료 30분
   // const refreshExpires = new Date().setTime(
   //   today.getTime() + 1000 * 60 * 60 * 24 * 14
   // );
@@ -29,7 +29,9 @@ const setToken = (accessToken: string, refreshtoken: string) => {
   );
 
   // decodeToken(accessToken);
-  console.log("만료시간", accessExpires);
+  console.log("만료시간 ac", accessExpires);
+  console.log("만료시간 re", refreshExpires);
+
   const accessStorage: rs.TokenInfo = {
     value: accessToken,
     expiry: accessExpires,
