@@ -7,6 +7,11 @@ export function AuthRouter() {
   useEffect(() => {
     (async () => {
       const token = checkAccessToken();
+      console.log("원래 토큰", token);
+      if (!token) {
+        window.location.replace("/login");
+        alert("로그인이 필요합니다.");
+      }
     })();
   });
   return <Outlet />;

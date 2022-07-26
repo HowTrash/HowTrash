@@ -1,5 +1,7 @@
 import { useState } from "react";
+import Api from "src/utils/customApi";
 import { rs } from "src/utils/types";
+import { refresh, refreshErrorHandle } from "./refresh";
 import { getToken } from "./tokenManager";
 
 const checkAccessToken = () => {
@@ -38,9 +40,11 @@ const checkRefreshToken = () => {
     if (tokenExpire - nowTime <= 0) {
       alert("다시 로그인 해주세요.");
       localStorage.clear();
+      window.location.replace("/login");
     }
 
-    // refresh 토큰의 만료일이 아직 안지났을때 새로운 access 토큰을 불러오는 함수 필요
+    // refresh 토큰의 만료일이 아직 안지났을때 새로운 access 토큰을 불러오는 함수
+    Api.interceptors.request.use(refresh, refreshErrorHandle);
 
     return token;
   }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { getToken } from "./module/tokenManager";
+import { getToken } from "./Auth/tokenManager";
 import Login from "./Page/Login";
 import MyPage from "./Page/MyPage";
 import MainPage from "./Page/MainPage";
@@ -14,6 +14,7 @@ import MyTrashChart from "./component/Mypage/MyTrashChart";
 import MyChallenge from "./component/Mypage/MyChallenge";
 import ChangeInfo from "./component/Mypage/ChangeInfo";
 import SearchResult from "./component/mainpage/SearchResult";
+import AuthRouter from "./Auth/AuthRouter";
 
 function App() {
   useEffect(() => {
@@ -41,12 +42,14 @@ function App() {
           <Route path="/howto" element={<Howto />} />
           <Route path="/register" element={<Register />} />
           <Route path="/mainpage/resultpage" element={<SearchResult />} />
-          <Route path="/mypage" element={<MyPage />}>
-            <Route index element={<MyTrashcan />} />
-            <Route path="/mypage/myTrashChart" element={<MyTrashChart />} />
-            <Route path="/mypage/myChallenge" element={<MyChallenge />} />
-            <Route path="/mypage/userInfo" element={<ChangeInfo />} />
-            <Route path="/mypage/logout" element={<MyTrashcan />} />
+          <Route element={<AuthRouter />}>
+            <Route path="/mypage" element={<MyPage />}>
+              <Route index element={<MyTrashcan />} />
+              <Route path="/mypage/myTrashChart" element={<MyTrashChart />} />
+              <Route path="/mypage/myChallenge" element={<MyChallenge />} />
+              <Route path="/mypage/userInfo" element={<ChangeInfo />} />
+              <Route path="/mypage/logout" element={<MyTrashcan />} />
+            </Route>
           </Route>
         </Routes>
       </Router>
