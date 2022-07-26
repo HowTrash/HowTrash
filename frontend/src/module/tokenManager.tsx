@@ -7,13 +7,12 @@ const setToken = (accessToken: string, refreshtoken: string) => {
   console.log("잘 들어왔나?", accessToken);
   axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
   const today = new Date();
-  const accessExpires = new Date();
-  const refreshExpires = new Date();
+  const accessExpires = new Date().setTime(today.getTime() + 1000 * 60 * 30); // 만료 30분
+  const refreshExpires = new Date().setTime(
+    today.getTime() + 1000 * 60 * 60 * 24 * 14
+  );
 
-  accessExpires.setTime(today.getTime() + 1000 * 60 * 30); // 만료 30분
-  refreshExpires.setTime(today.getTime() + 1000 * 60 * 60 * 24 * 14); // 만료 14일
-
-  //   decodeToken(accessToken);
+  // decodeToken(accessToken);
   console.log("만료시간", accessExpires);
   const accessStorage: rs.TokenInfo = {
     value: accessToken,
@@ -33,13 +32,13 @@ const getToken = () => {
   const access = localStorage.getItem("access_token");
   const refresh = localStorage.getItem("refresh_token");
 
-  console.log("확인 억셋으", access);
-  console.log("확인 맆레시", refresh);
+  return { access, refresh };
 };
 
 // 로컬 스토리지에 있는 토큰을 clear
 const deleteToken = (clearToken: string) => {
   localStorage.removeItem(clearToken);
+  window.location.replace("/mainpage");
 };
 
 export { setToken, getToken, deleteToken };

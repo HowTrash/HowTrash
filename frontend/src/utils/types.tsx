@@ -5,13 +5,13 @@ export namespace rs {
   }
   export interface TokenInfo {
     value: string;
-    expiry: Date;
+    expiry: number;
   }
   export interface TokenDecode {
-    name: string;
     alias: string;
     email: string;
-    exp: string;
+    exp: number;
+    name: string;
     token_type: string;
   }
 
