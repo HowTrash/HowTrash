@@ -42,8 +42,9 @@ const trashlist: Contentlist =
 
 function TrashChart({ list }: Contentlist) {
   const [BasicList, setBasicList] = useState(trashlist.list);
-
+/*
   React.useEffect(() => {
+    console.log("list",list);
     console.log("기본 데이터",trashlist.list);
     for (let i = 0; i < trashlist.list.length; i++) {
       for (let j = 0; j < list.length; j++) {
@@ -57,6 +58,21 @@ function TrashChart({ list }: Contentlist) {
     console.log("데이터 변환",trashlist.list);
   }
     , [list]);
+*/
+
+React.useEffect(() => {
+  console.log("기본 데이터", trashlist.list);
+  console.log("list", list);
+  if(list){
+    trashlist.list?.map((value,i) => 
+    list?.map((value,j) => {if (list[j]?.trash_kind === trashlist.list[i]?.trash_kind) {
+      trashlist.list[i].cnt = list[j].cnt;
+      console.log("같은 것을 발견");}
+    }))
+    setBasicList(trashlist.list);
+    console.log("데이터 변환",trashlist.list);
+  }
+}, [list]);
 
   return (
     <ResponsiveContainer width="100%" height="100%">

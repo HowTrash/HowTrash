@@ -56,7 +56,7 @@ function Dates({ onClickRetrieve }: { onClickRetrieve: any }) { // 함수의 반
     const endDateStr = EndDate !== null ? `/${EndDate}` : '';
 
     axios
-      .get(`http://localhost:8080/trash/mypage/users/a487bc6f-1df9-4f1f-97b5-27143599d317/statistics${periodStr}${startDateStr}${endDateStr}`)
+      .get(`http://localhost:8080/trash/mypage/users/c970a18e-9b11-4c4b-ac15-87411e4f20d3/statistics${periodStr}${startDateStr}${endDateStr}`)
       .then((response) => {
         // Handle success.
         const responseUserData = response.data;
