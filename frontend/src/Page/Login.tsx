@@ -78,14 +78,6 @@ function Login() {
 
   const [saveInfo, setSaveInfo] = useState<rs.UserAuth>(userInfo);
 
-  //❌
-  const dispatch = useDispatch();
-  const reduxToken = useSelector(
-    (state: RootReducerType) => state.DecodeReducer
-  ); //어떤 state 쓸지 설정/ 여기서는 뭐지 ?
-
-  //❌
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -97,7 +89,7 @@ function Login() {
     });
 
     const userLogin = async () => {
-      const result = await Api.get("http://localhost:8080/user/auth/", {
+      const result = await Api.get("http://localhost:8080/users/auth/", {
         params: { name: data.get("name"), pw: data.get("password") },
       }).then((res) => res.data as rs.UserAuth);
       setSaveInfo(result);
@@ -106,20 +98,6 @@ function Login() {
 
       if (result.access_token !== null) {
         setToken(result.access_token, result.refresh_token);
-
-        //❌
-        const access = localStorage.getItem("access_token");
-        // const what = decodeToken(access as string);
-        // console.log("what is this?", what);
-
-        dispatch(fetchDecodeData(access as string)); //디스 패치로 reduxtoken에 할당한 state 값 변경해줌 // 아마 type ;  DECODE_SUCCESS돼서 decodeinfo 추가되는거 같다.
-
-        console.log(
-          "dispatch로 거쳐서 받아왔나?",
-          reduxToken.decodeInfo?.alias
-        ); //이거 로그인 으로 옮겨야할 듯?
-        //❌
-
         alert("로그인 성공♻️");
 
         // window.location.replace("/mainpage");
@@ -131,7 +109,6 @@ function Login() {
     };
     userLogin();
   };
-  console.log("dispatch로 거쳐서 받아왔나?134", reduxToken.decodeInfo?.alias); //이거 로그인 으로 옮겨야할 듯?
   return (
     <Container
       style={{

@@ -39,34 +39,31 @@ const GetLogoLottie = () => {
 };
 
 function Header() {
-  // //❌
-  const access = localStorage.getItem("access_token");
-  // const what = decodeToken(access as string);
-  // console.log("what is this?", what);
-
-  const reduxToken = useSelector(
-    (state: RootReducerType) => state.DecodeReducer
-  ); //어떤 state 쓸지 설정/ 여기서는 뭐지 ?
+  const token = localStorage.getItem("access_token");
 
   const dispatch = useDispatch();
 
-  const searchButtonTapped = () => {
-    dispatch(fetchDecodeData(access as string)); //디스 패치로 reduxtoken에 할당한 state 값 변경해줌 // 아마 type ;  DECODE_SUCCESS돼서 decodeinfo 추가되는거 같다.
-  };
+  const reduxToken = useSelector(
+    (state: RootReducerType) => state.DecodeReducer
+  );
 
-  console.log("dispatch로 거쳐서 받아왔나?", reduxToken.decodeInfo?.alias); //이거 로그인 으로 옮겨야할 듯?
-  // //❌
+  useEffect(() => {
+    if (token) {
+      console.log("header.js useEffect");
+      dispatch(fetchDecodeData(token as string));
+    } else {
+      console.log("header.js not token");
+    }
+  }, []);
 
-  const [mouseOn, setMouseOn] = useState(false);
+  // const [mouseOn, setMouseOn] = useState(false);
 
-  const handlePopoverOpen = () => {
-    setMouseOn(true);
-  };
-  const handlePopoverClose = () => {
-    setMouseOn(false);
-  };
-
-  const token = localStorage.getItem("access_token");
+  // const handlePopoverOpen = () => {
+  //   setMouseOn(true);
+  // };
+  // const handlePopoverClose = () => {
+  //   setMouseOn(false);
+  // };
   console.log(token);
 
   function deleteToken() {
@@ -122,8 +119,8 @@ function Header() {
                 <Link
                   href="/mainpage"
                   onClick={deleteToken}
-                  onMouseEnter={handlePopoverOpen}
-                  onMouseLeave={handlePopoverClose}
+                  // onMouseEnter={handlePopoverOpen}
+                  // onMouseLeave={handlePopoverClose}
                   sx={{
                     textDecoration: "none",
                     color: "#759F98",
@@ -134,7 +131,6 @@ function Header() {
                 >
                   Welcome, {reduxToken.decodeInfo?.alias} 님
                 </Link>
-                <Button onClick={searchButtonTapped}>name</Button>
                 {/* {mouseOn?
                       <Container
                         style={{ position: 'absolute', top: 80 }}>
