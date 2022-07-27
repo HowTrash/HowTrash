@@ -1,3 +1,4 @@
+import { slideAnimationDuration } from '@mui/x-date-pickers/CalendarPicker/PickersSlideTransition';
 import React, { PureComponent, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
@@ -42,37 +43,43 @@ const trashlist: Contentlist =
 
 function TrashChart({ list }: Contentlist) {
   const [BasicList, setBasicList] = useState(trashlist.list);
-/*
-  React.useEffect(() => {
-    console.log("list",list);
-    console.log("기본 데이터",trashlist.list);
-    for (let i = 0; i < trashlist.list.length; i++) {
-      for (let j = 0; j < list.length; j++) {
-        if (list[j].trash_kind === trashlist.list[i].trash_kind) {
-          trashlist.list[i].cnt = list[j].cnt;
-          console.log("같은 것을 발견");
+  /*
+    React.useEffect(() => {
+      console.log("list",list);
+      console.log("기본 데이터",trashlist.list);
+      for (let i = 0; i < trashlist.list.length; i++) {
+        for (let j = 0; j < list.length; j++) {
+          if (list[j].trash_kind === trashlist.list[i].trash_kind) {
+            trashlist.list[i].cnt = list[j].cnt;
+            console.log("같은 것을 발견");
+          }
         }
       }
+      setBasicList(trashlist.list);
+      console.log("데이터 변환",trashlist.list);
     }
-    setBasicList(trashlist.list);
-    console.log("데이터 변환",trashlist.list);
-  }
-    , [list]);
+      , [list]);
 */
+  React.useEffect(() => {
+    console.log("기본 데이터", trashlist.list);
+    console.log("list", list);
+    if (list) {
+      const tempList: Content[] = trashlist.list?.map((trashlist: any) => {
+        list?.map((getlist: any) => {
+          if (getlist?.trash_kind === trashlist?.trash_kind) {
+            trashlist.cnt = getlist.cnt;
+            console.log("같은 것을 발견");
+          }
+          return getlist;
+        }
+        )
+        return trashlist;
+      });
 
-React.useEffect(() => {
-  console.log("기본 데이터", trashlist.list);
-  console.log("list", list);
-  if(list){
-    trashlist.list?.map((value,i) => 
-    list?.map((value,j) => {if (list[j]?.trash_kind === trashlist.list[i]?.trash_kind) {
-      trashlist.list[i].cnt = list[j].cnt;
-      console.log("같은 것을 발견");}
-    }))
-    setBasicList(trashlist.list);
-    console.log("데이터 변환",trashlist.list);
-  }
-}, [list]);
+      setBasicList(tempList); // trashlist.list로 바로 쓰면 적합하지않음. 새로 배열을 만들어 넣기!
+      console.log("데이터 변환", trashlist.list);
+    }
+  }, [list]);
 
   return (
     <ResponsiveContainer width="100%" height="100%">

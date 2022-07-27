@@ -13,8 +13,8 @@ function MyTrashcan() {
     const [userData, setUserData] = useState<any>('');
     const onClickRetrieve = (user: any) => {
         setUserData(user);
+        console.log("잘 나왔는지?", user);
     }
-    console.log("잘 나왔는지?", userData);
 
     return (
         <Container
