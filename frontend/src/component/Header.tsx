@@ -11,6 +11,10 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import lottie from "lottie-web";
 
+import { useSelector, useDispatch } from "react-redux";
+import { RootReducerType } from "../index";
+import { fetchDecodeData } from "src/actions/DecodeActions";
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -35,6 +39,24 @@ const GetLogoLottie = () => {
 };
 
 function Header() {
+  // //❌
+  const access = localStorage.getItem("access_token");
+  // const what = decodeToken(access as string);
+  // console.log("what is this?", what);
+
+  const reduxToken = useSelector(
+    (state: RootReducerType) => state.DecodeReducer
+  ); //어떤 state 쓸지 설정/ 여기서는 뭐지 ?
+
+  const dispatch = useDispatch();
+
+  const searchButtonTapped = () => {
+    dispatch(fetchDecodeData(access as string)); //디스 패치로 reduxtoken에 할당한 state 값 변경해줌 // 아마 type ;  DECODE_SUCCESS돼서 decodeinfo 추가되는거 같다.
+  };
+
+  console.log("dispatch로 거쳐서 받아왔나?", reduxToken.decodeInfo?.alias); //이거 로그인 으로 옮겨야할 듯?
+  // //❌
+
   const [mouseOn, setMouseOn] = useState(false);
 
   const handlePopoverOpen = () => {
@@ -110,8 +132,9 @@ function Header() {
                     mt: 4,
                   }}
                 >
-                  Welcom, 닉네임들어갈자리 님
+                  Welcome, {reduxToken.decodeInfo?.alias} 님
                 </Link>
+                <Button onClick={searchButtonTapped}>name</Button>
                 {/* {mouseOn?
                       <Container
                         style={{ position: 'absolute', top: 80 }}>
