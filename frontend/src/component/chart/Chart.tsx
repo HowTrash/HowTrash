@@ -61,9 +61,18 @@ function TrashChart({ list }: Contentlist) {
       , [list]);
 */
   React.useEffect(() => {
-    console.log("기본 데이터", trashlist.list);
     console.log("list", list);
     if (list) {
+      if(list.length === 0){ // 받아오는 데이터가 존재하지 않을 때
+        const needList: Content[] = trashlist.list?.map((blanklist : any) =>{
+          blanklist.cnt = 0;
+          return blanklist;
+        })
+        setBasicList(needList);
+        alert("해당 데이터를 찾을 수 없습니다!!");
+        console.log("찾는 데이터가 없음");
+      }
+      else{ // 그 외 데이터가 존재할 때
       const tempList: Content[] = trashlist.list?.map((trashlist: any) => {
         list?.map((getlist: any) => {
           if (getlist?.trash_kind === trashlist?.trash_kind) {
@@ -75,9 +84,9 @@ function TrashChart({ list }: Contentlist) {
         )
         return trashlist;
       });
-
       setBasicList(tempList); // trashlist.list로 바로 쓰면 적합하지않음. 새로 배열을 만들어 넣기!
       console.log("데이터 변환", trashlist.list);
+    }
     }
   }, [list]);
 
