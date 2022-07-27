@@ -2,14 +2,8 @@ import * as React from "react";
 import MyPageNavigation from "../component/Mypage/MyPageNavigation";
 import { Box, Container } from "@mui/material";
 import { Outlet } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { RootReducerType } from "../index";
 
 function MyPage() {
-  const reduxToken = useSelector(
-    (state: RootReducerType) => state.DecodeReducer
-  );
-  console.log("Mypage에서 실행됐나?", reduxToken.decodeInfo?.alias);
   return (
     <Container
       style={{
