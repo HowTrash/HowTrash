@@ -1,7 +1,7 @@
 import axios from "axios";
 import { API_BASE_URL } from "src/utils/constants";
 import { rs } from "src/utils/types";
-import { getToken, setToken } from "./tokenManager";
+import { getToken, setAccessToken, setRefreshToken } from "./tokenManager";
 
 // access_token의 만료일을 확인
 const checkAccessToken = () => {
@@ -91,8 +91,7 @@ const getRefreshToken = async () => {
 
     localStorage.removeItem("access_token");
     if (accessToken !== null) {
-      //setToken access, refresh 분리 해줘야함 이렇게 넣으면 refresh.expiry도 다시 설정됨
-      setToken(accessToken, newRe.value);
+      setAccessToken(accessToken);
       window.location.reload();
     }
 

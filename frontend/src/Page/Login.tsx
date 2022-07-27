@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Api from "src/utils/customApi";
 import { rs } from "src/utils/types";
-import { setToken } from "src/Auth/tokenManager";
+import { setAccessToken, setRefreshToken } from "src/Auth/tokenManager";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
   Divider,
@@ -95,7 +95,8 @@ function Login() {
       console.log("받아온 결과2", result.refresh_token);
 
       if (result.access_token !== null) {
-        setToken(result.access_token, result.refresh_token);
+        setAccessToken(result.access_token);
+        setRefreshToken(result.refresh_token);
         alert("로그인 성공♻️");
 
         // checkAccessToken();
