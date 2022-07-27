@@ -43,7 +43,9 @@ function MyTrashcan() {
 
   const fetchMyTrash = async () => {
     const result = await Api.get(
-      "/trash/mypage/users/f446242a-a219-44b9-aef7-86932259f799/images"
+
+      "/trash/mypage/users/e1be84fa-4726-4916-8356-d7151f7be5a9/images"
+
     ).then((res) => res.data as rs.TrashList);
     // setTrashes(result);
     setTrashes(result);

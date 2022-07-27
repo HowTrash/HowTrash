@@ -12,12 +12,12 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import lottie from "lottie-web";
 
 const theme = createTheme({
-    palette: {
-      primary: {
-        main: "#759F98",
-      },
+  palette: {
+    primary: {
+      main: "#759F98",
     },
-  });
+  },
+});
 
 const GetLogoLottie = () => {
   //lottie
@@ -31,16 +31,10 @@ const GetLogoLottie = () => {
       animationData: require("../images/LottieLogo.json"),
     });
   }, []);
-  return (
-    <Box
-      ref={likecontainer}>
-
-      </Box>
-  );
+  return <Box ref={likecontainer}></Box>;
 };
 
 function Header() {
-
   const [mouseOn, setMouseOn] = useState(false);
 
   const handlePopoverOpen = () => {
@@ -51,58 +45,74 @@ function Header() {
   };
 
   const token = localStorage.getItem("access_token");
-  console.log(token);
+  console.log("해더에서 찾은 토큰", token);
 
   function deleteToken() {
-    localStorage.removeItem("access_token");
+    localStorage.clear();
   }
 
   return (
-      <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Container style={{position: 'absolute', backgroundColor: 'transparent', zIndex: 100, top: 0, left: 0, right: 0 }}>
-
-              <Box
-                  display="flex"
-                  justifyContent="flex-end"
-                  alignItems="flex-end"
-                  marginLeft= "auto"
-              >
-                    <Link
-                      href="/mainpage"
-                      sx={{
-                        position: "absolute",
-                        left: 55,
-                        top: -5,
-                        width: 180,
-                        height: 140,
-                        textDecoration: "none",
-                      }}
-                    >
-                      <GetLogoLottie />
-                      <Typography
-                        style={{
-                          fontSize: 8,
-                          fontWeight: "bold",
-                          display: "flex",
-                          justifyContent: "center",
-                        }}
-                      >
-                        R e B I K E
-                      </Typography>
-                    </Link>
-                  {token ?(
-                  // if IsLogin is true
-                  <div>
-                    <Button>
-                      <Link
-                        href="/mainpage"
-                        onClick={deleteToken}
-                        onMouseEnter={handlePopoverOpen} onMouseLeave={handlePopoverClose}
-                        sx={{ textDecoration: "none", color: "#759F98", fontSize: "small",mr:2, mt:4 }}>
-                        Welcom, {token} 님
-                      </Link>
-                      {/* {mouseOn?
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Container
+        style={{
+          position: "absolute",
+          backgroundColor: "transparent",
+          zIndex: 100,
+          top: 0,
+          left: 0,
+          right: 0,
+        }}
+      >
+        <Box
+          display="flex"
+          justifyContent="flex-end"
+          alignItems="flex-end"
+          marginLeft="auto"
+        >
+          <Link
+            href="/mainpage"
+            sx={{
+              position: "absolute",
+              left: 55,
+              top: -5,
+              width: 180,
+              height: 140,
+              textDecoration: "none",
+            }}
+          >
+            <GetLogoLottie />
+            <Typography
+              style={{
+                fontSize: 8,
+                fontWeight: "bold",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              R e B I K E
+            </Typography>
+          </Link>
+          {token ? (
+            // if IsLogin is true
+            <div>
+              <Button>
+                <Link
+                  href="/mainpage"
+                  onClick={deleteToken}
+                  onMouseEnter={handlePopoverOpen}
+                  onMouseLeave={handlePopoverClose}
+                  sx={{
+                    textDecoration: "none",
+                    color: "#759F98",
+                    fontSize: "small",
+                    mr: 2,
+                    mt: 4,
+                  }}
+                >
+                  Welcom, 닉네임들어갈자리 님
+                </Link>
+                {/* {mouseOn?
                       <Container
                         style={{ position: 'absolute', top: 80 }}>
                         <Box 
@@ -116,30 +126,50 @@ function Header() {
                       </Container>
                       :
                       Hidden} */}
-                    </Button>
-                    
-                    
-                    
-                    <Button
-                      variant="contained"
-                      sx={{fontWeight: 'bold',mt:6,mb : 2,mr:2, color:'white',backgroundColor : "#759F98"}}>
-                    <Link href= '/mypage' sx={{textDecoration: 'none', color : "white"}}>MyPage</Link>
-                    </Button>
-                    
-                  </div>)
-                  
-                  : (// if IsLogin is false
-                  <Button
-                      variant="contained"
-                      sx={{fontWeight: 'bold' ,mt: 6, mb : 2,color:'white',backgroundColor : "#759F98"}}>
-                    <Link href= '/login' sx={{textDecoration: 'none', color : "white"}}>Login</Link>
-                  </Button>
-                  )}
-                  
-              </Box>
-          </Container> 
-      </ThemeProvider>
+              </Button>
 
+              <Button
+                variant="contained"
+                sx={{
+                  fontWeight: "bold",
+                  mt: 6,
+                  mb: 2,
+                  mr: 2,
+                  color: "white",
+                  backgroundColor: "#759F98",
+                }}
+              >
+                <Link
+                  href="/mypage"
+                  sx={{ textDecoration: "none", color: "white" }}
+                >
+                  MyPage
+                </Link>
+              </Button>
+            </div>
+          ) : (
+            // if IsLogin is false
+            <Button
+              variant="contained"
+              sx={{
+                fontWeight: "bold",
+                mt: 6,
+                mb: 2,
+                color: "white",
+                backgroundColor: "#759F98",
+              }}
+            >
+              <Link
+                href="/login"
+                sx={{ textDecoration: "none", color: "white" }}
+              >
+                Login
+              </Link>
+            </Button>
+          )}
+        </Box>
+      </Container>
+    </ThemeProvider>
   );
 }
 
