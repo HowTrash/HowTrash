@@ -14,7 +14,6 @@ import MyTrashChart from "./component/Mypage/MyTrashChart";
 import MyChallenge from "./component/Mypage/MyChallenge";
 import ChangeInfo from "./component/Mypage/ChangeInfo";
 
-import SearchResult from "./component/mainpage/SearchResult";
 import AuthRouter from "./Auth/AuthRouter";
 
 function App() {
@@ -42,7 +41,7 @@ function App() {
           <Route path="/mainpage" element={<MainPage />} />
           <Route path="/howto" element={<Howto />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/mainpage/resultpage" element={<SearchResult />} />
+          {/* <Route path="/mainpage/resultpage" element={<SearchResult />} /> */}
           {/* mypage 에 접근 못하게 라우팅 */}
           <Route element={<AuthRouter />}>
             <Route path="/mypage" element={<MyPage />}>
@@ -52,7 +51,6 @@ function App() {
               <Route path="/mypage/userInfo" element={<ChangeInfo />} />
               <Route path="/mypage/logout" element={<MyTrashcan />} />
             </Route>
-
           </Route>
         </Routes>
       </Router>
