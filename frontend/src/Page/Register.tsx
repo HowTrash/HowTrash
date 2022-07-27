@@ -137,7 +137,7 @@ const Register = () => {
       nameRegex.test(user.name as string) &&
       aliasRegex.test(user.alias as string)
     ) {
-      Api.post<User>(`/user/`, user)
+      Api.post<User>(`/users/`, user)
         .then((response) => {
           // Handle success.
           handleOpen();
@@ -157,7 +157,7 @@ const Register = () => {
 
   const onBlurInfo = async (props: Array<string>, event: any) => {
     const res = await Api.get(
-      `/user/?case=${props[0]}&value=${props[1] as string}`
+      `/users/?case=${props[0]}&value=${props[1] as string}`
     );
 
     if (props[0] == "name") {

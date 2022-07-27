@@ -4,15 +4,15 @@ import { getToken } from "./Auth/tokenManager";
 import Login from "./Page/Login";
 import MyPage from "./Page/MyPage";
 import MainPage from "./Page/MainPage";
-import Header from "./component/Header";
+import Header from "./components/Header";
 import Register from "./Page/Register";
 import Howto from "./Page/Howto";
 
 import GreenBack from "./images/greenBack";
-import MyTrashcan from "./component/Mypage/MyTrashcan";
-import MyTrashChart from "./component/Mypage/MyTrashChart";
-import MyChallenge from "./component/Mypage/MyChallenge";
-import ChangeInfo from "./component/Mypage/ChangeInfo";
+import MyTrashcan from "./components/Mypage/MyTrashcan";
+import MyTrashChart from "./components/Mypage/MyTrashChart";
+import MyChallenge from "./components/Mypage/MyChallenge";
+import ChangeInfo from "./components/Mypage/ChangeInfo";
 
 import AuthRouter from "./Auth/AuthRouter";
 

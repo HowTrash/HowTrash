@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Box } from "@mui/material";
-import SearchBar from "../component/mainpage/SearchBar";
-import UploadImage from "../component/mainpage/UploadImage";
-import PopularTrash from "../component/mainpage/PopularTrash";
+import SearchBar from "../components/mainpage/SearchBar";
+import UploadImage from "../components/mainpage/UploadImage";
+import PopularTrash from "../components/mainpage/PopularTrash";
 
 const MainPage = () => {
   return (
