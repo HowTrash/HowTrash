@@ -11,6 +11,10 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import lottie from "lottie-web";
 
+import { useSelector, useDispatch } from "react-redux";
+import { RootReducerType } from "../index";
+import { fetchDecodeData } from "src/actions/DecodeActions";
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -35,17 +39,32 @@ const GetLogoLottie = () => {
 };
 
 function Header() {
-  const [mouseOn, setMouseOn] = useState(false);
-
-  const handlePopoverOpen = () => {
-    setMouseOn(true);
-  };
-  const handlePopoverClose = () => {
-    setMouseOn(false);
-  };
-
   const token = localStorage.getItem("access_token");
-  console.log("해더에서 찾은 토큰", token);
+
+  const dispatch = useDispatch();
+
+  const reduxToken = useSelector(
+    (state: RootReducerType) => state.DecodeReducer
+  );
+
+  useEffect(() => {
+    if (token) {
+      console.log("header.js useEffect");
+      dispatch(fetchDecodeData(token as string));
+    } else {
+      console.log("header.js not token");
+    }
+  }, []);
+
+  // const [mouseOn, setMouseOn] = useState(false);
+
+  // const handlePopoverOpen = () => {
+  //   setMouseOn(true);
+  // };
+  // const handlePopoverClose = () => {
+  //   setMouseOn(false);
+  // };
+  console.log(token);
 
   function deleteToken() {
     localStorage.clear();
@@ -100,8 +119,8 @@ function Header() {
                 <Link
                   href="/mainpage"
                   onClick={deleteToken}
-                  onMouseEnter={handlePopoverOpen}
-                  onMouseLeave={handlePopoverClose}
+                  // onMouseEnter={handlePopoverOpen}
+                  // onMouseLeave={handlePopoverClose}
                   sx={{
                     textDecoration: "none",
                     color: "#759F98",
@@ -110,7 +129,7 @@ function Header() {
                     mt: 4,
                   }}
                 >
-                  Welcom, 닉네임들어갈자리 님
+                  Welcome, {reduxToken.decodeInfo?.alias} 님
                 </Link>
                 {/* {mouseOn?
                       <Container

@@ -19,21 +19,6 @@ import {
 import { checkAccessToken, checkRefreshToken } from "src/Auth/checkToken";
 import { decodeToken } from "src/Auth/tokenGetter";
 
-const style = {
-  position: "absolute",
-  top: "25%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  borderRadius: 3,
-  boxShadow: 24,
-  p: 4,
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-};
-
 const theme = createTheme({
   palette: {
     primary: {
@@ -111,7 +96,6 @@ function Login() {
     };
     userLogin();
   };
-
   return (
     <Container
       style={{
