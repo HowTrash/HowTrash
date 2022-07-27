@@ -72,7 +72,7 @@ const getRefreshToken = async () => {
 
     //access token 요청하는 axios
     const data = await axios
-      .get(`${API_BASE_URL}/user/auth/`, {
+      .get(`${API_BASE_URL}/users/auth/`, {
         headers: {
           Authorization: `${newRe.value}`,
         },
@@ -81,7 +81,8 @@ const getRefreshToken = async () => {
         return res.data;
       })
       .catch((e) => {
-        window.alert("로그인 정보가 유효하지 않습니다.");
+        localStorage.clear();
+        window.alert(e);
         // window.location.replace("/login");
       });
 
