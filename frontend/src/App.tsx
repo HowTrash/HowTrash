@@ -13,6 +13,7 @@ import MyTrashcan from "./component/Mypage/MyTrashcan";
 import MyTrashChart from "./component/Mypage/MyTrashChart";
 import MyChallenge from "./component/Mypage/MyChallenge";
 import ChangeInfo from "./component/Mypage/ChangeInfo";
+
 import SearchResult from "./component/mainpage/SearchResult";
 import AuthRouter from "./Auth/AuthRouter";
 
@@ -51,6 +52,7 @@ function App() {
               <Route path="/mypage/userInfo" element={<ChangeInfo />} />
               <Route path="/mypage/logout" element={<MyTrashcan />} />
             </Route>
+
           </Route>
         </Routes>
       </Router>

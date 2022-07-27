@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Box, Button, Typography } from "@mui/material";
-
 import InputIcon from "@mui/icons-material/Input";
 import { useLocation } from "react-router";
+import { rs } from "src/utils/types";
 
+const UploadResult = () => {
+  const { state } = useLocation() as rs.TrashResult;
 
-const SearchResult = () => {
-  const { state } = useLocation(); //이미지 주소
   return (
     <Box textAlign={"center"}>
       <div>
@@ -25,11 +25,16 @@ const SearchResult = () => {
             mt: 23,
           }}
         >
-          <img src ={state as string} />
+          <img src={state.imgSrc as string} />
         </Box>
 
         <Typography marginTop={5} fontWeight="bold" variant="h5">
-          결과 : 물병
+          {state.trashName === "BIODEGRADABLE" && <p>결과 : 음식물 쓰레기</p>}
+          {state.trashName === "CARDBOARD" && <p>결과 : 일반 쓰레기</p>}
+          {state.trashName === "GLASS" && <p>결과 : 유리</p>}
+          {state.trashName === "METAL" && <p>결과 : 캔</p>}
+          {state.trashName === "PAPER" && <p>결과 : 종이</p>}
+          {state.trashName === "PLASTIC" && <p>결과 : 플라스틱</p>}
         </Typography>
 
         <Button
@@ -58,4 +63,4 @@ const SearchResult = () => {
   );
 };
 
-export default SearchResult;
+export default UploadResult;
