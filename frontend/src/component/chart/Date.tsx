@@ -21,34 +21,23 @@ const theme = createTheme({
   },
 });
 
-function formatDate(date: Date) {
-  return (
-    [
-      date.getFullYear(),
-      (date.getMonth() + 1).toString().padStart(2, '0'),
-      date.getDate().toString().padStart(2, '0')
-    ].join('-')
-  );
-} // 날짜 상태
-
 function Dates({ onClickRetrieve }: { onClickRetrieve: any }) { // 함수의 반환 : onClickRetrieve
 
-  const [StartDate, setStartDate] = React.useState<string | Date>(new Date(0));
-  const [StartLock, setStartLock] = React.useState<Date>(new Date(0));
-  const [EndDate, setEndDate] = React.useState<string | Date>(new Date(0));
+  const [StartDate, setStartDate] = React.useState<Date | string | null>(null);
+  const [EndDate, setEndDate] = React.useState<Date | string | null>(null);
 
   const HandleStartChange = (date: Date) => {
-    //const dateresult = formatDate(date);
-    const datepad = date;
-   // setStartDate(dateresult);
-    setStartLock(datepad);
-    setStartDate(datepad);
+    setStartDate(date);
+    console.log(date);
   };
 
   const HandleEndChange = (date: Date) => {
-   // const dateresult = formatDate(date);
-    //setEndDate(dateresult);
-    setEndDate(date);
+    console.log(date);
+    const clone = new Date(date);
+    clone.setHours(23);
+    clone.setMinutes(59);
+    setEndDate(clone); // 날짜 명확한 표시 하루를 보기 위함.
+    console.log(clone);
   };
 
   const HandleSubmit = (event: any) => {
@@ -59,30 +48,34 @@ function Dates({ onClickRetrieve }: { onClickRetrieve: any }) { // 함수의 반
   };
 
   const fetchUserData = () => {
-
     axios
-      .get(`http://localhost:8080/trash/`,{headers : {Authorization: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6ImMzNTQyMzA1LTdiZjUtNDE2OC04ODk2LWExYzU3YmFjMGJhMiIsImFsaWFzIjoidGVzdCIsImV4cCI6MTY1ODkzODg2NywidHlwZSI6ImFjY2Vzc190b2tlbiJ9.MU507YR2PM9RhaC9fGYPJr7A-aJjOHiDtJdCiMI30gM`}})
+      .get(`http://localhost:8080/trash/`,{headers : {Authorization: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6ImMzNTQyMzA1LTdiZjUtNDE2OC04ODk2LWExYzU3YmFjMGJhMiIsImFsaWFzIjoidGVzdCIsImV4cCI6MTY1ODk4MzQzOCwidHlwZSI6ImFjY2Vzc190b2tlbiJ9.iaReUeH6lgosbPfnX24SJnWuY_naXukLG9rDlo3r7s4`}})
       .then((response) => {
         // Handle success.
-        const responseUserData = response.data;
         console.log("data saved!");
-        console.log(response.data.message);
         console.log(new Date(response.data.message[1].created_at));
         const tempList: Content[] = [];
         response.data.message?.forEach((item: any) => {
-          if(new Date(item.created_at) > StartDate && new Date(item.created_at) < EndDate){
+          if(StartDate !== null && EndDate !== null){
+            if(new Date(item.created_at) >= StartDate && new Date(item.created_at) <= EndDate){
+              tempList.push(item);
+            }
+          }
+          else{
             tempList.push(item);
           }
         }
       )
       onClickRetrieve(tempList);
-    })
+        }
+    )
       .catch((error) => {
         // Handle error.
         console.log("An error occurred:", error.response);
         console.log("에러",error.response.data);
       });
-  }
+
+}
 
   React.useEffect(() => {
     fetchUserData();
@@ -124,7 +117,7 @@ function Dates({ onClickRetrieve }: { onClickRetrieve: any }) { // 함수의 반
                 inputFormat="yyyy/MM/dd"
                 value={EndDate}
                 onChange={HandleEndChange as any}
-                minDate={StartLock}
+                minDate={StartDate}
                 renderInput={(params) => <TextField size="small" {...params} sx={{ width: '100%' }} />}
               />
             </Box>

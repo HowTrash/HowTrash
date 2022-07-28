@@ -82,7 +82,7 @@ function TrashChart({ list }: Contentlist) {
         }
       }
       )
-      setBasicList(trashlist.list); // trashlist.list로 바로 쓰면 적합하지않음. 새로 배열을 만들어 넣기!
+      setBasicList(trashlist.list);
       console.log("데이터 변환", trashlist.list);
     }
     }
