@@ -24,7 +24,7 @@ export default function MultiActionAreaCard({ image = "", kind = "" }) {
   // export default function MultiActionAreaCard() {
 
   return (
-    <Card sx={{ maxWidth: 200, border: 1, margin: 2 }}>
+    <Card sx={{ maxWidth: 200, border: 1, margin: 1.4 }}>
       <CardActionArea>
         <CardMedia
           component="img"

@@ -35,8 +35,6 @@ const GetNoTrashLottie = () => {
 };
 
 function MyTrashcan() {
-  const token = localStorage.getItem("access_token");
-  console.log(token);
   const what: any = getAccess();
   console.log(what);
 
@@ -59,14 +57,14 @@ function MyTrashcan() {
   };
 
   useEffect(() => {
-    if (token !== "") {
+    if (what !== "") {
       fetchMyTrash();
     }
   }, []);
 
   useEffect(() => {
-    console.log("정보 저장2", trashes);
-    console.log("정보 저장2", trashes.message.length);
+    // console.log("정보 저장2", trashes);
+    // console.log("정보 저장2", trashes.message.length);
     // console.log("api요청 gilli", Object.keys(trashes.message).length);
   }, [trashes]);
 
@@ -120,10 +118,10 @@ function MyTrashcan() {
           borderColor: "white",
           height: "100vh",
           paddingTop: 2,
-          paddingBottom: 2,
+          paddingBottom: 20,
         }}
       >
-        {trashes.message.length === 0 ? (
+        {trashes.message && trashes.message.length === 0 ? (
           <Box
             sx={{
               display: "flex",
@@ -148,17 +146,19 @@ function MyTrashcan() {
             sx={{
               display: "flex",
               flexWrap: "wrap",
-              alignItems: "center",
-              justifyContent: "space-evenly",
+              // alignItems: "center",
+              // justifyContent: "flex-start",
+              // placeContent: "center",
             }}
           >
-            {trashes.message.map((item: rs.Trash, index: any) => (
-              <MultiActionAreaCard
-                image={item.img}
-                kind={item.trash_kind}
-                key={index}
-              />
-            ))}
+            {trashes.message &&
+              trashes.message.map((item: rs.Trash, index: any) => (
+                <MultiActionAreaCard
+                  image={item.img}
+                  kind={item.trash_kind}
+                  key={index}
+                />
+              ))}
           </Box>
         )}
       </Container>
