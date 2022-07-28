@@ -24,11 +24,12 @@ export default function MultiActionAreaCard({ image = "", kind = "" }) {
   // export default function MultiActionAreaCard() {
 
   return (
-    <Card sx={{ maxWidth: 200, border: 1, margin: 1.4 }}>
+    <Card sx={{ maxWidth: 170, border: 1, margin: 1.4 }}>
       <CardActionArea>
         <CardMedia
           component="img"
           height="170"
+          width="170"
           // image='https://picsum.photos/400/300'
           image={image}
           style={{ padding: 3, borderRadius: 8 }}
