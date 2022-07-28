@@ -9,9 +9,8 @@ import {
 
 interface jwtType {
   alias: string;
-  email: string;
   exp: string;
-  name: string;
+  id: string;
   type: string;
 }
 
@@ -23,7 +22,7 @@ export const fetchDecodeData =
       console.log("라이브러리로?  in DecodeActions", decoded);
 
       const data: DecodePropsType = {
-        name: decoded.email, //반환된 데이터의 Email 값 사용
+        id: decoded.id, //반환된 데이터의 Email 값 사용
         alias: decoded.alias,
       };
 

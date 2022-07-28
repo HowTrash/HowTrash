@@ -28,13 +28,14 @@ const DecodeReducer = (
       };
     case DECODE_SUCCESS:
       console.log({ ...state }, "decode확인 절차 in reducer");
-      const { name, alias } = action.payload;
-      console.log(name, alias);
+      console.log(action.payload, "payload  in reducer");
+      const { id, alias } = action.payload;
+      console.log(id, alias);
       return {
         ...state,
         success: true,
         decodeInfo: {
-          name,
+          id,
           alias,
         },
       };

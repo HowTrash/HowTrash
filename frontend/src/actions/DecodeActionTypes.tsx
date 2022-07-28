@@ -2,7 +2,7 @@ export const DECODE_SUCCESS = "DECODE_SUCCESS";
 export const DECODE_FAIL = "DECODE_FAIL";
 
 export type DecodePropsType = {
-  name: string;
+  id: string;
   alias: string;
 };
 
