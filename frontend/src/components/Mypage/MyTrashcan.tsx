@@ -5,6 +5,7 @@ import MultiActionAreaCard from "./MultiActionAreaCard";
 import Api from "../../utils/customApi";
 import lottie from "lottie-web";
 import { rs } from "src/utils/types";
+import { getToken, getAccess } from "src/Auth/tokenManager";
 
 const GreenSwitch = styled(Switch)(({ theme }) => ({
   "& .MuiSwitch-switchBase.Mui-checked": {
@@ -34,8 +35,8 @@ const GetNoTrashLottie = () => {
 };
 
 function MyTrashcan() {
-  const token = localStorage.getItem("access_token");
-  console.log(token);
+  const what: any = getAccess();
+  console.log(what);
 
   const trashList = [] as unknown as rs.TrashList;
 
@@ -43,9 +44,7 @@ function MyTrashcan() {
 
   const fetchMyTrash = async () => {
     const result = await Api.get(
-
-      "/trash/mypage/users/e1be84fa-4726-4916-8356-d7151f7be5a9/images"
-
+      "/trash/mypage/users/2c762f6e-b369-4985-96f9-29ccb4f9fc34/images"
     ).then((res) => res.data as rs.TrashList);
     // setTrashes(result);
     setTrashes(result);
@@ -56,13 +55,14 @@ function MyTrashcan() {
   };
 
   useEffect(() => {
-    if (token !== "") {
+    if (what !== "") {
       fetchMyTrash();
     }
   }, []);
 
   useEffect(() => {
     console.log("정보 저장2", trashes);
+    // console.log("정보 저장2", trashes.message.length);
     console.log("api요청 gilli", Object.keys(trashes).length);
   }, [trashes]);
 
@@ -96,7 +96,7 @@ function MyTrashcan() {
             flexDirection: "row",
           }}
         >
-          <Typography color="black" sx={{ mt: 2, mb: 1, fontSize: 2 }}>
+          <Typography color="black" sx={{ mt: 2, fontSize: 2 }}>
             사진 자동으로 추가
           </Typography>
           <GreenSwitch
@@ -109,17 +109,25 @@ function MyTrashcan() {
         </Box>
       </Box>
       <Container
+        // style={{
+        //   backgroundColor: "white",
+        //   border: "solid",
+        //   borderRadius: 5,
+        //   borderColor: "white",
+        //   height: "50vh",
+        //   paddingTop: 3,
+        //   paddingBottom: 20,
+        // }}
+        // sx={{ mt: 3 }}
+
         style={{
+          borderRadius: 8,
           backgroundColor: "white",
-          border: "solid",
-          borderRadius: 5,
-          borderColor: "white",
-          height: "100vh",
-          paddingTop: 2,
-          paddingBottom: 2,
+          height: "50vh",
         }}
+        sx={{ mt: 2 }}
       >
-        {Object.keys(trashes).length === 0 ? (
+        {trashes && Object.keys(trashes)?.length === 0 ? (
           <Box
             sx={{
               display: "flex",
@@ -144,17 +152,20 @@ function MyTrashcan() {
             sx={{
               display: "flex",
               flexWrap: "wrap",
-              alignItems: "center",
-              justifyContent: "space-evenly",
+              paddingTop: 2,
+              // alignItems: "center",
+              // justifyContent: "flex-start",
+              // placeContent: "center",
             }}
           >
-            {Object.values(trashes)?.map((item: rs.Trash, index: any) => (
-              <MultiActionAreaCard
-                image={item.img}
-                kind={item.trash_kind}
-                key={index}
-              />
-            ))}
+            {trashes &&
+              Object.values(trashes)?.map((item: rs.Trash, index: any) => (
+                <MultiActionAreaCard
+                  image={item.img}
+                  kind={item.trash_kind}
+                  key={index}
+                />
+              ))}
           </Box>
         )}
       </Container>

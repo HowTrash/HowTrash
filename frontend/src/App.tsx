@@ -16,6 +16,7 @@ import ChangeInfo from "./components/Mypage/ChangeInfo";
 import UploadResult from "./components/mainpage/UploadResult";
 
 import AuthRouter from "./Auth/AuthRouter";
+import HowtoResult from "./components/howtopage/HowtoResult1";
 
 function App() {
   useEffect(() => {
@@ -39,18 +40,28 @@ function App() {
         <Header />
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/mainpage" element={<MainPage />} />
-          <Route path="/howto" element={<Howto />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/mainpage/resultpage" element={<UploadResult />} />
+
+          <Route element={<AuthRouter authAble={false} />}>
+            <Route path="/mainpage" element={<MainPage />} />
+            <Route path="/howto" element={<Howto />} />
+            <Route path="/mainpage/resultpage" element={<UploadResult />} />
+          </Route>
+
+          
+
           {/* mypage 에 접근 못하게 라우팅 */}
-          <Route element={<AuthRouter />}>
+          <Route element={<AuthRouter authAble={true} />}>
             <Route path="/mypage" element={<MyPage />}>
               <Route index element={<MyTrashcan />} />
+              <Route
+                path={`/mypage/trashNum/:trashNum/howTo`}
+                element={<HowtoResult />}
+              />
               <Route path="/mypage/myTrashChart" element={<MyTrashChart />} />
               <Route path="/mypage/myChallenge" element={<MyChallenge />} />
               <Route path="/mypage/userInfo" element={<ChangeInfo />} />
-              <Route path="/mypage/logout" element={<MyTrashcan />} />
+              <Route path="/mypage/logout" element={<ChangeInfo />} />
             </Route>
           </Route>
         </Routes>

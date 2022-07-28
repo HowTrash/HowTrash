@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import { useState } from "react";
 import {
     Typography,
@@ -36,6 +37,7 @@ function MyTrashchart() {
             </Container>
         </Container>
     );
+
 }
 
 export default MyTrashchart;

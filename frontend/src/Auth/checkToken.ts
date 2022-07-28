@@ -7,6 +7,7 @@ import { getToken, setAccessToken, setRefreshToken } from "./tokenManager";
 const checkAccessToken = () => {
   const access_token = getToken().access;
   const token_active = true;
+
   if (access_token) {
     const token: rs.TokenInfo = JSON.parse(access_token);
     console.log("확인 억셋으", token);
@@ -44,6 +45,7 @@ const checkRefreshToken = () => {
     // refresh 토큰 만료일이 지나면 localStorage clear
     if (tokenExpire - nowTime <= 0) {
       localStorage.clear();
+      alert("로그인이 필요합니다.");
       window.location.replace("/login");
       return;
     }
