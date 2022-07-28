@@ -51,10 +51,21 @@ const getToken = () => {
   return { access, refresh };
 };
 
+const getAccess = () => {
+  const stringAccess = getToken().access;
+  console.log(stringAccess);
+  if (stringAccess !== null) {
+    const access: rs.TokenInfo = JSON.parse(stringAccess);
+    return access;
+  }
+
+  return;
+};
+
 // 로컬 스토리지에 있는 토큰을 clear
 const deleteToken = (clearToken: string) => {
   localStorage.removeItem(clearToken);
   window.location.replace("/mainpage");
 };
 
-export { setAccessToken, setRefreshToken, getToken, deleteToken };
+export { setAccessToken, setRefreshToken, getToken, getAccess, deleteToken };

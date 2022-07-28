@@ -7,6 +7,7 @@ import { getToken, setAccessToken, setRefreshToken } from "./tokenManager";
 const checkAccessToken = () => {
   const access_token = getToken().access;
   const token_active = true;
+
   if (access_token) {
     const token: rs.TokenInfo = JSON.parse(access_token);
     console.log("확인 억셋으", token);

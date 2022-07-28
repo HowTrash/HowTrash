@@ -49,7 +49,7 @@ function App() {
               <Route path="/mypage/myTrashChart" element={<MyTrashChart />} />
               <Route path="/mypage/myChallenge" element={<MyChallenge />} />
               <Route path="/mypage/userInfo" element={<ChangeInfo />} />
-              <Route path="/mypage/logout" element={<MyTrashcan />} />
+              <Route path="/mypage/logout" element={<ChangeInfo />} />
             </Route>
           </Route>
         </Routes>

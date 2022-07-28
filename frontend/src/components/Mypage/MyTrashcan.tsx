@@ -5,6 +5,7 @@ import MultiActionAreaCard from "./MultiActionAreaCard";
 import Api from "../../utils/customApi";
 import lottie from "lottie-web";
 import { rs } from "src/utils/types";
+import { getToken, getAccess } from "src/Auth/tokenManager";
 
 const GreenSwitch = styled(Switch)(({ theme }) => ({
   "& .MuiSwitch-switchBase.Mui-checked": {
@@ -36,17 +37,19 @@ const GetNoTrashLottie = () => {
 function MyTrashcan() {
   const token = localStorage.getItem("access_token");
   console.log(token);
+  const what: any = getAccess();
+  console.log(what);
 
   const trashList = [] as unknown as rs.TrashList;
 
   const [trashes, setTrashes] = useState<rs.TrashList>(trashList);
 
   const fetchMyTrash = async () => {
-    const result = await Api.get(
-
-      "/trash/mypage/users/e1be84fa-4726-4916-8356-d7151f7be5a9/images"
-
-    ).then((res) => res.data as rs.TrashList);
+    const result = await Api.get("/trash/", {
+      headers: {
+        Authorization: `${what.value}`,
+      },
+    }).then((res) => res.data as rs.TrashList);
     // setTrashes(result);
     setTrashes(result);
     console.log("api요청 결과", result);
@@ -63,7 +66,8 @@ function MyTrashcan() {
 
   useEffect(() => {
     console.log("정보 저장2", trashes);
-    console.log("api요청 gilli", Object.keys(trashes).length);
+    console.log("정보 저장2", trashes.message.length);
+    // console.log("api요청 gilli", Object.keys(trashes.message).length);
   }, [trashes]);
 
   return (
@@ -119,7 +123,7 @@ function MyTrashcan() {
           paddingBottom: 2,
         }}
       >
-        {Object.keys(trashes).length === 0 ? (
+        {trashes.message.length === 0 ? (
           <Box
             sx={{
               display: "flex",
@@ -148,7 +152,7 @@ function MyTrashcan() {
               justifyContent: "space-evenly",
             }}
           >
-            {Object.values(trashes)?.map((item: rs.Trash, index: any) => (
+            {trashes.message.map((item: rs.Trash, index: any) => (
               <MultiActionAreaCard
                 image={item.img}
                 kind={item.trash_kind}
