@@ -56,7 +56,7 @@ function Dates({ onClickRetrieve }: { onClickRetrieve: any }) { // 함수의 반
     const endDateStr = EndDate !== null ? `/${EndDate}` : '';
 
     axios
-      .get(`http://localhost:8080/trash/mypage/users/c970a18e-9b11-4c4b-ac15-87411e4f20d3/statistics${periodStr}${startDateStr}${endDateStr}`)
+      .get(`http://localhost:8080/trash/mypage/users/8ffd6fae-2ebf-4a32-be0d-f4b4d61bb2d2/statistics${periodStr}${startDateStr}${endDateStr}`)
       .then((response) => {
         // Handle success.
         const responseUserData = response.data;
@@ -100,11 +100,11 @@ function Dates({ onClickRetrieve }: { onClickRetrieve: any }) { // 함수의 반
               />
             </Box>
             <Box margin="4px"
-            justifyContent="center"
-            alignItems="center">
+              justifyContent="center"
+              alignItems="center">
               <Typography color="black" fontWeight="bold" sx={{ fontSize: "medium", mx: 2 }}>to</Typography>
-              </Box>
-              <Box margin="4px">
+            </Box>
+            <Box margin="4px">
               <DatePicker
                 label="종료 날짜"
                 inputFormat="yyyy/MM/dd"
@@ -115,13 +115,13 @@ function Dates({ onClickRetrieve }: { onClickRetrieve: any }) { // 함수의 반
               />
             </Box>
             <Box margin="4px">
-            <Button
-              type="submit"
-              variant="contained"
-              sx={{ height: 40, color: 'white', fontWeight: 'bold', fontSize: 18, marginLeft: 3, backgroundColor: "#759F98" }}
-            >
-              조회</Button>
-              </Box>
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{ height: 40, color: 'white', fontWeight: 'bold', fontSize: 18, marginLeft: 3, backgroundColor: "#759F98" }}
+              >
+                조회</Button>
+            </Box>
           </Grid>
         </LocalizationProvider>
       </Grid>
