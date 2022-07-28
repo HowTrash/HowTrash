@@ -6,7 +6,19 @@ import {
   CardActionArea,
   CardMedia,
 } from "@mui/material";
+
 import * as React from "react";
+import constants from "../../utils/constants";
+
+const HowtoResult = ({ props }: any) => {
+  console.log(props);
+  console.log(constants.GLASS);
+
+  // if(props == "BIODEGRADABLE"){
+  //     const csTrash = constants.BIODEGRADABLE
+  // }
+  const resTrash = constants.BIODEGRADABLE; // ⭕️위에 처럼 들어오는 거 구현되면 if로 묶어
+
 
 const HowtoResult = () => {
   return (
@@ -44,6 +56,7 @@ const HowtoResult = () => {
         </Box>
       </Container>
     </Container>
+
   );
 };
 

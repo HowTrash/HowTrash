@@ -4,11 +4,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Resizer from "react-image-file-resizer";
 import Api from "../../utils/customApi";
-import { rs } from "src/utils/types";
 
 function UploadImage() {
   const [isImg, setIsImg] = useState(null);
-  const [urlImg, setUrlImg] = useState<string>("");
+  const [urlImg, setUrlImg] = useState("");
   const [respondImg, setRespondImg] = useState(null);
   const navigate = useNavigate();
 
@@ -78,7 +77,7 @@ function UploadImage() {
     trashFormData.append("filename", respondImg as any);
 
     return await Api.post(
-      `/trash/mainpage/users/f446242a-a219-44b9-aef7-86932259f799/result`,
+      `/trash/mainpage/users/959f9b1c-c0bf-44b1-bb31-4ff08e86f782/result`,
       trashFormData
     );
   };
@@ -129,10 +128,7 @@ function UploadImage() {
           {isImg ? null : (
             <Box>
               {" "}
-              <CloudUploadIcon
-                sx={{ color: "#759F98", mr: 1 }}
-                fontSize="large"
-              />
+              <CloudUploadIcon sx={{ color: "#759F98" }} fontSize="large" />
               <Typography sx={{ color: "#759F98" }}>
                 {" "}
                 Upload your image!
