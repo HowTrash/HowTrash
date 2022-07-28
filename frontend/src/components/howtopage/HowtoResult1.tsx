@@ -19,8 +19,6 @@ const HowtoResult = ({ props }: any) => {
   // }
   const resTrash = constants.BIODEGRADABLE; // ⭕️위에 처럼 들어오는 거 구현되면 if로 묶어
 
-
-const HowtoResult = () => {
   return (
     <Container
       style={{
@@ -56,7 +54,6 @@ const HowtoResult = () => {
         </Box>
       </Container>
     </Container>
-
   );
 };
 
