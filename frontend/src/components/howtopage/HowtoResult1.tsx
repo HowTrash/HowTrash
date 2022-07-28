@@ -1,16 +1,40 @@
-import { Grid, Box, Typography } from "@mui/material";
+import { Grid, Box, Typography, autocompleteClasses } from "@mui/material";
 import * as React from "react";
 import constants from "../../utils/constants";
+import { useState, useEffect } from "react";
+
+interface trashType {
+  kind: string;
+  tag: string;
+  method1: string;
+  method2: string;
+  method3: string;
+  warning: string;
+}
 
 const HowtoResult = ({ props }: any) => {
-  console.log(props);
-  console.log(constants.GLASS);
-
-  // if(props == "BIODEGRADABLE"){
-  //     const csTrash = constants.BIODEGRADABLE
-  // }
-  const resTrash = constants.BIODEGRADABLE; // ⭕️위에 처럼 들어오는 거 구현되면 if로 묶어
-
+  const [resTrash, setResTrash] = useState<trashType | undefined>();
+  useEffect(() => {
+    if (props.trashkind == "BIODEGRADABLE") {
+      setResTrash(constants.BIODEGRADABLE);
+    }
+    if (props.trashkind == "GLASS") {
+      setResTrash(constants.GLASS);
+    }
+    if (props.trashkind == "CARDBOARD") {
+      setResTrash(constants.CARDBOARD);
+    }
+    if (props.trashkind == "METAL") {
+      setResTrash(constants.METAL);
+    }
+    if (props.trashkind == "PAPER") {
+      setResTrash(constants.PAPER);
+    }
+    if (props.trashkind == "PLASTIC") {
+      setResTrash(constants.PLASTIC);
+    }
+  }, []);
+  // console.log(props.img);
   return (
     <Grid
       container
@@ -18,14 +42,21 @@ const HowtoResult = ({ props }: any) => {
       justifyContent="center"
       direction="row"
       sx={{
-        backgroundColor: "#00ff0000",
+        backgroundColor: "white",
+        borderRadius: 10,
         margin: "auto",
+        border: 1.5,
+        borderColor: "black",
         mt: 10,
-        width: "100ch",
+        height: "auto",
+        width: "auto",
+        marginX: 20,
       }}
     >
-      <Box sx={{ width: "45ch", height: "auto" }}>사진 넣을 공간</Box>
-      <Box sx={{ width: "54ch", height: "auto" }}>
+      <Box sx={{ width: "auto", height: "auto", margin: 8 }}>
+        <img style={{ borderRadius: 10 }} src={props.img as string} />
+      </Box>
+      <Box sx={{ width: "auto", height: "auto", margin: 2 }}>
         <Typography
           component="h1"
           fontWeight="bold"
@@ -33,7 +64,7 @@ const HowtoResult = ({ props }: any) => {
           align="left"
           sx={{ mt: 5, marginLeft: 1 }}
         >
-          {resTrash.kind}
+          {resTrash?.kind}
           <br />
         </Typography>
 
@@ -43,7 +74,7 @@ const HowtoResult = ({ props }: any) => {
           fontSize="16px"
           fontWeight="bold"
         >
-          {resTrash.tag}
+          {resTrash?.tag}
           <br />
           <br />
         </Typography>
@@ -59,13 +90,13 @@ const HowtoResult = ({ props }: any) => {
         </Typography>
 
         <Typography align="left" sx={{ margin: 1 }}>
-          {resTrash.method1}
+          {resTrash?.method1}
           <br />
           <br />
-          {resTrash.method2}
+          {resTrash?.method2}
           <br />
           <br />
-          {resTrash.method3}
+          {resTrash?.method3}
           <br />
           <br />
         </Typography>
@@ -79,8 +110,8 @@ const HowtoResult = ({ props }: any) => {
           알아두면 좋은 점
         </Typography>
 
-        <Typography align="left" sx={{ margin: 1 }}>
-          {resTrash.warning}
+        <Typography align="left" sx={{ margin: 1, marginBottom: 5 }}>
+          {resTrash?.warning}
         </Typography>
       </Box>
     </Grid>

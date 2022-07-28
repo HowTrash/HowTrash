@@ -1,15 +1,34 @@
 import { Button, Typography, Box } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Resizer from "react-image-file-resizer";
 import Api from "../../utils/customApi";
+import { ReduxModule } from "../../modules/ReduxModule";
 
 function UploadImage() {
   const [isImg, setIsImg] = useState(null);
   const [urlImg, setUrlImg] = useState("");
   const [respondImg, setRespondImg] = useState(null);
   const navigate = useNavigate();
+
+  // const token = localStorage.getItem("access_token");
+
+  // const dispatch = useDispatch();
+
+  // const reduxToken = useSelector(
+  //   (state: RootReducerType) => state.DecodeReducer
+  // );
+
+  // useEffect(() => {
+  //   if (token) {
+  //     console.log("header.js useEffect");
+  //     dispatch(fetchDecodeData(token as string));
+  //   } else {
+  //     console.log("header.js not token");
+  //   }
+  // }, []);
+  const userIdtoRedux = ReduxModule().decodeInfo?.id;
 
   const resizeFile = (file: Blob) =>
     new Promise((resolve) => {
@@ -77,7 +96,7 @@ function UploadImage() {
     trashFormData.append("filename", respondImg as any);
 
     return await Api.post(
-      `/trash/mainpage/users/959f9b1c-c0bf-44b1-bb31-4ff08e86f782/result`,
+      `/trash/mainpage/users/${userIdtoRedux}/result`,
       trashFormData
     );
   };
@@ -87,16 +106,22 @@ function UploadImage() {
     else {
       (async () => {
         const res = await sendImage();
-        // const tN = res.data[0].name;
         navigate(`/mainpage/resultpage`, {
           state: {
-            trashName: res.data[0].name,
-            throwWay: res.data[0].way,
+            trashName: res.data.trash_kind,
             imgSrc: urlImg,
           },
         });
       })();
     }
+    // navigate(`/mainpage/resultpage`, {
+    //   state: {
+    //     trashName: "GLASS",
+    //     throwWay: "asfas",
+    //     imgSrc:
+    //       "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png",
+    //   },
+    // });
   };
 
   return (

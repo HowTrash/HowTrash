@@ -46,7 +46,7 @@ const SearchBar = () => {
         border: 1,
         borderRadius: 10,
         margin: "auto",
-        mt: 30,
+        mt: 25,
         width: "58ch",
       }}
     >
