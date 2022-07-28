@@ -30,17 +30,18 @@ function Dates({ onClickRetrieve }: { onClickRetrieve: any }) { // 함수의 반
   const [StartDate, setStartDate] = React.useState<string | null>(null);
   const [StartLock, setStartLock] = React.useState<Date | null>(null);
   const [EndDate, setEndDate] = React.useState<string | null>(null);
+  const [EndLock, setEndLock] = React.useState<Date | null> (null);
 
   const HandleStartChange = (date: Date) => {
     const dateresult = formatDate(date);
-    const datepad = date;
     setStartDate(dateresult);
-    setStartLock(datepad);
+    setStartLock(date);
   };
 
   const HandleEndChange = (date: Date) => {
     const dateresult = formatDate(date);
     setEndDate(dateresult);
+    setEndLock(date);
   };
 
   const HandleSubmit = (event: any) => {
@@ -54,6 +55,12 @@ function Dates({ onClickRetrieve }: { onClickRetrieve: any }) { // 함수의 반
     const periodStr = StartDate !== null || EndDate !== null ? '/period' : '';
     const startDateStr = StartDate !== null ? `/${StartDate}` : '';
     const endDateStr = EndDate !== null ? `/${EndDate}` : '';
+
+    if(StartLock !== null && EndLock !== null){
+      if(EndLock < StartLock){
+        alert("종료 날짜가 시작 날짜보다 앞에 있을수는 없습니다!");
+      }
+    }
 
     axios
       .get(`http://localhost:8080/trash/mypage/users/8ffd6fae-2ebf-4a32-be0d-f4b4d61bb2d2/statistics${periodStr}${startDateStr}${endDateStr}`)
