@@ -15,6 +15,7 @@ import MyChallenge from "./components/Mypage/MyChallenge";
 import ChangeInfo from "./components/Mypage/ChangeInfo";
 
 import AuthRouter from "./Auth/AuthRouter";
+import HowtoResult from "./components/howtopage/HowtoResult1";
 
 function App() {
   useEffect(() => {
@@ -46,6 +47,10 @@ function App() {
           <Route element={<AuthRouter />}>
             <Route path="/mypage" element={<MyPage />}>
               <Route index element={<MyTrashcan />} />
+              <Route
+                path={`/mypage/trashNum/:trashNum/howTo`}
+                element={<HowtoResult />}
+              />
               <Route path="/mypage/myTrashChart" element={<MyTrashChart />} />
               <Route path="/mypage/myChallenge" element={<MyChallenge />} />
               <Route path="/mypage/userInfo" element={<ChangeInfo />} />

@@ -157,6 +157,7 @@ function MyTrashcan() {
                   image={item.img}
                   kind={item.trash_kind}
                   key={index}
+                  trashNum={item.trash_kind}
                 />
               ))}
           </Box>

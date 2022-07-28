@@ -16,9 +16,10 @@ export namespace rs {
   }
 
   export interface Trash {
+    created_at: Date;
     img: string;
+    is_on_basket: boolean;
     trash_kind: string;
-    uploaded_trash_image_id: number;
   }
 
   export interface TrashList {
