@@ -16,14 +16,13 @@ export namespace rs {
   }
 
   export interface Trash {
-    created_at: Date;
+    uploaded_trash_image_id: string;
     img: string;
-    is_on_basket: boolean;
     trash_kind: string;
   }
 
   export interface TrashList {
-    message: Array<Trash>;
+    trashlist: Array<Trash>;
   }
 
   export interface TrashResult {

@@ -45,6 +45,7 @@ const checkRefreshToken = () => {
     // refresh 토큰 만료일이 지나면 localStorage clear
     if (tokenExpire - nowTime <= 0) {
       localStorage.clear();
+      alert("로그인이 필요합니다.");
       window.location.replace("/login");
       return;
     }

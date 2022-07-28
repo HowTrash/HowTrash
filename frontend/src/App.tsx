@@ -39,12 +39,15 @@ function App() {
         <Header />
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/mainpage" element={<MainPage />} />
-          <Route path="/howto" element={<Howto />} />
           <Route path="/register" element={<Register />} />
+          <Route element={<AuthRouter authAble={false} />}>
+            <Route path="/mainpage" element={<MainPage />} />
+            <Route path="/howto" element={<Howto />} />
+          </Route>
+
           {/* <Route path="/mainpage/resultpage" element={<SearchResult />} /> */}
           {/* mypage 에 접근 못하게 라우팅 */}
-          <Route element={<AuthRouter />}>
+          <Route element={<AuthRouter authAble={true} />}>
             <Route path="/mypage" element={<MyPage />}>
               <Route index element={<MyTrashcan />} />
               <Route

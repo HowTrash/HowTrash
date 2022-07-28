@@ -43,11 +43,9 @@ function MyTrashcan() {
   const [trashes, setTrashes] = useState<rs.TrashList>(trashList);
 
   const fetchMyTrash = async () => {
-    const result = await Api.get("/trash/", {
-      headers: {
-        Authorization: `${what.value}`,
-      },
-    }).then((res) => res.data as rs.TrashList);
+    const result = await Api.get(
+      "/trash/mypage/users/2c762f6e-b369-4985-96f9-29ccb4f9fc34/images"
+    ).then((res) => res.data as rs.TrashList);
     // setTrashes(result);
     setTrashes(result);
     console.log("api요청 결과", result);
@@ -63,9 +61,9 @@ function MyTrashcan() {
   }, []);
 
   useEffect(() => {
-    // console.log("정보 저장2", trashes);
+    console.log("정보 저장2", trashes);
     // console.log("정보 저장2", trashes.message.length);
-    // console.log("api요청 gilli", Object.keys(trashes.message).length);
+    console.log("api요청 gilli", Object.keys(trashes).length);
   }, [trashes]);
 
   return (
@@ -98,7 +96,7 @@ function MyTrashcan() {
             flexDirection: "row",
           }}
         >
-          <Typography color="black" sx={{ mt: 2, mb: 1, fontSize: 2 }}>
+          <Typography color="black" sx={{ mt: 2, fontSize: 2 }}>
             사진 자동으로 추가
           </Typography>
           <GreenSwitch
@@ -111,17 +109,25 @@ function MyTrashcan() {
         </Box>
       </Box>
       <Container
+        // style={{
+        //   backgroundColor: "white",
+        //   border: "solid",
+        //   borderRadius: 5,
+        //   borderColor: "white",
+        //   height: "50vh",
+        //   paddingTop: 3,
+        //   paddingBottom: 20,
+        // }}
+        // sx={{ mt: 3 }}
+
         style={{
+          borderRadius: 8,
           backgroundColor: "white",
-          border: "solid",
-          borderRadius: 5,
-          borderColor: "white",
-          height: "100vh",
-          paddingTop: 2,
-          paddingBottom: 20,
+          height: "50vh",
         }}
+        sx={{ mt: 2 }}
       >
-        {trashes.message && trashes.message.length === 0 ? (
+        {trashes && Object.keys(trashes)?.length === 0 ? (
           <Box
             sx={{
               display: "flex",
@@ -146,18 +152,18 @@ function MyTrashcan() {
             sx={{
               display: "flex",
               flexWrap: "wrap",
+              paddingTop: 2,
               // alignItems: "center",
               // justifyContent: "flex-start",
               // placeContent: "center",
             }}
           >
-            {trashes.message &&
-              trashes.message.map((item: rs.Trash, index: any) => (
+            {trashes &&
+              Object.values(trashes)?.map((item: rs.Trash, index: any) => (
                 <MultiActionAreaCard
                   image={item.img}
                   kind={item.trash_kind}
                   key={index}
-                  trashNum={item.trash_kind}
                 />
               ))}
           </Box>

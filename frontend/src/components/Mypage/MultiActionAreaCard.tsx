@@ -20,11 +20,7 @@ const MyTrashcanBtn = styled(Button)(({}) => ({
   },
 }));
 
-export default function MultiActionAreaCard({
-  image = "",
-  kind = "",
-  trashNum = "",
-}) {
+export default function MultiActionAreaCard({ image = "", kind = "" }) {
   // export default function MultiActionAreaCard() {
 
   return (
@@ -62,7 +58,7 @@ export default function MultiActionAreaCard({
           }}
         >
           <Link
-            href={`/mypage/trashNum/:${trashNum}/howTo`}
+            href={`/mypage/trashNum/:${kind}/howTo`}
             sx={{ color: "black", textDecoration: "none" }}
           >
             더보기
