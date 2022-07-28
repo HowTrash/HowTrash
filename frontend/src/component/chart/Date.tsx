@@ -7,12 +7,6 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 
-
-interface Content {
-  trash_kind: string;
-  created_at: Date;
-}
-
 const theme = createTheme({
   palette: {
     primary: {
@@ -21,23 +15,32 @@ const theme = createTheme({
   },
 });
 
+function formatDate(date: Date) {
+  return (
+    [
+      date.getFullYear(),
+      (date.getMonth() + 1).toString().padStart(2, '0'),
+      date.getDate().toString().padStart(2, '0')
+    ].join('-')
+  );
+} // 날짜 상태
+
 function Dates({ onClickRetrieve }: { onClickRetrieve: any }) { // 함수의 반환 : onClickRetrieve
 
-  const [StartDate, setStartDate] = React.useState<Date | string | null>(null);
-  const [EndDate, setEndDate] = React.useState<Date | string | null>(null);
+  const [StartDate, setStartDate] = React.useState<string | null>(null);
+  const [StartLock, setStartLock] = React.useState<Date | null>(null);
+  const [EndDate, setEndDate] = React.useState<string | null>(null);
 
   const HandleStartChange = (date: Date) => {
-    setStartDate(date);
-    console.log(date);
+    const dateresult = formatDate(date);
+    const datepad = date;
+    setStartDate(dateresult);
+    setStartLock(datepad);
   };
 
   const HandleEndChange = (date: Date) => {
-    console.log(date);
-    const clone = new Date(date);
-    clone.setHours(23);
-    clone.setMinutes(59);
-    setEndDate(clone); // 날짜 명확한 표시 하루를 보기 위함.
-    console.log(clone);
+    const dateresult = formatDate(date);
+    setEndDate(dateresult);
   };
 
   const HandleSubmit = (event: any) => {
@@ -48,34 +51,24 @@ function Dates({ onClickRetrieve }: { onClickRetrieve: any }) { // 함수의 반
   };
 
   const fetchUserData = () => {
+    const periodStr = StartDate !== null || EndDate !== null ? '/period' : '';
+    const startDateStr = StartDate !== null ? `/${StartDate}` : '';
+    const endDateStr = EndDate !== null ? `/${EndDate}` : '';
+
     axios
-      .get(`http://localhost:8080/trash/`,{headers : {Authorization: `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6ImMzNTQyMzA1LTdiZjUtNDE2OC04ODk2LWExYzU3YmFjMGJhMiIsImFsaWFzIjoidGVzdCIsImV4cCI6MTY1ODk4MzQzOCwidHlwZSI6ImFjY2Vzc190b2tlbiJ9.iaReUeH6lgosbPfnX24SJnWuY_naXukLG9rDlo3r7s4`}})
+      .get(`http://localhost:8080/trash/mypage/users/c970a18e-9b11-4c4b-ac15-87411e4f20d3/statistics${periodStr}${startDateStr}${endDateStr}`)
       .then((response) => {
         // Handle success.
+        const responseUserData = response.data;
         console.log("data saved!");
-        console.log(new Date(response.data.message[1].created_at));
-        const tempList: Content[] = [];
-        response.data.message?.forEach((item: any) => {
-          if(StartDate !== null && EndDate !== null){
-            if(new Date(item.created_at) >= StartDate && new Date(item.created_at) <= EndDate){
-              tempList.push(item);
-            }
-          }
-          else{
-            tempList.push(item);
-          }
-        }
-      )
-      onClickRetrieve(tempList);
-        }
-    )
+        console.log(response.data);
+        onClickRetrieve(responseUserData);
+      })
       .catch((error) => {
         // Handle error.
         console.log("An error occurred:", error.response);
-        console.log("에러",error.response.data);
       });
-
-}
+  }
 
   React.useEffect(() => {
     fetchUserData();
@@ -117,7 +110,7 @@ function Dates({ onClickRetrieve }: { onClickRetrieve: any }) { // 함수의 반
                 inputFormat="yyyy/MM/dd"
                 value={EndDate}
                 onChange={HandleEndChange as any}
-                minDate={StartDate}
+                minDate={StartLock}
                 renderInput={(params) => <TextField size="small" {...params} sx={{ width: '100%' }} />}
               />
             </Box>

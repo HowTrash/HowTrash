@@ -10,11 +10,13 @@ import Chart from "../chart/Chart";
 import Date from "../chart/Date";
 
 function MyTrashcan() {
-    const [userData, setUserData] = useState<any>('');
+    const [userData, setUserData] = useState<any>([]);
+    /*
     const onClickRetrieve = (user: any) => {
         setUserData(user);
         console.log("잘 나왔는지?", user);
     }
+    */
 
     return (
         <Container
@@ -35,7 +37,7 @@ function MyTrashcan() {
                     height: "50vh"
                 }}
                 sx={{ mt: 3 }}>
-                <Date onClickRetrieve={onClickRetrieve} />
+                <Date onClickRetrieve={setUserData} />
                 <Chart list={userData} />
             </Container>
         </Container>
