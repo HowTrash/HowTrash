@@ -12,7 +12,9 @@ import GreenBack from "./images/greenBack";
 import MyTrashcan from "./components/Mypage/MyTrashcan";
 import MyTrashChart from "./components/Mypage/MyTrashChart";
 import MyChallenge from "./components/Mypage/MyChallenge";
-import ChangeInfo from "./components/Mypage/ChangeInfo";
+import ChangeNickName from "./components/Mypage/Change_nickname";
+import ChangePassWord from "./components/Mypage/Change_password";
+import LogOut from "./components/Mypage/LogOut";
 import UploadResult from "./components/mainpage/UploadResult";
 
 import AuthRouter from "./Auth/AuthRouter";
@@ -60,8 +62,9 @@ function App() {
               />
               <Route path="/mypage/myTrashChart" element={<MyTrashChart />} />
               <Route path="/mypage/myChallenge" element={<MyChallenge />} />
-              <Route path="/mypage/userInfo" element={<ChangeInfo />} />
-              <Route path="/mypage/logout" element={<ChangeInfo />} />
+              <Route path="/mypage/changeNickName" element={<ChangeNickName />} />
+              <Route path="/mypage/changePassWord" element={<ChangePassWord />} />
+              <Route path="/mypage/logout" element={<LogOut />} />
             </Route>
           </Route>
         </Routes>

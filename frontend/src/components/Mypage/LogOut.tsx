@@ -31,7 +31,7 @@ const UserInfoChange = styled(TextField)(({}) => ({
 }));
 
 
-function ChangeInfo() {
+function LogOut() {
 
     return(
         <Container
@@ -49,7 +49,7 @@ function ChangeInfo() {
                         sx={{mt: 1.2,
                             mb: 1,
                             fontSize: "medium"}}>
-                        내 정보 변경
+                        로그아웃하기
                     </Typography>
                    
                 <Container
@@ -75,36 +75,6 @@ function ChangeInfo() {
                                 margin: "auto"}}
                             
                         >
-                            <UserInfoChange
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="email"
-                                label="Email Address"
-                                name="email"
-                                autoComplete="email"
-                                autoFocus
-                            />
-                            <UserInfoChange
-                                margin="normal"
-                                required
-                                fullWidth
-                                name="password"
-                                label="Password"
-                                type="password"
-                                id="password"
-                                autoComplete="current-password"
-                            />
-                            <UserInfoChange
-                                margin="normal"
-                                required
-                                fullWidth
-                                name="nickname"
-                                label="nickname"
-                                type="nickname"
-                                id="nickname"
-                                autoComplete="current-nickname"
-                            />
                             <Button
                                 type="submit"
                                 fullWidth
@@ -117,7 +87,7 @@ function ChangeInfo() {
                                     fontWeight: "bold",
                                 }}
                             >
-                                변경하기
+                                로그아웃
                             </Button>
                     </Box>                                              
                 </Container>
@@ -127,4 +97,4 @@ function ChangeInfo() {
     );
 }
 
-export default ChangeInfo;
+export default LogOut;

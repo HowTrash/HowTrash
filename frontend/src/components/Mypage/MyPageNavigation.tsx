@@ -16,9 +16,13 @@ const sidebarNavItems = [{
         to: '/mypage/myChallenge',
         section: 'started'
     },{
-        display: '내 정보 변경',
-        to: '/mypage/userInfo',
+        display: '닉네임 변경',
+        to: '/mypage/changeNickName',
         section: 'calendar'
+    },{
+        display: '비밀번호 변경',
+        to: '/mypage/changePassWord',
+        section: 'user'
     },{
         display: '로그아웃',
         to: '/mypage/logout',
