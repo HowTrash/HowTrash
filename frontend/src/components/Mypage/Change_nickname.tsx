@@ -3,7 +3,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { rs } from "src/utils/types";
 import { API_BASE_URL } from "src/utils/constants";
-import { getToken } from "../../Auth/tokenManager";
+import { getAccess } from "../../Auth/tokenManager";
 import { setAccessToken, setRefreshToken } from "src/Auth/tokenManager";
 import { useState } from "react";
 import Api from "../../utils/customApi";
@@ -39,10 +39,9 @@ const UserInfoChange = styled(TextField)(({ }) => ({
 
 
 function ChangeNickName() {
-    const aliasRegex = /^[가-힣a-zA-Z]+$/;
+    const aliasRegex = /^[가-힣a-zA-Z0-9]+$/;
     const [checkAilas, setCheckAlias] = useState("");
     const [alias, setAlias] = useState("");
-    const [aliasError, setAliasError] = useState("");
 
     const onBlurInfo = async (props: Array<string>, event: any) => {
         const res = await Api.get(
@@ -50,9 +49,8 @@ function ChangeNickName() {
         );
         if (props[0] == "alias") {
             if (!aliasRegex.test(alias as string) || (alias as string).length < 1) {
-                setAliasError("올바른 닉네임을 입력해주세요.");
+                setCheckAlias("올바른 닉네임을 입력해주세요.");
             } else {
-                setAliasError("");
                 if (res.data.result == false) setCheckAlias("사용 중인 닉네임 입니다.");
                 else setCheckAlias("사용 가능한 닉네임 입니다.");
             }
@@ -65,17 +63,16 @@ function ChangeNickName() {
         const changeAlias = data.get("alias");
         if (aliasRegex.test(changeAlias as string) && checkAilas === "사용 가능한 닉네임 입니다.") { // 닉네임 체크에 통과될 때
             const aliasChange = async () => {
-                const stringAccess = getToken().access;
-                console.log("이거슨 토큰?", stringAccess);
-        
+                const stringAccess : any = getAccess();
+
                 if (stringAccess !== null) { // stringAccess if문 안써주면 코드 오류 발생
-                    const access: rs.TokenInfo = JSON.parse(stringAccess); // string형태로 받는 토큰 JSON으로 만들어줌
-                    console.log("넘겨줄 토큰값", access);
-        
+                    /* const access: rs.TokenInfo = JSON.parse(stringAccess); // string형태로 받는 토큰 JSON으로 만들어줌*/
+                    console.log("넘겨줄 토큰값", stringAccess);
+
                     const changeData = await axios
                         .patch(`${API_BASE_URL}/users/`, { "value": { "alias": changeAlias } }, { //patch : 바디 -> 변경할 alias & 헤더 -> 확인해야되는 토큰 
                             headers: {
-                                Authorization: `${access.value}`,
+                                Authorization: `${stringAccess.value}`,
                             },
                         })
                         .then((response) => {
@@ -85,13 +82,13 @@ function ChangeNickName() {
                             alert("닉네임이 정상적으로 변경되었습니다!");
                         })
                         .catch((e) => { // 의도치 않는 오류
-                            alert("로그인 정보에 오류가 생겼습니다. 새로고침을 해주세요");
+                            alert("로그인 정보에 오류가 생겼습니다.");
                         });
                 };
             }
             aliasChange();
         }
-        else  e.preventDefault();
+        else e.preventDefault();
         //오류 생길때는 활성화 X 화면 넘어가지 않도록
     }
 

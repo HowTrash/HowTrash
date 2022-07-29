@@ -57,7 +57,7 @@ const theme = createTheme({
   },
 });
 
-const UserInfoTf = styled(TextField)(({}) => ({
+const UserInfoTf = styled(TextField)(({ }) => ({
   backgroundColor: "",
   "&:hover": {
     color: "#759F98",
@@ -70,14 +70,6 @@ const UserInfoTf = styled(TextField)(({}) => ({
   },
 }));
 
-const FormHelperTexts = styled(FormHelperText)`
-  width: 100%;
-  padding-left: 12px;
-  font-weight: 700;
-  color: #d32f2f;
-  font-size: 16px;
-`;
-
 interface User {
   name: FormDataEntryValue | null;
   pw: FormDataEntryValue | null;
@@ -86,11 +78,8 @@ interface User {
 }
 
 const Register = () => {
-  const [emailError, setEmailError] = useState("");
   const [passwordState, setPasswordState] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [nameError, setNameError] = useState("");
-  const [aliasError, setAliasError] = useState("");
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -101,9 +90,9 @@ const Register = () => {
 
   const emailRegex =
     /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-  const passwordRegex = /^[가-힣a-zA-Z]+$/;
-  const nameRegex = /^[가-힣a-zA-Z]+$/;
-  const aliasRegex = /^[가-힣a-zA-Z]+$/;
+  const passwordRegex = /^[가-힣a-zA-Z0-9]+$/;
+  const nameRegex = /^[가-힣a-zA-Z0-9]+$/;
+  const aliasRegex = /^[가-힣a-zA-Z0-9]+$/;
 
   //form 비교
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -162,19 +151,16 @@ const Register = () => {
 
     if (props[0] == "name") {
       if (!nameRegex.test(name as string) || (name as string).length < 1) {
-        setNameError("올바른 이름을 입력해주세요.");
-        setCheckName("");
+        setCheckName("올바른 이름을 입력해주세요.");
       } else {
-        setNameError("");
         if (res.data.result == false) setCheckName("사용 중인 아이디입니다.");
         else setCheckName("사용 가능한 아이디 입니다.");
       }
     }
     if (props[0] == "email") {
       if (!emailRegex.test(email as string)) {
-        setEmailError("올바른 이메일 형식이 아닙니다.");
+        setCheckEmail("올바른 이메일 형식이 아닙니다.");
       } else {
-        setEmailError("");
         if (res.data.result == false) setCheckEmail("사용 중인 이메일 입니다.");
         else setCheckEmail("사용 가능한 이메일 입니다.");
       }
@@ -182,10 +168,8 @@ const Register = () => {
 
     if (props[0] == "alias") {
       if (!aliasRegex.test(alias as string) || (alias as string).length < 1) {
-        setAliasError("올바른 이름을 입력해주세요.");
-        setCheckName("");
+        setCheckAlias("올바른 닉네임을 입력해주세요.");
       } else {
-        setAliasError("");
         if (res.data.result == false) setCheckAlias("사용 중인 닉네임 입니다.");
         else setCheckAlias("사용 가능한 닉네임 입니다.");
       }
@@ -242,7 +226,6 @@ const Register = () => {
                 onBlur={(event) => {
                   onBlurInfo(["name", name], event);
                 }}
-                error={nameError !== "" || false}
               />
               <span
                 style={{
@@ -253,7 +236,7 @@ const Register = () => {
               >
                 {checkName}
               </span>
-              <FormHelperTexts>{nameError}</FormHelperTexts>
+
               <UserInfoTf
                 margin="normal"
                 required
@@ -262,9 +245,17 @@ const Register = () => {
                 label="Password"
                 type="password"
                 id="password"
-                error={passwordState !== "" || false}
               />
-              <FormHelperTexts>{passwordState}</FormHelperTexts>
+              <span
+                style={{
+                  color: "red",
+                  fontSize: 13,
+                  marginLeft: 8,
+                }}
+              >
+                {passwordState}
+              </span>
+
               <UserInfoTf
                 margin="normal"
                 required
@@ -273,9 +264,16 @@ const Register = () => {
                 label="Password Confirm"
                 type="password"
                 id="rePassword"
-                error={passwordError !== "" || false}
               />
-              <FormHelperTexts>{passwordError}</FormHelperTexts>
+              <span
+                style={{
+                  color: "red",
+                  fontSize: 13,
+                  marginLeft: 8,
+                }}
+              >
+                {passwordError}
+              </span>
 
               <UserInfoTf
                 margin="normal"
@@ -289,7 +287,6 @@ const Register = () => {
                 onBlur={(event) => {
                   onBlurInfo(["email", email], event);
                 }}
-                error={emailError !== "" || false}
               />
               <span
                 style={{
@@ -301,7 +298,6 @@ const Register = () => {
                 {checkEmail}
               </span>
 
-              <FormHelperTexts>{emailError}</FormHelperTexts>
               <UserInfoTf
                 margin="normal"
                 required
@@ -341,7 +337,7 @@ const Register = () => {
                 >
                   가입하기
                 </Button>
-
+                
                 <Modal
                   aria-labelledby="modal-title"
                   aria-describedby="modal-description"
