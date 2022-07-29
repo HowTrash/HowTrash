@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Typography, Container, Box } from "@mui/material";
-import BadgeBack from "../../images/challengeBack";
+import BadgeBack from "../../images/challenges/challengeBack";
 
 function MyBadge() {
   return (
