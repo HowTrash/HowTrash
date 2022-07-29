@@ -109,21 +109,10 @@ function MyTrashcan() {
         </Box>
       </Box>
       <Container
-        // style={{
-        //   backgroundColor: "white",
-        //   border: "solid",
-        //   borderRadius: 5,
-        //   borderColor: "white",
-        //   height: "50vh",
-        //   paddingTop: 3,
-        //   paddingBottom: 20,
-        // }}
-        // sx={{ mt: 3 }}
-
         style={{
           borderRadius: 8,
           backgroundColor: "white",
-          height: "50vh",
+          height: "100vh",
         }}
         sx={{ mt: 2 }}
       >

@@ -63,6 +63,38 @@ const contents = {
     warning:
       "제품마다 적혀있는 분리배출 기호를 확인하고, 분리배출 장소가 나뉘어져 있으면 재질별로, 그렇지 않으면 플라스틱 으로 배출하세요",
   },
+  CHALLENGE: [
+    {
+      id: 1,
+      imgT: "https://i.ibb.co/WvxdQFY/003-1.png",
+      imgF: "https://i.ibb.co/f2W2S56/004.png",
+      test: "첫 분리수거 시작!",
+    },
+    {
+      id: 2,
+      imgT: "https://i.ibb.co/H2sjHm9/001.png",
+      imgF: "https://i.ibb.co/f8hZNfD/002.png",
+      test: "분리수거함 쌓여가는 중...",
+    },
+    {
+      id: 3,
+      imgT: "https://i.ibb.co/pPLCXxb/005-1.png",
+      imgF: "https://i.ibb.co/XzcL76V/006.png",
+      test: "벌써 5번째 분리수거",
+    },
+    {
+      id: 4,
+      imgT: "https://i.ibb.co/j5dDHQy/007.png",
+      imgF: "https://i.ibb.co/pjMpRmS/008.png",
+      test: "행운의 7번째 분리수거!",
+    },
+    {
+      id: 5,
+      imgT: "https://i.ibb.co/S6Z7yjx/009.png",
+      imgF: "https://i.ibb.co/qFd500m/010.png",
+      test: "10번째 달성",
+    },
+  ],
 };
 
 export default contents;

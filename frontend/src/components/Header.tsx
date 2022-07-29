@@ -56,14 +56,14 @@ function Header() {
     }
   }, []);
 
-  // const [mouseOn, setMouseOn] = useState(false);
+  const [mouseOn, setMouseOn] = useState(false);
 
-  // const handlePopoverOpen = () => {
-  //   setMouseOn(true);
-  // };
-  // const handlePopoverClose = () => {
-  //   setMouseOn(false);
-  // };
+  const handlePopoverOpen = () => {
+    setMouseOn(true);
+  };
+  const handlePopoverClose = () => {
+    setMouseOn(false);
+  };
   console.log(token);
 
   function deleteToken() {
@@ -119,8 +119,8 @@ function Header() {
                 <Link
                   href="/mainpage"
                   onClick={deleteToken}
-                  // onMouseEnter={handlePopoverOpen}
-                  // onMouseLeave={handlePopoverClose}
+                  onMouseEnter={handlePopoverOpen}
+                  onMouseLeave={handlePopoverClose}
                   sx={{
                     textDecoration: "none",
                     color: "#759F98",
@@ -131,20 +131,30 @@ function Header() {
                 >
                   Welcome, {reduxToken.decodeInfo?.alias} 님
                 </Link>
-                {/* {mouseOn?
-                      <Container
-                        style={{ position: 'absolute', top: 80 }}>
-                        <Box 
-                          display="flex" justifyContent="center" 
-                          sx={{
-                            background: "white", border: 1, borderRadius: 1, borderColor: "#E7F5EF", color: "#759F98",
-                            fontSize: 3, padding: 1, width: 100
-                            }}>
-                          클릭해서 로그아웃
-                        </Box>
-                      </Container>
-                      :
-                      Hidden} */}
+                <>
+                  {mouseOn ? (
+                    <Container style={{ position: "absolute", top: 80 }}>
+                      <Box
+                        display="flex"
+                        justifyContent="center"
+                        sx={{
+                          background: "white",
+                          border: 1,
+                          borderRadius: 1,
+                          borderColor: "#E7F5EF",
+                          color: "#759F98",
+                          fontSize: 3,
+                          padding: 1,
+                          width: 100,
+                        }}
+                      >
+                        클릭해서 로그아웃
+                      </Box>
+                    </Container>
+                  ) : (
+                    Hidden
+                  )}
+                </>
               </Button>
 
               <Button

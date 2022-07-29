@@ -32,4 +32,14 @@ export namespace rs {
       imgSrc: string;
     };
   }
+  export interface Challenge {
+    challenge_number: number;
+    type: boolean;
+  }
+  export interface ChallengeInfo {
+    id: number;
+    imgT: string;
+    imgF: string;
+    test: string;
+  }
 }
