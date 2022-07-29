@@ -52,7 +52,7 @@ export default function UserChallenge({ num = 1, type }: Props) {
     >
       <img src={whatChallenge?.imgF} alt="008" style={{ width: 250 }} />
       <Typography color="#898989" sx={{ mt: 1, mb: 1, fontSize: "small" }}>
-        아직 달성하지 않은 도전과제에요.
+        아직 달성하지 않은 도전과제예요.
       </Typography>
     </Box>
   );
