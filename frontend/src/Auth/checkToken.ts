@@ -94,7 +94,7 @@ const getRefreshToken = async () => {
 
     localStorage.removeItem("access_token");
     if (accessToken !== null) {
-      setAccessToken(accessToken);
+      setAccessToken(accessToken,false);
       window.location.reload();
     }
 

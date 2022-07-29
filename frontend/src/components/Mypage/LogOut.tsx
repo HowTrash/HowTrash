@@ -49,7 +49,7 @@ function LogOut() {
                         sx={{mt: 1.2,
                             mb: 1,
                             fontSize: "medium"}}>
-                        로그아웃하기
+                        로그아웃
                     </Typography>
                    
                 <Container
