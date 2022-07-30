@@ -1,24 +1,37 @@
 import * as React from "react";
 import { Box, Button, Typography } from "@mui/material";
 import InputIcon from "@mui/icons-material/Input";
-import { useLocation } from "react-router";
-import { rs } from "src/utils/types";
 import { useNavigate } from "react-router-dom";
-import { store } from "../../index";
 import { useSelector } from "react-redux";
 import { RootReducerType } from "../../index";
+import { ReduxModule } from "../../modules/ReduxModule";
+import { useState } from "react";
+
+import Api from "../../utils/customApi";
 
 const UploadResult = () => {
-  const { state } = useLocation() as rs.TrashResult;
   const navigate = useNavigate();
 
-  const trashKindList = state.trashName.split(","); // [GLASS,PAPER]
-  console.log("in uploadResult", trashKindList);
-
   //❌
+
+  const [imgUrl, setImgUrl] = useState("");
+  const [trashKinds, setTrashKinds] = useState("");
   const itemID = useSelector((state: RootReducerType) => state.ImgIDReducer);
-  console.log("제발 아이디 10 이여라 ", itemID);
-  console.log(store.getState().ImgIDReducer);
+  const userIdToRedux = ReduxModule().decodeInfo?.id;
+
+  const searchHowTrash = async () => {
+    const result = await Api.get(
+      `/trash/mypage/users/${userIdToRedux}/images/${itemID}`
+    );
+    setImgUrl(result.data[0].img);
+    setTrashKinds(result.data[0].trash_kind);
+  };
+  searchHowTrash();
+  console.log(imgUrl);
+  console.log(trashKinds);
+
+  const trashKindList = trashKinds.split(","); // 이거 api 바뀌면 배열로 바꿔야함
+
   //❌
 
   const onClickHowto = () => {
@@ -43,7 +56,7 @@ const UploadResult = () => {
             mt: 23,
           }}
         >
-          <img src={state.imgSrc as string} />
+          <img src={imgUrl as string} />
         </Box>
 
         <Typography marginTop={5} fontWeight="bold" variant="h5">
@@ -66,11 +79,6 @@ const UploadResult = () => {
             if (item === "PLASTIC") {
               return <p key={index}>결과 : 플라스틱</p>;
             }
-            // state.trashName === "CARDBOARD" && <p>결과 : 일반 쓰레기</p>,
-            // state.trashName === "GLASS" && <p>결과 : 유리</p>,
-            // state.trashName === "METAL" && <p>결과 : 캔</p>,
-            // state.trashName === "PAPER" && <p>결과 : 종이</p>,
-            // state.trashName === "PLASTIC" && <p>결과 : 플라스틱</p>
           })}
         </Typography>
 

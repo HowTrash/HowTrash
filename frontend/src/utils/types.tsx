@@ -1,5 +1,4 @@
 export namespace rs {
-
   export interface UserAuth {
     access_token: string;
     refresh_token: string;
@@ -16,7 +15,6 @@ export namespace rs {
     token_type: string;
   }
 
-
   export interface Trash {
     img: string;
     trash_kind: string;
@@ -27,6 +25,7 @@ export namespace rs {
     trashList: Array<Trash>;
   }
 
+  //❌
   export interface TrashResult {
     state: {
       trashName: string;
@@ -34,5 +33,5 @@ export namespace rs {
       imgSrc: string;
     };
   }
-
+  //❌
 }

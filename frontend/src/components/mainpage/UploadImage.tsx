@@ -1,6 +1,6 @@
 import { Button, Typography, Box } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Resizer from "react-image-file-resizer";
 import Api from "../../utils/customApi";
@@ -69,17 +69,11 @@ function UploadImage() {
     if (isImg === null) return alert("no image");
     else {
       //❌
-      dispatch(save_ID("10"));
+      dispatch(save_ID("39")); //여기 api 바뀌면 "10"을 post 에서 받아온 값으로 바꿔줘야함
       //❌
       (async () => {
         await sendImage();
-        navigate(`/mainpage/resultpage`, {
-          state: {
-            // trashName: res.data.trash_kind,
-            trashName: "GLASS,PAPER",
-            imgSrc: urlImg,
-          },
-        });
+        navigate(`/mainpage/resultpage`);
       })();
     }
   };
