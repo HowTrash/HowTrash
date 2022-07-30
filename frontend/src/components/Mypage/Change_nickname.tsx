@@ -155,15 +155,16 @@ function ChangeNickName() {
                                 onBlurInfo(["alias", alias], event);
                             }}
                         />
-                        <span
+                        <div
                             style={{
                                 color: "red",
                                 fontSize: 13,
-                                marginLeft: 8,
+                                marginRight: 90
+                                
                             }}
                         >
                             {checkAilas}
-                        </span>
+                        </div>
                         <Button
                             type="submit"
                             fullWidth
