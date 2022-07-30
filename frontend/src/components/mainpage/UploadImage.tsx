@@ -6,29 +6,16 @@ import Resizer from "react-image-file-resizer";
 import Api from "../../utils/customApi";
 import { ReduxModule } from "../../modules/ReduxModule";
 
+import { useDispatch } from "react-redux";
+import { save_ID } from "../../actions/ImgIDActions";
+
 function UploadImage() {
   const [isImg, setIsImg] = useState(null);
   const [urlImg, setUrlImg] = useState("");
   const [respondImg, setRespondImg] = useState(null);
   const navigate = useNavigate();
-
-  // const token = localStorage.getItem("access_token");
-
-  // const dispatch = useDispatch();
-
-  // const reduxToken = useSelector(
-  //   (state: RootReducerType) => state.DecodeReducer
-  // );
-
-  // useEffect(() => {
-  //   if (token) {
-  //     console.log("header.js useEffect");
-  //     dispatch(fetchDecodeData(token as string));
-  //   } else {
-  //     console.log("header.js not token");
-  //   }
-  // }, []);
   const userIdtoRedux = ReduxModule().decodeInfo?.id;
+  console.log(userIdtoRedux, "in uploadImage");
 
   const resizeFile = (file: Blob) =>
     new Promise((resolve) => {
@@ -46,6 +33,12 @@ function UploadImage() {
       );
     });
 
+  //❌
+
+  const dispatch = useDispatch();
+
+  //❌
+
   const onChangeImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
       const file: any =
@@ -62,35 +55,6 @@ function UploadImage() {
     }
   };
 
-  // const sendImage: () => Promise<any> = async () => {
-  //   const trashFormData = new FormData();
-  //   trashFormData.append("filename", respondImg as any);
-
-  //   await Api.post(
-  //     `/trash/mainpage/users/f446242a-a219-44b9-aef7-86932259f799/result`,
-  //     trashFormData
-  //   )
-  //     .then((res) => {
-  //       const sendAxiosTrashResult: rs.TrashResult = {
-  //         state: {
-  //           trashName: res.data[0].name,
-  //           throwWay: res.data[0].way,
-  //           imgSrc: urlImg,
-  //         },
-  //       };
-  //       navigate(`/mainpage/resultpage`, { state: sendAxiosTrashResult.state });
-  //     })
-  //     .catch((error) => {
-  //       console.log("An error occurred:", error.response);
-  //     });
-  // };
-
-  // const onClickImgResult = () => {
-  //   if (isImg === null) return alert("no image");
-  //   else {
-  //     sendImage();
-  //   }
-  // };
   const sendImage: () => Promise<any> = async () => {
     const trashFormData = new FormData();
     trashFormData.append("filename", respondImg as any);
@@ -104,24 +68,20 @@ function UploadImage() {
   const onClickImgResult = () => {
     if (isImg === null) return alert("no image");
     else {
+      //❌
+      dispatch(save_ID("10"));
+      //❌
       (async () => {
-        const res = await sendImage();
+        await sendImage();
         navigate(`/mainpage/resultpage`, {
           state: {
-            trashName: res.data.trash_kind,
+            // trashName: res.data.trash_kind,
+            trashName: "GLASS,PAPER",
             imgSrc: urlImg,
           },
         });
       })();
     }
-    // navigate(`/mainpage/resultpage`, {
-    //   state: {
-    //     trashName: "GLASS",
-    //     throwWay: "asfas",
-    //     imgSrc:
-    //       "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png",
-    //   },
-    // });
   };
 
   return (

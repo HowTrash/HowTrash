@@ -4,19 +4,25 @@ import InputIcon from "@mui/icons-material/Input";
 import { useLocation } from "react-router";
 import { rs } from "src/utils/types";
 import { useNavigate } from "react-router-dom";
+import { store } from "../../index";
+import { useSelector } from "react-redux";
+import { RootReducerType } from "../../index";
 
 const UploadResult = () => {
   const { state } = useLocation() as rs.TrashResult;
-
   const navigate = useNavigate();
 
+  const trashKindList = state.trashName.split(","); // [GLASS,PAPER]
+  console.log("in uploadResult", trashKindList);
+
+  //❌
+  const itemID = useSelector((state: RootReducerType) => state.ImgIDReducer);
+  console.log("제발 아이디 10 이여라 ", itemID);
+  console.log(store.getState().ImgIDReducer);
+  //❌
+
   const onClickHowto = () => {
-    navigate(`/howto`, {
-      state: {
-        trashkind: state.trashName, //이거 업로드 api 되면 거기서 받아온 값 넣어 줘야함 답 : state.trashname
-        img: state.imgSrc,
-      },
-    });
+    navigate(`/howtopage`);
   };
 
   return (
@@ -41,12 +47,31 @@ const UploadResult = () => {
         </Box>
 
         <Typography marginTop={5} fontWeight="bold" variant="h5">
-          {state.trashName === "BIODEGRADABLE" && <p>결과 : 음식물 쓰레기</p>}
-          {state.trashName === "CARDBOARD" && <p>결과 : 일반 쓰레기</p>}
-          {state.trashName === "GLASS" && <p>결과 : 유리</p>}
-          {state.trashName === "METAL" && <p>결과 : 캔</p>}
-          {state.trashName === "PAPER" && <p>결과 : 종이</p>}
-          {state.trashName === "PLASTIC" && <p>결과 : 플라스틱</p>}
+          {trashKindList.map((item: string, index: any) => {
+            if (item === "BIODEGRADABLE") {
+              return <p key={index}>결과 : 음식물 쓰레기</p>;
+            }
+            if (item === "CARDBOARD") {
+              return <p key={index}>결과 : 일반 쓰레기</p>;
+            }
+            if (item === "GLASS") {
+              return <p key={index}>결과 : 유리</p>;
+            }
+            if (item === "METAL") {
+              return <p key={index}>결과 : 캔</p>;
+            }
+            if (item === "PAPER") {
+              return <p key={index}>결과 : 종이</p>;
+            }
+            if (item === "PLASTIC") {
+              return <p key={index}>결과 : 플라스틱</p>;
+            }
+            // state.trashName === "CARDBOARD" && <p>결과 : 일반 쓰레기</p>,
+            // state.trashName === "GLASS" && <p>결과 : 유리</p>,
+            // state.trashName === "METAL" && <p>결과 : 캔</p>,
+            // state.trashName === "PAPER" && <p>결과 : 종이</p>,
+            // state.trashName === "PLASTIC" && <p>결과 : 플라스틱</p>
+          })}
         </Typography>
 
         <Button

@@ -16,7 +16,7 @@ const SearchBar = () => {
     const result = await Api.get(
       `/trash/mainpage/search-words/${props}/result`
     ).then((res) => res.data[0] as searchData);
-    window.location.href = "../Howto"; //이걸 또 각각 새로운 페이지로 만들어야함 ${}써서
+    window.location.href = "../Howtopage"; //이걸 또 각각 새로운 페이지로 만들어야함 ${}써서
     console.log(result);
   };
 
