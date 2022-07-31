@@ -23,39 +23,21 @@ import Footer from "src/components/common/Footer";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#759F98",
+      main: "#B0B09A",
     },
   },
 });
 
-const UserInfoTf = styled(TextField)(({}) => ({
-  "&:hover": {
-    color: "#759F98",
-  },
-  "& .MuiOutlinedInput-root": {
-    "&:hover fieldset": {
-      borderColor: "#759F98",
-    },
-  },
-}));
-
-const KakaoLoginBtn = styled(Button)(({}) => ({
-  backgroundColor: "white",
-  "&:hover": {
-    color: "yellow",
-    backgroundColor: "#F1DC2C",
-    borderColor: "#F1DC2C",
-  },
-}));
-
-const NaverLoginBtn = styled(Button)(({}) => ({
-  backgroundColor: "white",
-  "&:hover": {
-    color: "#6AED64",
-    backgroundColor: "#54B94E",
-    borderColor: "#54B94E",
-  },
-}));
+// const UserInfoTf = styled(TextField)(({}) => ({
+//   "&:hover": {
+//     color: "#B0B09A",
+//   },
+//   "& .MuiOutlinedInput-root": {
+//     "&:hover fieldset": {
+//       borderColor: "#B0B09A",
+//     },
+//   },
+// }));
 
 function Login() {
   const userInfo = [] as unknown as rs.UserAuth;
@@ -88,7 +70,7 @@ function Login() {
         // checkAccessToken();
         // checkRefreshToken();
         decodeToken(result.access_token);
-        // window.location.replace("/mainpage");
+        window.location.replace("/login/welcome");
       } else {
         alert("아이디와 비밀번호를 다시 확인해주세요.");
         // Handle error.
@@ -102,11 +84,11 @@ function Login() {
       style={{
         backgroundColor: "#F7F8E9",
         minWidth: "100%",
-        height: "100vh",
+        maxHeight: "100vh",
       }}
     >
       <ThemeProvider theme={theme}>
-        <Container component="main" maxWidth="xs" sx={{ mb: 2, mt: 15 }}>
+        <Container component="main" maxWidth="xs" sx={{ mb: 25, mt: 20 }}>
           <CssBaseline />
           <Box
             sx={{
@@ -131,9 +113,10 @@ function Login() {
                 fontSize: 15,
                 color: "#B0B09A",
                 fontFamily: "Itim",
+                margin: 15,
               }}
             >
-              join us
+              join us &gt;
             </Link>
             <Box
               component="form"
@@ -142,7 +125,7 @@ function Login() {
               noValidate
               sx={{ mt: 1 }}
             >
-              <UserInfoTf
+              <TextField
                 margin="normal"
                 required
                 fullWidth
@@ -151,8 +134,9 @@ function Login() {
                 name="name"
                 autoComplete="name"
                 autoFocus
+                sx={{ borderRadius: 5, textAlign: "center" }}
               />
-              <UserInfoTf
+              <TextField
                 margin="normal"
                 required
                 fullWidth
@@ -173,9 +157,12 @@ function Login() {
                   height: 50,
                   color: "white",
                   fontWeight: "bold",
+                  fontFamily: "Itim",
+                  borderRadius: 5,
+                  backgroundColor: "#B0B09A",
                 }}
               >
-                Login
+                Sign In
               </Button>
             </Box>
           </Box>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { getToken } from "./Auth/tokenManager";
 import Login from "./Page/Login";
+import LoginSuccess from "./Page/LoginSuccess";
 import MyPage from "./Page/MyPage";
 import MainPage from "./Page/MainPage";
 import Header from "./components/common/Header";
@@ -26,7 +27,7 @@ function App() {
         <Routes>
           <Route path="/" element={<StartPage />} />
           <Route path="/login" element={<Login />} />
-
+          <Route path="/login/welcome" element={<LoginSuccess />} />
           <Route path="/register" element={<Register />} />
 
           <Route element={<AuthRouter authAble={false} />}>
