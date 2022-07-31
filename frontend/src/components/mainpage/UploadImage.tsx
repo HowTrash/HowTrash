@@ -59,22 +59,21 @@ function UploadImage() {
     const trashFormData = new FormData();
     trashFormData.append("filename", respondImg as any);
 
-    return await Api.post(
-      `/trash/mainpage/users/${userIdtoRedux}/result`,
-      trashFormData
-    );
+    await Api.post(`/trash/users/${userIdtoRedux}/results`, trashFormData)
+      .then((res) => {
+        dispatch(save_ID(res.data.image_id));
+        //res.data.challenge : NONE 확인해야함
+        navigate(`/mainpage/resultpage`);
+      })
+      .catch((error) => {
+        console.log("An error occurred:", error.response);
+      });
   };
 
   const onClickImgResult = () => {
     if (isImg === null) return alert("no image");
     else {
-      //❌
-      dispatch(save_ID("39")); //여기 api 바뀌면 "10"을 post 에서 받아온 값으로 바꿔줘야함
-      //❌
-      (async () => {
-        await sendImage();
-        navigate(`/mainpage/resultpage`);
-      })();
+      sendImage();
     }
   };
 

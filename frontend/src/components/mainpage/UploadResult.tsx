@@ -5,34 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootReducerType } from "../../index";
 import { ReduxModule } from "../../modules/ReduxModule";
-import { useState } from "react";
-
-import Api from "../../utils/customApi";
+import ReduxImgApi from "../../modules/ReduxImgApi";
 
 const UploadResult = () => {
   const navigate = useNavigate();
-
-  //❌
-
-  const [imgUrl, setImgUrl] = useState("");
-  const [trashKinds, setTrashKinds] = useState("");
   const itemID = useSelector((state: RootReducerType) => state.ImgIDReducer);
   const userIdToRedux = ReduxModule().decodeInfo?.id;
 
-  const searchHowTrash = async () => {
-    const result = await Api.get(
-      `/trash/mypage/users/${userIdToRedux}/images/${itemID}`
-    );
-    setImgUrl(result.data[0].img);
-    setTrashKinds(result.data[0].trash_kind);
-  };
-  searchHowTrash();
-  console.log(imgUrl);
-  console.log(trashKinds);
-
-  const trashKindList = trashKinds.split(","); // 이거 api 바뀌면 배열로 바꿔야함
-
-  //❌
+  const reduxKindAndImg = ReduxImgApi(itemID, userIdToRedux);
 
   const onClickHowto = () => {
     navigate(`/howtopage`);
@@ -56,11 +36,11 @@ const UploadResult = () => {
             mt: 23,
           }}
         >
-          <img src={imgUrl as string} />
+          <img src={reduxKindAndImg.imgUrl as string} />
         </Box>
 
         <Typography marginTop={5} fontWeight="bold" variant="h5">
-          {trashKindList.map((item: string, index: any) => {
+          {reduxKindAndImg.trashKinds.map((item: string, index: any) => {
             if (item === "BIODEGRADABLE") {
               return <p key={index}>결과 : 음식물 쓰레기</p>;
             }
