@@ -13,23 +13,23 @@ import Api from "../../utils/customApi";
 import lottie from "lottie-web";
 import MoreIcon from "../../images/moreIcon";
 import { rs } from "src/utils/types";
-import { getToken, getAccess } from "src/Auth/tokenManager";
+import { getAccess } from "src/Auth/tokenManager";
 
 interface Props {
   trashlist?: Array<rs.Trash>;
 }
 
-const GreenSwitch = styled(Switch)(({ theme }) => ({
-  "& .MuiSwitch-switchBase.Mui-checked": {
-    color: "#76F2BE",
-    "&:hover": {
-      backgroundColor: alpha("#76F2BE", theme.palette.action.hoverOpacity),
-    },
-  },
-  "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
-    backgroundColor: "white",
-  },
-}));
+// const GreenSwitch = styled(Switch)(({ theme }) => ({
+//   "& .MuiSwitch-switchBase.Mui-checked": {
+//     color: "#76F2BE",
+//     "&:hover": {
+//       backgroundColor: alpha("#76F2BE", theme.palette.action.hoverOpacity),
+//     },
+//   },
+//   "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
+//     backgroundColor: "white",
+//   },
+// }));
 
 const GetNoTrashLottie = () => {
   //lottie
@@ -48,7 +48,7 @@ const GetNoTrashLottie = () => {
 
 function MyTrashcan(props: Props) {
   const what: any = getAccess();
-  console.log(what);
+  console.log(what.value);
 
   // const trashList = [] as unknown as rs.TrashList;
   const [trashes, setTrashes] = useState(props.trashlist);
@@ -57,7 +57,12 @@ function MyTrashcan(props: Props) {
 
   const fetchMyTrash = async () => {
     await Api.get(
-      `/trash/users/95fd1cd5-0461-4c27-aaea-9e0c838cae03/images`
+      `/trash/users/95fd1cd5-0461-4c27-aaea-9e0c838cae03/pages/${page}`,
+      {
+        headers: {
+          Authorization: `${what.value}`,
+        },
+      }
     ).then((res) => {
       const newArray = trashes ? [...trashes, ...res.data] : res.data;
       setTrashes(newArray);
@@ -86,7 +91,6 @@ function MyTrashcan(props: Props) {
         borderRadius: 5,
         borderColor: "transparent",
         minWidth: "100%",
-        height: "100vh",
       }}
     >
       <Box
@@ -103,7 +107,7 @@ function MyTrashcan(props: Props) {
         >
           내 분리수거함
         </Typography>
-        <Box
+        {/* <Box
           sx={{
             display: "flex",
             flexDirection: "row",
@@ -119,13 +123,12 @@ function MyTrashcan(props: Props) {
             inputProps={{ "aria-label": "controlled" }}
             sx={{ mt: 1.5 }}
           />
-        </Box>
+        </Box> */}
       </Box>
       <Container
         style={{
           borderRadius: 8,
           backgroundColor: "white",
-          height: "100vh",
         }}
         sx={{
           mt: 2,

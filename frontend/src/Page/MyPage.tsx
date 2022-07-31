@@ -10,7 +10,6 @@ function MyPage() {
         border: "solid",
         borderColor: "white",
         minWidth: "100%",
-        height: "100vh",
       }}
     >
       <Box
@@ -18,7 +17,7 @@ function MyPage() {
           display: "flex",
           flexDirection: "row",
           mb: 20,
-          mt: 20,
+          mt: 10,
         }}
       >
         <MyPageNavigation />

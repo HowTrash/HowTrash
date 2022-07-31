@@ -58,7 +58,6 @@ const theme = createTheme({
 });
 
 const UserInfoTf = styled(TextField)(({}) => ({
-  backgroundColor: "white",
   borderRadius: 5,
   textAlign: "center",
   "&:hover": {
@@ -139,7 +138,7 @@ const Register = () => {
       nameRegex.test(user.name as string) &&
       aliasRegex.test(user.alias as string)
     ) {
-      Api.post<User>(`/users/`, user)
+      Api.post<User>(`/users`, user)
         .then((response) => {
           // Handle success.
           handleOpen();
@@ -162,7 +161,7 @@ const Register = () => {
       `/users/?case=${props[0]}&value=${props[1] as string}`
     );
 
-    if (props[0] == "name") {
+    if (props[0] === "name") {
       if (!nameRegex.test(name as string) || (name as string).length < 1) {
         setNameError("올바른 이름을 입력해주세요.");
         setCheckName("");
@@ -172,7 +171,7 @@ const Register = () => {
         else setCheckName("사용 가능한 아이디 입니다.");
       }
     }
-    if (props[0] == "email") {
+    if (props[0] === "email") {
       if (!emailRegex.test(email as string)) {
         setEmailError("올바른 이메일 형식이 아닙니다.");
       } else {
@@ -182,13 +181,14 @@ const Register = () => {
       }
     }
 
-    if (props[0] == "alias") {
+    if (props[0] === "alias") {
       if (!aliasRegex.test(alias as string) || (alias as string).length < 1) {
         setAliasError("올바른 이름을 입력해주세요.");
         setCheckName("");
       } else {
         setAliasError("");
-        if (res.data.result == false) setCheckAlias("사용 중인 닉네임 입니다.");
+        if (res.data.result === false)
+          setCheckAlias("사용 중인 닉네임 입니다.");
         else setCheckAlias("사용 가능한 닉네임 입니다.");
       }
     }
@@ -335,7 +335,7 @@ const Register = () => {
                   variant="contained"
                   sx={{
                     mt: 3,
-                    mb: 2,
+                    mb: 50,
                     height: 50,
                     color: "white",
                     fontWeight: "bold",
@@ -364,7 +364,7 @@ const Register = () => {
                       variant="h4"
                       fontWeight="bold"
                       component="h1"
-                      sx={{ mb: 1, color: "#737458", fontFamily: "Itim" }}
+                      sx={{ mb: 3, color: "#737458", fontFamily: "Itim" }}
                     >
                       WELCOME!
                     </Typography>
@@ -373,7 +373,7 @@ const Register = () => {
                     </div>
 
                     <Link href="/login" sx={btnstyle}>
-                      go sign in &gt;
+                      sign in &gt;
                     </Link>
                   </Box>
                 </Modal>

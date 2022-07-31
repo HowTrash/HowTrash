@@ -3,7 +3,7 @@ import { Typography, Container, Box, listClasses } from "@mui/material";
 import { rs } from "src/utils/types";
 import Api from "../../utils/customApi";
 import UserChallenge from "../Mypage/UserChallenge";
-import BadgeBack from "../../images/challenges/challengeBack";
+import { getAccess } from "src/Auth/tokenManager";
 
 interface Contentlist {
   list: Array<rs.Challenge>;
@@ -35,10 +35,18 @@ const trashlist: Contentlist = {
 };
 
 function MyBadge() {
+  const what: any = getAccess();
+  console.log(what.value);
+
   const [myChallenge, setMyChallenge] = useState<rs.Challenge[]>();
   const fetchMyChallenge = async () => {
     const result = await Api.get(
-      "/trash/mypage/users/2c762f6e-b369-4985-96f9-29ccb4f9fc34/challenges"
+      "/trash/users/95fd1cd5-0461-4c27-aaea-9e0c838cae03/challenges",
+      {
+        headers: {
+          Authorization: `${what.value}`,
+        },
+      }
     ).then((res) => res.data as rs.Challenge[]);
     const challengeList = result;
 
@@ -66,7 +74,6 @@ function MyBadge() {
         borderRadius: 5,
         borderColor: "transparent",
         minWidth: "100%",
-        height: "100vh",
       }}
     >
       <Typography
@@ -80,9 +87,8 @@ function MyBadge() {
         style={{
           borderRadius: 8,
           backgroundColor: "white",
-          height: "100vh",
         }}
-        sx={{ mt: 3 }}
+        sx={{ mt: 3, mb: 3, pb: 5 }}
       >
         <Box
           sx={{
@@ -90,6 +96,7 @@ function MyBadge() {
             flexWrap: "wrap",
             alignItems: "center",
             justifyContent: "space-evenly",
+            pb: 10,
           }}
         >
           {trashlist &&
