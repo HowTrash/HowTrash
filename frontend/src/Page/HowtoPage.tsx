@@ -2,7 +2,7 @@ import * as React from "react";
 import { Box, Grid, Typography, Link } from "@mui/material";
 import SearchBar from "../components/mainpage/SearchBar";
 import ExplanationTrash from "../components/howtopage/ExplanationTrash";
-
+import Resizer from "react-image-file-resizer";
 import { ReduxModule } from "../modules/ReduxModule";
 import { useSelector } from "react-redux";
 import { RootReducerType } from "../index";
@@ -17,6 +17,22 @@ const HowtoPage = () => {
   const userIdToRedux = ReduxModule().decodeInfo?.id;
 
   const reduxKindAndImg = ReduxImgApi(itemID, userIdToRedux);
+
+  const resizeFile = (file: Blob) =>
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        500, // max width
+        250, // max height
+        "JPEG",
+        513, // min width
+        0, // min height
+        (uri) => {
+          resolve(uri);
+        },
+        "file" // 저장 형식
+      );
+    });
 
   return (
     <Box textAlign={"center"}>
@@ -37,7 +53,10 @@ const HowtoPage = () => {
             mb: 10,
           }}
         >
-          <img src={reduxKindAndImg.imgUrl as string} />
+          <img
+            style={{ maxWidth: 500, maxHeight: 250 }}
+            src={reduxKindAndImg.imgUrl as string}
+          />
         </Box>
         <Grid
           container
@@ -68,7 +87,7 @@ const HowtoPage = () => {
             }}
           >
             {" "}
-            go to mypage{">>"}{" "}
+            Go To Mypage{" 👉"}{" "}
           </Link>
         </Grid>
       </div>

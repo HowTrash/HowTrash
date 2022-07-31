@@ -1,4 +1,4 @@
-import { Grid, Box, Typography, autocompleteClasses } from "@mui/material";
+import { Grid, Box, Typography } from "@mui/material";
 import * as React from "react";
 import constants from "../../utils/constants";
 import { useState, useEffect } from "react";
@@ -42,8 +42,7 @@ const HowtoResult = (props: any) => {
 
   return (
     <Grid
-      container
-      width={800}
+      width={810}
       sx={{
         backgroundColor: "white",
         borderRadius: 3,
@@ -57,7 +56,7 @@ const HowtoResult = (props: any) => {
           fontWeight="bold"
           variant="h4"
           align="center"
-          sx={{ mt: 5, marginLeft: 1, fontFamily: "Nanum" }}
+          sx={{ mt: 5, fontFamily: "Nanum1" }}
         >
           {resTrash?.kind}
           <br />
@@ -65,7 +64,7 @@ const HowtoResult = (props: any) => {
 
         <Typography
           align="center"
-          sx={{ mt: 3, marginLeft: 1, fontFamily: "Nanum" }}
+          sx={{ mt: 3, fontFamily: "Nanum1" }}
           fontSize="16px"
           fontWeight="bold"
         >
@@ -76,19 +75,20 @@ const HowtoResult = (props: any) => {
 
         <Typography
           align="center"
-          sx={{ mt: 3, marginLeft: 1, fontFamily: "Nanum" }}
+          sx={{ mt: 3, fontFamily: "Nanum1" }}
           fontSize="16px"
         ></Typography>
 
         <Typography
           align="center"
-          sx={{ mt: 5, marginLeft: 1, fontFamily: "Nanum" }}
+          sx={{ mt: 5, fontFamily: "Nanum1" }}
           variant="h6"
+          fontWeight="bold"
         >
           버리는 방법
         </Typography>
 
-        <Typography align="center" sx={{ margin: 1, fontFamily: "Nanum" }}>
+        <Typography align="center" sx={{ margin: 1, fontFamily: "Nanum1" }}>
           {resTrash?.method1}
           <br />
           <br />
@@ -102,7 +102,7 @@ const HowtoResult = (props: any) => {
 
         <Typography
           align="center"
-          sx={{ mt: 5, marginLeft: 1, fontFamily: "Nanum" }}
+          sx={{ mt: 5, fontFamily: "Nanum1" }}
           variant="h6"
           fontWeight="bold"
         >
@@ -111,7 +111,7 @@ const HowtoResult = (props: any) => {
 
         <Typography
           align="center"
-          sx={{ margin: 1, marginBottom: 5, fontFamily: "Nanum" }}
+          sx={{ margin: 1, marginBottom: 5, fontFamily: "Nanum1" }}
         >
           {resTrash?.warning}
         </Typography>

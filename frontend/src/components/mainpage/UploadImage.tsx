@@ -33,11 +33,7 @@ function UploadImage() {
       );
     });
 
-  //❌
-
   const dispatch = useDispatch();
-
-  //❌
 
   const onChangeImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
