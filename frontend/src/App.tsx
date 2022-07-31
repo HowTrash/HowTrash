@@ -19,18 +19,7 @@ import StartPage from "./Page/StartPage";
 
 function App() {
   return (
-    <div>
-      <div
-        style={{
-          position: "absolute",
-          float: "right",
-          zIndex: -100,
-          top: 0,
-          right: 0,
-        }}
-      >
-        <GreenBack />
-      </div>
+    <div style={{ backgroundColor: "#F7F8E9" }}>
       <Router>
         <Header />
         <Routes>
