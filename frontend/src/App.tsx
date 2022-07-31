@@ -4,7 +4,7 @@ import { getToken } from "./Auth/tokenManager";
 import Login from "./Page/Login";
 import MyPage from "./Page/MyPage";
 import MainPage from "./Page/MainPage";
-import Header from "./components/Header";
+import Header from "./components/common/Header";
 import Register from "./Page/Register";
 import Howto from "./Page/Howto";
 
@@ -14,15 +14,11 @@ import MyTrashChart from "./components/Mypage/MyTrashChart";
 import MyChallenge from "./components/Mypage/MyChallenge";
 import ChangeInfo from "./components/Mypage/ChangeInfo";
 import UploadResult from "./components/mainpage/UploadResult";
-
+import HowtoResult from "../src/components/howtopage/HowtoResult1";
 import AuthRouter from "./Auth/AuthRouter";
-import HowtoResult from "./components/howtopage/HowtoResult1";
+import StartPage from "./Page/StartPage";
 
 function App() {
-  useEffect(() => {
-    getToken();
-  }, []);
-
   return (
     <div>
       <div
@@ -39,6 +35,7 @@ function App() {
       <Router>
         <Header />
         <Routes>
+          <Route path="/" element={<StartPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
@@ -47,8 +44,6 @@ function App() {
             <Route path="/howto" element={<Howto />} />
             <Route path="/mainpage/resultpage" element={<UploadResult />} />
           </Route>
-
-          
 
           {/* mypage 에 접근 못하게 라우팅 */}
           <Route element={<AuthRouter authAble={true} />}>
