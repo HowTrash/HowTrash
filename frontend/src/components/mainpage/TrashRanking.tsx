@@ -30,49 +30,36 @@ interface Ranklist {
   imgs: any;
 }
 
-interface Contentlist {
-  list: Array<Content>;
-}
 
-const trashlist: Contentlist =
-{
-  list: [
+const trashlist: Content[] =
+[
     {
-      kind: "",
+      kind: " ",
       cnt: 0,
     },
     {
-      kind: "",
+      kind: " ",
       cnt: 0,
     },
     {
-      kind: "",
+      kind: " ",
       cnt: 0,
     },
   ]
-}
 
 
-function MultiActionAreaCard() {
-//  const [newData, setNewData] = useState<string | null>('');
-//  const [Ranking, setRanking] = useState<any[] | null>([]);
-//  const needRank : string[] = [];
-  const [firstData, setFirstData] = useState<string>('');
-  const [secondData, setSecondData] = useState<string>('');
-  const [thridData, setThirdData] = useState<string>('');
+function Ranking() {
+  const [firstData, setFirstData] = useState("");
+  const [secondtData, setSecondData] = useState("");
+  const [thirdData, setThirdData] = useState("");
 
   axios
     .get("http://localhost:8080/trash/statistics/ranking")
     .then((response) => {
       for (let i = 0; i < 3; i++) {
-        trashlist.list[i].kind = response.data[i].kind;
-        console.log("아 되는거?",trashlist.list[i].kind);
-       // setRanking((e) => [...e, newData]);
-       // setNewData(response.data[i].kind);
+        trashlist[i].kind = response.data[i].kind;
+        console.log("아 되는거?",trashlist[i].kind);
       }
-      setFirstData(trashlist.list[0].kind);
-      setSecondData(trashlist.list[1].kind);
-      setThirdData(trashlist.list[2].kind);
     })
     .catch((error) => {
       console.log("error", error.response);
@@ -112,4 +99,4 @@ function MultiActionAreaCard() {
   );
 }
 
-export default MultiActionAreaCard;
+export default Ranking;
