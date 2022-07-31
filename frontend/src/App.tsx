@@ -6,7 +6,7 @@ import MyPage from "./Page/MyPage";
 import MainPage from "./Page/MainPage";
 import Header from "./components/common/Header";
 import Register from "./Page/Register";
-import Howto from "./Page/Howto";
+import HowtoPage from "./Page/HowtoPage";
 
 import GreenBack from "./images/greenBack";
 import MyTrashcan from "./components/Mypage/MyTrashcan";
@@ -37,6 +37,8 @@ function App() {
         <Routes>
           <Route path="/" element={<StartPage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/mainpage" element={<MainPage />} />
+          <Route path="/howtopage" element={<HowtoPage />} />
           <Route path="/register" element={<Register />} />
 
           <Route element={<AuthRouter authAble={false} />}>

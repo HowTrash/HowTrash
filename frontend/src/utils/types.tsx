@@ -25,6 +25,7 @@ export namespace rs {
     trashlist: Array<Trash>;
   }
 
+  //❌
   export interface TrashResult {
     state: {
       trashName: string;
@@ -32,6 +33,7 @@ export namespace rs {
       imgSrc: string;
     };
   }
+  //❌
   export interface Challenge {
     challenge_number: number;
     type: boolean;
