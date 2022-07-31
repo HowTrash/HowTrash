@@ -16,6 +16,7 @@ import ChangeInfo from "./components/Mypage/ChangeInfo";
 import UploadResult from "./components/mainpage/UploadResult";
 import AuthRouter from "./Auth/AuthRouter";
 import StartPage from "./Page/StartPage";
+import Footer from "./components/common/Footer";
 
 function App() {
   return (
@@ -51,6 +52,9 @@ function App() {
           </Route>
         </Routes>
       </Router>
+      <footer>
+        <Footer />
+      </footer>
     </div>
   );
 }

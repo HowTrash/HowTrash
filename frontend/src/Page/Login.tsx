@@ -18,6 +18,7 @@ import {
 } from "@mui/material";
 import { checkAccessToken, checkRefreshToken } from "src/Auth/checkToken";
 import { decodeToken } from "src/Auth/tokenGetter";
+import Footer from "src/components/common/Footer";
 
 const theme = createTheme({
   palette: {
@@ -99,15 +100,13 @@ function Login() {
   return (
     <Container
       style={{
-        backgroundColor: "#E7F5EF",
-        border: "solid",
-        borderColor: "#E7F5EF",
+        backgroundColor: "#F7F8E9",
         minWidth: "100%",
         height: "100vh",
       }}
     >
       <ThemeProvider theme={theme}>
-        <Container component="main" maxWidth="xs" sx={{ mb: 2, mt: 20 }}>
+        <Container component="main" maxWidth="xs" sx={{ mb: 2, mt: 15 }}>
           <CssBaseline />
           <Box
             sx={{
@@ -118,12 +117,24 @@ function Login() {
           >
             <Typography
               component="h1"
-              color="primary"
+              color="#737458"
               fontWeight="bold"
               variant="h4"
+              fontFamily={"Itim"}
             >
-              로그인
+              Do you have any account?
             </Typography>
+            <Link
+              href="/register"
+              style={{
+                textDecoration: "none",
+                fontSize: 15,
+                color: "#B0B09A",
+                fontFamily: "Itim",
+              }}
+            >
+              join us
+            </Link>
             <Box
               component="form"
               color="info.contrastText"
@@ -166,41 +177,6 @@ function Login() {
               >
                 Login
               </Button>
-              <Typography align="right">
-                <Link
-                  href="/register"
-                  style={{ textDecoration: "none", fontWeight: "bold" }}
-                >
-                  가입하기
-                </Link>
-              </Typography>
-              <Divider sx={{ color: "lightgrey" }}>또는</Divider>
-
-              <KakaoLoginBtn
-                variant="outlined"
-                sx={{
-                  borderColor: "#F1DC2C",
-                  color: "#F1DC2C",
-                  fontWeight: "bold",
-                  width: "46%",
-                  mt: 3,
-                }}
-              >
-                카카오로 로그인하기
-              </KakaoLoginBtn>
-              <NaverLoginBtn
-                variant="outlined"
-                sx={{
-                  borderColor: "#54B94E",
-                  color: "#54B94E",
-                  fontWeight: "bold",
-                  width: "46%",
-                  mt: 3,
-                  ml: 3.6,
-                }}
-              >
-                네이버로 로그인하기
-              </NaverLoginBtn>
             </Box>
           </Box>
         </Container>
