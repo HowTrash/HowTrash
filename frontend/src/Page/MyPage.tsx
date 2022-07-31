@@ -7,24 +7,17 @@ function MyPage() {
   return (
     <Container
       style={{
-        border: "solid",
-        borderColor: "white",
-        minWidth: "100%",
+        display: "flex",
+        flexDirection: "column",
+        marginBottom: 20,
+        width: "100vw",
+        maxWidth: "1920px",
       }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          mb: 20,
-          mt: 10,
-        }}
-      >
-        <MyPageNavigation />
-        <Container>
-          <Outlet />
-        </Container>
-      </Box>
+      <MyPageNavigation />
+      <Container>
+        <Outlet />
+      </Container>
     </Container>
   );
 }
