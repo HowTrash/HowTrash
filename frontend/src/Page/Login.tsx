@@ -55,8 +55,9 @@ function Login() {
     });
 
     const userLogin = async () => {
-      const result = await Api.get("http://localhost:8080/users/auth/", {
-        params: { name: data.get("name"), pw: data.get("password") },
+      const result = await Api.post(`/users/auth`, {
+        name: data.get("name"),
+        pw: data.get("password"),
       }).then((res) => res.data as rs.UserAuth);
       setSaveInfo(result);
       console.log("받아온 결과1", result);
