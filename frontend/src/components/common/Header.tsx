@@ -12,9 +12,9 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { useSelector, useDispatch } from "react-redux";
-import { RootReducerType } from "../index";
+import { RootReducerType } from "../../index";
 import { fetchDecodeData } from "src/actions/DecodeActions";
-import Logo from "../images/header/headerLogo";
+import Logo from "../../images/header/headerLogo";
 
 const theme = createTheme({
   palette: {

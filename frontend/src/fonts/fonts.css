@@ -17,3 +17,17 @@
   font-weight: 400;
   font-style: normal;
 }
+
+@font-face {
+  /* 사용할 폰트의 이름 */
+  font-family: "IrishGrover";
+  font-display: fallback;
+
+  src: url("./IrishGrover-Regular.ttf") format("truetype"),
+    url("./IrishGrover-Regular.woff") format("woff"),
+    url("./IrishGrover-Regular.eot?iefix") format("embedded-opentype");
+
+  /* 사용할 폰트의 기본 스타일 */
+  font-weight: 400;
+  font-style: normal;
+}
