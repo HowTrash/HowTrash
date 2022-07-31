@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import "./fonts/fonts.css";
 
 import rootReducer from "../src/reducers";
 import { createStore, applyMiddleware } from "redux";
