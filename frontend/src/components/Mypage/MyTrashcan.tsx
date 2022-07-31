@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { alpha, createTheme } from "@mui/material/styles";
+import { alpha } from "@mui/material/styles";
 import {
   Box,
   Typography,
@@ -57,7 +57,7 @@ function MyTrashcan(props: Props) {
 
   const fetchMyTrash = async () => {
     await Api.get(
-      `/trash/mypage/users/2c762f6e-b369-4985-96f9-29ccb4f9fc34/images/${page}`
+      `/trash/users/95fd1cd5-0461-4c27-aaea-9e0c838cae03/images`
     ).then((res) => {
       const newArray = trashes ? [...trashes, ...res.data] : res.data;
       setTrashes(newArray);
