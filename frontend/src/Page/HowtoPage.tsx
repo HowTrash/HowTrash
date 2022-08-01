@@ -17,12 +17,6 @@ const HowtoPage = () => {
 
   const reduxKindAndImg = ReduxImgApi(itemID, userIdToRedux);
 
-  window.addEventListener("beforeunload", (event) => {
-    event.preventDefault();
-    console.log("새로고침 됨");
-    event.returnValue = "";
-  });
-
   return (
     <Box textAlign={"center"}>
       <div>

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Resizer from "react-image-file-resizer";
 import Api from "../../utils/customApi";
 import { ReduxModule } from "../../modules/ReduxModule";
-
+import { getAccess } from "src/Auth/tokenManager";
 import { useDispatch } from "react-redux";
 import { save_ID } from "../../actions/ImgIDActions";
 
@@ -50,12 +50,18 @@ function UploadImage() {
       console.log(err);
     }
   };
+  const what: any = getAccess();
 
   const sendImage: () => Promise<any> = async () => {
     const trashFormData = new FormData();
     trashFormData.append("filename", respondImg as any);
 
-    await Api.post(`/trash/users/${userIdtoRedux}/results`, trashFormData)
+    await Api.post(`/trash/users/${userIdtoRedux}/results`, trashFormData, {
+      headers: {
+        Authorization: `${what.value}`,
+      },
+    })
+
       .then((res) => {
         dispatch(save_ID(res.data.image_id));
         //res.data.challenge : NONE 확인해야함
