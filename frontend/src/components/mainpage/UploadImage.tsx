@@ -63,6 +63,7 @@ function UploadImage() {
       })
       .catch((error) => {
         console.log("An error occurred:", error.response);
+        navigate(`/errorpage`);
       });
   };
 

@@ -1,14 +1,11 @@
-import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { getToken } from "./Auth/tokenManager";
 import Login from "./Page/Login";
 import MyPage from "./Page/MyPage";
 import MainPage from "./Page/MainPage";
 import Header from "./components/common/Header";
 import Register from "./Page/Register";
 import HowtoPage from "./Page/HowtoPage";
-
-import GreenBack from "./images/greenBack";
+import ErrorPage from "./components/common/ErrorPage";
 import MyTrashcan from "./components/Mypage/MyTrashcan";
 import MyTrashChart from "./components/Mypage/MyTrashChart";
 import MyChallenge from "./components/Mypage/MyChallenge";
@@ -25,8 +22,8 @@ function App() {
         <Routes>
           <Route path="/" element={<StartPage />} />
           <Route path="/login" element={<Login />} />
-
           <Route path="/register" element={<Register />} />
+          <Route path="/errorpage" element={<ErrorPage />} />
 
           <Route element={<AuthRouter authAble={false} />}>
             <Route path="/mainpage" element={<MainPage />} />

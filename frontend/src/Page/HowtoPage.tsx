@@ -2,7 +2,6 @@ import * as React from "react";
 import { Box, Grid, Typography, Link } from "@mui/material";
 import SearchBar from "../components/mainpage/SearchBar";
 import ExplanationTrash from "../components/howtopage/ExplanationTrash";
-import Resizer from "react-image-file-resizer";
 import { ReduxModule } from "../modules/ReduxModule";
 import { useSelector } from "react-redux";
 import { RootReducerType } from "../index";
@@ -18,21 +17,11 @@ const HowtoPage = () => {
 
   const reduxKindAndImg = ReduxImgApi(itemID, userIdToRedux);
 
-  const resizeFile = (file: Blob) =>
-    new Promise((resolve) => {
-      Resizer.imageFileResizer(
-        file,
-        500, // max width
-        250, // max height
-        "JPEG",
-        513, // min width
-        0, // min height
-        (uri) => {
-          resolve(uri);
-        },
-        "file" // 저장 형식
-      );
-    });
+  window.addEventListener("beforeunload", (event) => {
+    event.preventDefault();
+    console.log("새로고침 됨");
+    event.returnValue = "";
+  });
 
   return (
     <Box textAlign={"center"}>
@@ -64,7 +53,9 @@ const HowtoPage = () => {
           justifyContent="center"
           alignItems="center"
         >
-          <Typography sx={{ fontSize: 50, mt: 10, fontFamily: "Itim" }}>
+          <Typography
+            sx={{ fontSize: 50, mt: 10, fontFamily: "Itim", color: "#737458" }}
+          >
             How to recycle?
           </Typography>
           {reduxKindAndImg.trashKinds?.map((item: string, index: any) => (
