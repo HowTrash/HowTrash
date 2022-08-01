@@ -33,6 +33,8 @@ function MyTrashcan(props: Props) {
   const [more, setMore] = useState(false);
   const [page, setPage] = useState(1);
 
+  const [last, setLast] = useState(true);
+
   const fetchMyTrash = async () => {
     await Api.get(
       `/trash/users/95fd1cd5-0461-4c27-aaea-9e0c838cae03/pages/${page}`,
@@ -42,8 +44,12 @@ function MyTrashcan(props: Props) {
         },
       }
     ).then((res) => {
-      const newArray = trashes ? [...trashes, ...res.data] : res.data;
-      setTrashes(newArray);
+      if (res.data) {
+        const newArray = trashes ? [...trashes, ...res.data] : res.data;
+        setTrashes(newArray);
+      } else {
+        setLast(false);
+      }
     });
   };
 
@@ -154,10 +160,19 @@ function MyTrashcan(props: Props) {
             justifyContent="center"
             sx={{ margin: 5 }}
           >
-            <Button onClick={changePage} style={{ color: "#76F2BE" }}>
-              더보기
-              <MoreIcon />
-            </Button>
+            {last === true ? (
+              <Button
+                onClick={changePage}
+                style={{ color: "#76F2BE", fontFamily: "Itim" }}
+              >
+                more
+                <MoreIcon />
+              </Button>
+            ) : (
+              <Box style={{ color: "#76F2BE", fontFamily: "Itim" }}>
+                no more data!
+              </Box>
+            )}
           </Box>
         </Box>
       </Container>
