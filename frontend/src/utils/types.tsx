@@ -34,7 +34,7 @@ export namespace rs {
   }
   //❌
   export interface Challenge {
-    challenge_number: number;
+    challenge_id: number;
     type: boolean;
   }
   export interface ChallengeInfo {
@@ -42,5 +42,9 @@ export namespace rs {
     imgT: string;
     imgF: string;
     test: string;
+  }
+
+  export interface AutoSave {
+    user_autosave: boolean;
   }
 }

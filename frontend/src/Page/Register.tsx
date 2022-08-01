@@ -81,7 +81,7 @@ const FormHelperTexts = styled(FormHelperText)`
 
 interface User {
   name: FormDataEntryValue | null;
-  pw: FormDataEntryValue | null;
+  password: FormDataEntryValue | null;
   alias: FormDataEntryValue | null;
   email: FormDataEntryValue | null;
 }
@@ -114,27 +114,27 @@ const Register = () => {
 
     const user: User = {
       name: data.get("name"),
-      pw: data.get("password"),
+      password: data.get("password"),
       alias: data.get("alias"),
       email: data.get("email"),
     };
 
     const rePassword = data.get("rePassword");
     // 비밀번호 유효성 체크
-    if (!passwordRegex.test(user.pw as string))
+    if (!passwordRegex.test(user.password as string))
       setPasswordState("비밀번호를 형식에 맞춰 입력해주세요!");
     else setPasswordState("");
 
     // 비밀번호 같은지 체크
-    if (user.pw !== rePassword)
+    if (user.password !== rePassword)
       setPasswordError("비밀번호가 일치하지 않습니다.");
     else setPasswordError("");
 
     // 모두 통과되면 완료출력
     if (
       emailRegex.test(user.email as string) &&
-      passwordRegex.test(user.pw as string) &&
-      (user.pw as string) === rePassword &&
+      passwordRegex.test(user.password as string) &&
+      (user.password as string) === rePassword &&
       nameRegex.test(user.name as string) &&
       aliasRegex.test(user.alias as string)
     ) {
@@ -167,7 +167,7 @@ const Register = () => {
         setCheckName("");
       } else {
         setNameError("");
-        if (res.data.result == false) setCheckName("사용 중인 아이디입니다.");
+        if (res.data.result === false) setCheckName("사용 중인 아이디입니다.");
         else setCheckName("사용 가능한 아이디 입니다.");
       }
     }
@@ -176,7 +176,8 @@ const Register = () => {
         setEmailError("올바른 이메일 형식이 아닙니다.");
       } else {
         setEmailError("");
-        if (res.data.result == false) setCheckEmail("사용 중인 이메일 입니다.");
+        if (res.data.result === false)
+          setCheckEmail("사용 중인 이메일 입니다.");
         else setCheckEmail("사용 가능한 이메일 입니다.");
       }
     }
