@@ -2,8 +2,9 @@ import { slideAnimationDuration } from '@mui/x-date-pickers/CalendarPicker/Picke
 import React, { PureComponent, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
+
 interface Content {
-  trash_kind: string;
+  kind: string;
   cnt: number;
 }
 
@@ -15,27 +16,27 @@ const trashlist: Contentlist =
 {
   list: [
     {
-      trash_kind: "GLASS",
+      kind: "GLASS",
       cnt: 0
     },
     {
-      trash_kind: "BIODEGRADABLE",
+      kind: "BIODEGRADABLE",
       cnt: 0
     },
     {
-      trash_kind: "CARDBOARD",
+      kind: "CARDBOARD",
       cnt: 0
     },
     {
-      trash_kind: "PAPER",
+      kind: "PAPER",
       cnt: 0
     },
     {
-      trash_kind: "METAL",
+      kind: "METAL",
       cnt: 0
     },
     {
-      trash_kind: "PLASTIC",
+      kind: "PLASTIC",
       cnt: 0
     },
   ]
@@ -74,7 +75,7 @@ function TrashChart({ list }: Contentlist) {
       else { // 그 외 데이터가 존재할 때
         const tempList: Content[] = trashlist.list?.map((trashlist: any) => {
           list?.map((getlist: any) => {
-            if (getlist?.trash_kind === trashlist?.trash_kind) {
+            if (getlist?.kind === trashlist?.kind) {
               trashlist.cnt = getlist.cnt;
               console.log("같은 것을 발견");
             }
@@ -103,11 +104,11 @@ function TrashChart({ list }: Contentlist) {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey='trash_kind' />
+        <XAxis dataKey='kind' />
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey='cnt' fill="#759F98" barSize={40} />
+        <Bar dataKey='cnt' fill="#737458" barSize={40} />
       </BarChart>
     </ResponsiveContainer>
   );

@@ -20,20 +20,25 @@ function MyTrashchart() {
                 borderRadius: 5,
                 borderColor: "transparent",
                 minWidth: "100%",
-                height: "80vh",
+                height: "100vh",
             }}>
             <Typography color="black" fontWeight="bold" sx={{ mt: 3, mb: 2, fontSize: "medium" }}>
                 내 쓰레기 통계
             </Typography>
             <Container
                 style={{
-                    borderRadius: 8,
+                    borderRadius: 5,
                     backgroundColor: "white",
-                    height: "50vh"
+                    height: "80vh"
                 }}
                 sx={{ mt: 3 }}>
-                <Date onClickRetrieve={setUserData} />
-                <Chart list={userData} />
+                <Container>
+                    <Date onClickRetrieve={setUserData} />
+                </Container>
+                <Container
+                sx={{width:"100%", height: "80%"}}>
+                    <Chart list={userData} />
+                </Container>
             </Container>
         </Container>
     );
