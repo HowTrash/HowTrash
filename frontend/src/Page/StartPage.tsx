@@ -27,16 +27,15 @@ const StartPage = () => {
       textAlign={"center"}
       style={{
         backgroundImage: "url(ggu2.jpg)",
+        backgroundPosition: "center",
         margin: "auto",
-        maxWidth: "1920px",
-        minHeight: "1000px",
+        width: "100%",
+        height: "100vh",
         display: "flex",
         justifyContent: "center",
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* <img src="ggu.jpg"></img> */}
-
       <Box display={"flex"} flexDirection="column" margin={"auto"}>
         <StartLogo />
         <Link

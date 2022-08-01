@@ -50,10 +50,8 @@ function App() {
             </Route>
           </Route>
         </Routes>
-      </Router>
-      <footer>
         <Footer />
-      </footer>
+      </Router>
     </div>
   );
 }
