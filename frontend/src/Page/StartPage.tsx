@@ -3,6 +3,7 @@ import { Box, Button, Link } from "@mui/material";
 import lottie from "lottie-web";
 import Main from "../images/mainBacl";
 import StartLogo from "../images/startLogo";
+import { Container } from "@mui/system";
 
 const MainPageLottie = () => {
   //lottie
@@ -25,28 +26,31 @@ const StartPage = () => {
       display="flex"
       textAlign={"center"}
       style={{
-        position: "absolute",
-        backgroundColor: "white",
-        backgroundSize: "cover",
-        zIndex: 100,
-        width: "100%",
-        height: "100%",
+        backgroundImage: "url(ggu2.jpg)",
+        margin: "auto",
+        maxWidth: "1920px",
+        minHeight: "1000px",
+        display: "flex",
+        justifyContent: "center",
+        backgroundRepeat: "no-repeat",
       }}
     >
-      <Main />
+      {/* <img src="ggu.jpg"></img> */}
 
-      {/* <MainPageLottie /> */}
-
-      <StartLogo />
-      <Link
-        href="/mainpage"
-        alignSelf="center"
-        style={{ margin: "auto", textDecoration: "none", fontWeight: "bold" }}
-      >
-        <Button sx={{ fontFamily: "IrishGrover", color: "black" }}>
-          start rebike ▶︎
-        </Button>
-      </Link>
+      <Box display={"flex"} flexDirection="column" margin={"auto"}>
+        <StartLogo />
+        <Link
+          href="/mainpage"
+          style={{
+            textDecoration: "none",
+            fontWeight: "bold",
+          }}
+        >
+          <Button sx={{ fontFamily: "IrishGrover", color: "black" }}>
+            start rebike ▶︎
+          </Button>
+        </Link>
+      </Box>
     </Box>
   );
 };
