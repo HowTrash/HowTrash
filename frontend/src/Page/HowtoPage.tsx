@@ -1,8 +1,7 @@
 import * as React from "react";
-import { Box } from "@mui/material";
+import { Box, Grid, Typography, Link } from "@mui/material";
 import SearchBar from "../components/mainpage/SearchBar";
 import ExplanationTrash from "../components/howtopage/ExplanationTrash";
-
 import { ReduxModule } from "../modules/ReduxModule";
 import { useSelector } from "react-redux";
 import { RootReducerType } from "../index";
@@ -25,28 +24,57 @@ const HowtoPage = () => {
         <Box
           sx={{
             borderRadius: 3,
-            border: 1,
-            borderColor: "black",
             backgroundColor: "white",
-            width: 600,
-            height: 300,
+            width: 700,
+            height: 350,
             margin: "auto",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            boxShadow: "1px 3px 3px #B0B09A",
             mt: 7,
+            mb: 10,
           }}
         >
-          <img src={reduxKindAndImg.imgUrl as string} />
-        </Box>
-
-        {reduxKindAndImg.trashKinds?.map((item: string, index: any) => (
-          <ExplanationTrash
-            key={index}
-            kind={item}
-            imgURL={reduxKindAndImg.imgUrl}
+          <img
+            style={{ maxWidth: 500, maxHeight: 250 }}
+            src={reduxKindAndImg.imgUrl as string}
           />
-        ))}
+        </Box>
+        <Grid
+          container
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Typography
+            sx={{ fontSize: 50, mt: 10, fontFamily: "Itim", color: "#737458" }}
+          >
+            How to recycle?
+          </Typography>
+          {reduxKindAndImg.trashKinds?.map((item: string, index: any) => (
+            <ExplanationTrash
+              key={index}
+              kind={item}
+              imgURL={reduxKindAndImg.imgUrl}
+            />
+          ))}
+
+          <Link
+            href="/mypage"
+            style={{
+              textDecoration: "none",
+              fontWeight: "bold",
+              fontFamily: "Itim",
+              padding: 100,
+              color: "black",
+              fontSize: 30,
+            }}
+          >
+            {" "}
+            Go To Mypage{" 👉"}{" "}
+          </Link>
+        </Grid>
       </div>
     </Box>
   );

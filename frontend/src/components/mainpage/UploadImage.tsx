@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Resizer from "react-image-file-resizer";
 import Api from "../../utils/customApi";
 import { ReduxModule } from "../../modules/ReduxModule";
-
+import { getAccess } from "src/Auth/tokenManager";
 import { useDispatch } from "react-redux";
 import { save_ID } from "../../actions/ImgIDActions";
 
@@ -33,11 +33,7 @@ function UploadImage() {
       );
     });
 
-  //❌
-
   const dispatch = useDispatch();
-
-  //❌
 
   const onChangeImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
@@ -54,19 +50,26 @@ function UploadImage() {
       console.log(err);
     }
   };
+  const what: any = getAccess();
 
   const sendImage: () => Promise<any> = async () => {
     const trashFormData = new FormData();
     trashFormData.append("filename", respondImg as any);
 
-    await Api.post(`/trash/users/${userIdtoRedux}/results`, trashFormData)
+    await Api.post(`/trash/users/${userIdtoRedux}/results`, trashFormData, {
+      headers: {
+        Authorization: `${what.value}`,
+      },
+    })
+
       .then((res) => {
         dispatch(save_ID(res.data.image_id));
         //res.data.challenge : NONE 확인해야함
-        navigate(`/mainpage/resultpage`);
+        navigate(`/howtopage`);
       })
       .catch((error) => {
         console.log("An error occurred:", error.response);
+        navigate(`/errorpage`);
       });
   };
 
@@ -83,15 +86,20 @@ function UploadImage() {
         <Button
           variant="outlined"
           sx={{
-            border: 1,
-            borderColor: "black",
+            borderColor: "white",
+            borderRadius: 3,
+            boxShadow: "1px 3px 3px #B0B09A",
             backgroundColor: "white",
             width: 600,
             height: 300,
             mt: 10,
             "&:hover": {
-              backgroundColor: "#C3F5E7",
-              borderColor: "#1F7D66",
+              backgroundColor: "#D4D4D4",
+              borderColor: "#F7F8E9",
+            },
+            "& .MuiTouchRipple-root span": {
+              backgroundColor: "#8F704E",
+              opacity: 0.3,
             },
           }}
           component="label"
@@ -106,7 +114,7 @@ function UploadImage() {
           {isImg ? null : (
             <Box>
               {" "}
-              <CloudUploadIcon sx={{ color: "#759F98" }} fontSize="large" />
+              <CloudUploadIcon sx={{ color: "#B8B8B8" }} fontSize="large" />
               <Typography sx={{ color: "#759F98" }}>
                 {" "}
                 Upload your image!
@@ -120,7 +128,7 @@ function UploadImage() {
             variant="contained"
             sx={{
               "&:hover": {
-                backgroundColor: "#4F6B66",
+                backgroundColor: "#51523E",
               },
               mt: 2,
               width: 80,
@@ -129,7 +137,7 @@ function UploadImage() {
               fontSize: 12,
               mb: 2,
               color: "white",
-              backgroundColor: "#759F98",
+              backgroundColor: "#737458",
             }}
           >
             결과보기

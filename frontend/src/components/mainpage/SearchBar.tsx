@@ -43,8 +43,8 @@ const SearchBar = () => {
       sx={{
         backgroundColor: "white",
         borderColor: "#759F98",
-        border: 1,
-        borderRadius: 10,
+        borderRadius: 3,
+        boxShadow: "1px 3px 3px #B0B09A",
         margin: "auto",
         mt: 25,
         width: "58ch",
@@ -87,7 +87,7 @@ const SearchBar = () => {
         />
 
         <IconButton type="submit" aria-label="search">
-          <SearchIcon sx={{ mt: 0.5 }} fontSize="large" />
+          <SearchIcon sx={{ mt: 0.5, color: "#B0B09A" }} fontSize="large" />
         </IconButton>
       </Box>
     </Box>

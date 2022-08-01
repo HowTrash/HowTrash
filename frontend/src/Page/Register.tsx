@@ -137,7 +137,7 @@ const Register = () => {
       nameRegex.test(user.name as string) &&
       aliasRegex.test(user.alias as string)
     ) {
-      Api.post<User>(`/users/`, user)
+      Api.post<User>(`/users`, user)
         .then((response) => {
           // Handle success.
           handleOpen();
