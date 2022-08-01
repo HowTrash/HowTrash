@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Box, Button, Link } from "@mui/material";
 import lottie from "lottie-web";
 import Main from "../images/mainBacl";
+import StartLogo from "../images/startLogo";
 
 const MainPageLottie = () => {
   //lottie
@@ -26,32 +27,26 @@ const StartPage = () => {
       style={{
         position: "absolute",
         backgroundColor: "white",
+        backgroundSize: "cover",
         zIndex: 100,
-        width: "100vw",
-        height: "100vh",
+        width: "100%",
+        height: "100%",
       }}
     >
       <Main />
-      <Box
-        position={"absolute"}
-        display={"flex"}
-        flexDirection="column"
-        justifyContent={"center"}
+
+      {/* <MainPageLottie /> */}
+
+      <StartLogo />
+      <Link
+        href="/mainpage"
         alignSelf="center"
-        zIndex={90}
+        style={{ margin: "auto", textDecoration: "none", fontWeight: "bold" }}
       >
-        <MainPageLottie />
-        <Link
-          href="/mainpage"
-          display={"flex"}
-          flexDirection="column"
-          justifyContent={"center"}
-          alignSelf="center"
-          style={{ margin: "auto", textDecoration: "none", fontWeight: "bold" }}
-        >
-          <Button>메인 페이지로 간드앙</Button>
-        </Link>
-      </Box>
+        <Button sx={{ fontFamily: "IrishGrover", color: "black" }}>
+          start rebike ▶︎
+        </Button>
+      </Link>
     </Box>
   );
 };
