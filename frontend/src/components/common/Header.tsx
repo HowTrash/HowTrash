@@ -1,16 +1,6 @@
 import { useState, useRef, useEffect } from "react";
-import {
-  Button,
-  Container,
-  Box,
-  Link,
-  CssBaseline,
-  Hidden,
-  Typography,
-  styled,
-} from "@mui/material";
+import { Button, Container, Box, Link, CssBaseline } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
 import { useSelector, useDispatch } from "react-redux";
 import { RootReducerType } from "../../index";
 import { fetchDecodeData } from "src/actions/DecodeActions";
@@ -35,7 +25,6 @@ function Header() {
 
   useEffect(() => {
     if (token) {
-      console.log("header.js useEffect");
       dispatch(fetchDecodeData(token as string));
     } else {
       console.log("header.js not token");
@@ -50,7 +39,6 @@ function Header() {
   const handlePopoverClose = () => {
     setMouseOn(false);
   };
-  console.log(token);
 
   function deleteToken() {
     localStorage.clear();
@@ -88,28 +76,29 @@ function Header() {
           {token ? (
             // if IsLogin is true
             <div>
-              {" "}
-              <Button>
-                <Link
-                  href="/mypage"
-                  sx={{
-                    textDecoration: "none",
-                    color: "#F7F8E9",
-                    fontFamily: "Itim",
-                    fontSize: 17,
-                    fontStyle: "bold",
-                    margin: 1,
-                  }}
-                >
-                  mypage
-                </Link>
-              </Button>
+              <div style={{ position: "relative", display: "inline-block" }}>
+                <Button>
+                  <Link
+                    href="/mypage"
+                    onMouseEnter={handlePopoverOpen}
+                    onMouseLeave={handlePopoverClose}
+                    sx={{
+                      textDecoration: "none",
+                      color: "#F7F8E9",
+                      fontFamily: "Itim",
+                      fontSize: 17,
+                      fontStyle: "bold",
+                      margin: 1,
+                    }}
+                  >
+                    mypage
+                  </Link>
+                </Button>
+              </div>
               <Button>
                 <Link
                   href="/mainpage"
                   onClick={deleteToken}
-                  onMouseEnter={handlePopoverOpen}
-                  onMouseLeave={handlePopoverClose}
                   sx={{
                     textDecoration: "none",
                     color: "#F7F8E9",
@@ -120,30 +109,6 @@ function Header() {
                 >
                   {reduxToken.decodeInfo?.alias}
                 </Link>
-                <>
-                  {mouseOn ? (
-                    <Container style={{ position: "absolute", top: 80 }}>
-                      <Box
-                        display="flex"
-                        justifyContent="center"
-                        sx={{
-                          background: "white",
-                          border: 1,
-                          borderRadius: 1,
-                          borderColor: "#F7F8E9",
-                          color: "#F7F8E9",
-                          fontSize: 3,
-                          padding: 1,
-                          width: 100,
-                        }}
-                      >
-                        클릭해서 로그아웃
-                      </Box>
-                    </Container>
-                  ) : (
-                    Hidden
-                  )}
-                </>
               </Button>
             </div>
           ) : (

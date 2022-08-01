@@ -35,47 +35,48 @@ const style = {
 
 const btnstyle = {
   borderColor: "transparent",
-  backgroundColor: "#759F98",
+  backgroundColor: "#B0B09A",
   color: "#ffffff",
   height: "40px",
   width: "300px",
-  borderRadius: "5px",
   marginTop: "25px",
   textAlign: "center",
   fontSize: "15px",
-  fontWeight: "bold",
   textDecoration: "none",
+  borderRadius: 4,
   p: 1,
-  "&:hover": { backgroundColor: "#5e8079", color: "#ffffff" },
+  fontFamily: "Itim",
+  "&:hover": { backgroundColor: "#737458", color: "#ffffff" },
 };
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#759F98",
+      main: "#737458",
     },
   },
 });
 
 const UserInfoTf = styled(TextField)(({}) => ({
-  backgroundColor: "",
+  borderRadius: 5,
+  textAlign: "center",
   "&:hover": {
-    color: "#759F98",
+    color: "#737458",
   },
 
   "& .MuiOutlinedInput-root": {
     "&:hover fieldset": {
-      borderColor: "#759F98",
+      borderColor: "#737458",
     },
   },
 }));
 
 const FormHelperTexts = styled(FormHelperText)`
   width: 100%;
-  padding-left: 12px;
-  font-weight: 700;
-  color: #d32f2f;
-  font-size: 16px;
+  padding: "auto;
+  font-weight: 600;
+  color: #c65959;
+  font-size: 12px;
 `;
 
 interface User {
@@ -160,7 +161,7 @@ const Register = () => {
       `/users/?case=${props[0]}&value=${props[1] as string}`
     );
 
-    if (props[0] == "name") {
+    if (props[0] === "name") {
       if (!nameRegex.test(name as string) || (name as string).length < 1) {
         setNameError("올바른 이름을 입력해주세요.");
         setCheckName("");
@@ -170,7 +171,7 @@ const Register = () => {
         else setCheckName("사용 가능한 아이디 입니다.");
       }
     }
-    if (props[0] == "email") {
+    if (props[0] === "email") {
       if (!emailRegex.test(email as string)) {
         setEmailError("올바른 이메일 형식이 아닙니다.");
       } else {
@@ -180,13 +181,14 @@ const Register = () => {
       }
     }
 
-    if (props[0] == "alias") {
+    if (props[0] === "alias") {
       if (!aliasRegex.test(alias as string) || (alias as string).length < 1) {
         setAliasError("올바른 이름을 입력해주세요.");
         setCheckName("");
       } else {
         setAliasError("");
-        if (res.data.result == false) setCheckAlias("사용 중인 닉네임 입니다.");
+        if (res.data.result === false)
+          setCheckAlias("사용 중인 닉네임 입니다.");
         else setCheckAlias("사용 가능한 닉네임 입니다.");
       }
     }
@@ -195,15 +197,15 @@ const Register = () => {
   return (
     <Container
       style={{
-        backgroundColor: "#E7F5EF",
+        backgroundColor: "#F7F8E9",
         border: "solid",
-        borderColor: "#E7F5EF",
+        borderColor: "#F7F8E9",
         minWidth: "100%",
         height: "100vh",
       }}
     >
       <ThemeProvider theme={theme}>
-        <Container component="main" maxWidth="xs" sx={{ mb: 2 }}>
+        <Container component="main" maxWidth="xs" sx={{ mb: 25, mt: 15 }}>
           <CssBaseline />
           <Box
             sx={{
@@ -215,11 +217,12 @@ const Register = () => {
           >
             <Typography
               component="h1"
-              color="primary"
+              color="#737458"
               fontWeight="bold"
               variant="h4"
+              fontFamily={"Itim"}
             >
-              회원가입
+              Sign up
             </Typography>
             <Box
               textAlign="left"
@@ -227,7 +230,7 @@ const Register = () => {
               color="info.contrastText"
               onSubmit={handleSubmit}
               noValidate
-              sx={{ mt: 1, width: 396 }}
+              sx={{ mt: 1, width: 396, marginTop: 5 }}
             >
               <UserInfoTf
                 margin="normal"
@@ -332,14 +335,16 @@ const Register = () => {
                   variant="contained"
                   sx={{
                     mt: 3,
-                    mb: 2,
+                    mb: 50,
                     height: 50,
                     color: "white",
                     fontWeight: "bold",
-                    fontSize: 20,
+                    fontFamily: "Itim",
+                    borderRadius: 5,
+                    backgroundColor: "#B0B09A",
                   }}
                 >
-                  가입하기
+                  Submit
                 </Button>
 
                 <Modal
@@ -359,20 +364,16 @@ const Register = () => {
                       variant="h4"
                       fontWeight="bold"
                       component="h1"
-                      sx={{ mb: 1 }}
+                      sx={{ mb: 3, color: "#737458", fontFamily: "Itim" }}
                     >
-                      회원가입 완료
+                      WELCOME!
                     </Typography>
-                    <Typography
-                      id="modal-description"
-                      variant="h6"
-                      sx={{ mb: 3, mt: 2 }}
-                    >
-                      가입이 완료되었습니다!
-                    </Typography>
-                    <TrashCan />
+                    <div style={{ marginTop: 15 }}>
+                      <TrashCan />
+                    </div>
+
                     <Link href="/login" sx={btnstyle}>
-                      로그인하러가기
+                      sign in &gt;
                     </Link>
                   </Box>
                 </Modal>

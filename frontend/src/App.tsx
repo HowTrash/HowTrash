@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./Page/Login";
+import LoginSuccess from "./Page/LoginSuccess";
 import MyPage from "./Page/MyPage";
 import MainPage from "./Page/MainPage";
 import Header from "./components/common/Header";
@@ -13,6 +14,7 @@ import ChangeInfo from "./components/Mypage/ChangeInfo";
 import UploadResult from "./components/mainpage/UploadResult";
 import AuthRouter from "./Auth/AuthRouter";
 import StartPage from "./Page/StartPage";
+import Footer from "./components/common/Footer";
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
         <Routes>
           <Route path="/" element={<StartPage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/login/welcome" element={<LoginSuccess />} />
           <Route path="/register" element={<Register />} />
           <Route path="/errorpage" element={<ErrorPage />} />
 
@@ -48,6 +51,9 @@ function App() {
           </Route>
         </Routes>
       </Router>
+      <footer>
+        <Footer />
+      </footer>
     </div>
   );
 }
