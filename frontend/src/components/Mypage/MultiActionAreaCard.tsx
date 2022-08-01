@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { save_ID } from "../../actions/ImgIDActions";
 import { useSelector } from "react-redux";
 import { RootReducerType } from "../../index";
+import { useNavigate } from "react-router-dom";
 
 const MyTrashcanBtn = styled(Button)(({}) => ({
   backgroundColor: "#B0B09A",
@@ -24,14 +25,16 @@ const MyTrashcanBtn = styled(Button)(({}) => ({
   },
 }));
 
-export default function MultiActionAreaCard({ image = "", id = 0 }) {
+export default function MultiActionAreaCard({ image = "", id = "" }) {
+  const navigate = useNavigate();
+
+  console.log(id);
   const dispatch = useDispatch();
   const itemID = useSelector((state: RootReducerType) => state.ImgIDReducer);
   console.log(itemID);
   const onDispatch = () => {
     dispatch(save_ID(id));
-
-    console.log(itemID);
+    navigate(`/howtopage`);
   };
 
   return (
@@ -48,6 +51,7 @@ export default function MultiActionAreaCard({ image = "", id = 0 }) {
       <CardActions>
         <MyTrashcanBtn
           variant="outlined"
+          onClick={onDispatch}
           sx={{
             margin: "auto",
             width: 70,
@@ -55,15 +59,10 @@ export default function MultiActionAreaCard({ image = "", id = 0 }) {
             bgcolor: "#B0B09A",
             borderColor: "#B0B09A",
             color: "black",
+            fontSize: 2,
           }}
         >
-          <Link
-            href={`/mypage/${id}/howtopage`}
-            onClick={onDispatch}
-            sx={{ fontSize: 2, color: "black", textDecoration: "none" }}
-          >
-            상세보기
-          </Link>
+          더보기
         </MyTrashcanBtn>
       </CardActions>
     </Card>

@@ -17,6 +17,7 @@ const HowtoPage = () => {
 
   const reduxKindAndImg = ReduxImgApi(itemID, userIdToRedux);
   console.log(userIdToRedux);
+  console.log(itemID);
 
   return (
     <Box textAlign={"center"}>

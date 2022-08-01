@@ -63,7 +63,7 @@ function MyTrashcan(props: Props) {
   }, [page]);
 
   useEffect(() => {
-    // console.log(trashes);
+    console.log(trashes);
   }, [trashes]);
 
   return (

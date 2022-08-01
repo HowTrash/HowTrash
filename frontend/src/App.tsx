@@ -39,7 +39,6 @@ function App() {
           <Route element={<AuthRouter authAble={true} />}>
             <Route path="/mypage" element={<MyPage />}>
               <Route index element={<MyTrashcan />} />
-              <Route path={`/mypage/:id/howtopage`} element={<HowtoPage />} />
               <Route path="/mypage/myTrashChart" element={<MyTrashChart />} />
               <Route path="/mypage/myChallenge" element={<MyChallenge />} />
               <Route path="/mypage/userInfo" element={<ChangeInfo />} />

@@ -16,7 +16,7 @@ export namespace rs {
   }
 
   export interface Trash {
-    trash_image_id: number;
+    trash_image_id?: any;
     image: string;
   }
 
