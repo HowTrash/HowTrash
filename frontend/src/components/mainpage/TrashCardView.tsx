@@ -11,9 +11,6 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import FirstImg from "../../images/firstImg";
-import SecondImg from "../../images/secondImg";
-import ThirdImg from "../../images/thirdImg";
 import { decodeToken } from "src/Auth/tokenGetter";
 import axios from "axios";
 import { response } from "express";
@@ -103,23 +100,36 @@ function MultiActionAreaCard() {
     <Box
       sx={{ display: "flex", flexWrap: "wrap", justifyContent: "space-evenly" }}
     >
-      <Box sx={{ p: 2 }}>
-        <FirstImg />
-        <Card sx={{ width: 300, border: 1 }}>
+      <Box
+        sx={{ p: 2 }}>
+        <Typography
+          sx={{ fontSize: 40, mt: 10, fontFamily: "Itim", color: "#737458" }}
+        >1st
+        </Typography>
+        <Box sx={{
+          width: 450, border: 0,
+          backgroundColor: "white",
+          borderColor: "#759F98",
+          borderRadius: 5,
+          boxShadow: "1px 3px 3px #B0B09A",
+          margin: "auto",
+          mt: 5
+        }}>
           <CardActionArea>
-            <CardMedia component="img" height="300" image={firstData?.images} />
+            <CardMedia component="img" height="500" image={firstData?.images} />
             <Typography
-              fontWeight={"bold"}
-              fontSize={20}
+              fontSize={40}
               component="div"
               margin={1}
               marginTop={2}
+              sx={{ fontFamily: "Itim", color: "#737458" }}
             >
               {firstData?.kind}
             </Typography>
           </CardActionArea>
           <CardActions>
             <Button
+              variant="text"
               onClick={() => {
                 navigate(`/defaulthowpage`, {
                   state: {
@@ -128,36 +138,44 @@ function MultiActionAreaCard() {
                   },
                 });
               }}
-              size="small"
-              sx={{ margin: "auto", bgcolor: "#C0F0FF", border: 1 }}
+              sx={{ margin: "auto", fontFamily: "Itim", color: "#737458", fontSize : 20}}
             >
               더보기
             </Button>
           </CardActions>
-        </Card>
+        </Box>
       </Box>
 
-      <Box sx={{ p: 2 }}>
-        <SecondImg />
-        <Card sx={{ width: 300, border: 1 }}>
+      <Box
+        sx={{ p: 2 }}>
+        <Typography
+          sx={{ fontSize: 40, mt: 10, fontFamily: "Itim", color: "#737458" }}
+        >2nd
+        </Typography>
+        <Box sx={{
+          width: 450, border: 0,
+          backgroundColor: "white",
+          borderColor: "#759F98",
+          borderRadius: 5,
+          boxShadow: "1px 3px 3px #B0B09A",
+          margin: "auto",
+          mt: 5
+        }}>
           <CardActionArea>
-            <CardMedia
-              component="img"
-              height="300"
-              image={secondData?.images}
-            />
+            <CardMedia component="img" height="500" image={secondData?.images} />
             <Typography
-              fontWeight={"bold"}
-              fontSize={20}
+              fontSize={40}
               component="div"
               margin={1}
               marginTop={2}
+              sx={{ fontFamily: "Itim", color: "#737458" }}
             >
               {secondData?.kind}
             </Typography>
           </CardActionArea>
           <CardActions>
             <Button
+              variant="text"
               onClick={() => {
                 navigate(`/defaulthowpage`, {
                   state: {
@@ -166,32 +184,44 @@ function MultiActionAreaCard() {
                   },
                 });
               }}
-              size="small"
-              sx={{ margin: "auto", bgcolor: "#C0F0FF", border: 1 }}
+              sx={{ margin: "auto", fontFamily: "Itim", color: "#737458", fontSize : 20}}
             >
               더보기
             </Button>
           </CardActions>
-        </Card>
+        </Box>
       </Box>
 
-      <Box sx={{ p: 2 }}>
-        <ThirdImg />
-        <Card sx={{ width: 300, border: 1 }}>
+      <Box
+        sx={{ p: 2 }}>
+        <Typography
+          sx={{ fontSize: 40, mt: 10, fontFamily: "Itim", color: "#737458" }}
+        >3rd
+        </Typography>
+        <Box sx={{
+          width: 450, border: 0,
+          backgroundColor: "white",
+          borderColor: "#759F98",
+          borderRadius: 5,
+          boxShadow: "1px 3px 3px #B0B09A",
+          margin: "auto",
+          mt: 5
+        }}>
           <CardActionArea>
-            <CardMedia component="img" height="300" image={thridData?.images} />
+            <CardMedia component="img" height="500" image={thridData?.images} />
             <Typography
-              fontWeight={"bold"}
-              fontSize={20}
+              fontSize={40}
               component="div"
               margin={1}
               marginTop={2}
+              sx={{ fontFamily: "Itim", color: "#737458" }}
             >
               {thridData?.kind}
             </Typography>
           </CardActionArea>
           <CardActions>
             <Button
+              variant="text"
               onClick={() => {
                 navigate(`/defaulthowpage`, {
                   state: {
@@ -200,13 +230,12 @@ function MultiActionAreaCard() {
                   },
                 });
               }}
-              size="small"
-              sx={{ margin: "auto", bgcolor: "#C0F0FF", border: 1 }}
+              sx={{ margin: "auto", fontFamily: "Itim", color: "#737458", fontSize : 20}}
             >
               더보기
             </Button>
           </CardActions>
-        </Card>
+        </Box>
       </Box>
     </Box>
   );
