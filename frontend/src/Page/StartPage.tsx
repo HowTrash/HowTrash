@@ -1,53 +1,43 @@
-import { useState, useEffect, useRef } from "react";
 import { Box, Button, Link } from "@mui/material";
-import lottie from "lottie-web";
-import Main from "../images/mainBacl";
 import StartLogo from "../images/startLogo";
-import { Container } from "@mui/system";
-
-const MainPageLottie = () => {
-  //lottie
-  const element = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    lottie.loadAnimation({
-      container: element.current as HTMLDivElement,
-      renderer: "svg",
-      loop: false,
-      autoplay: true,
-      animationData: require("../images/mainLottie.json"),
-    });
-  }, []);
-  return <Box ref={element} style={{ height: 300 }}></Box>;
-};
+import Animation from "src/components/common/Animation";
+import useMoveScroll from "src/modules/UseMoveScroll";
 
 const StartPage = () => {
+  const { element, onMoveToElement } = useMoveScroll();
+
   return (
     <Box
-      display="flex"
       textAlign={"center"}
       style={{
-        backgroundImage: "url(ggu2.jpg)",
+        backgroundImage: "url(ggu.jpg)",
         backgroundPosition: "center",
-        margin: "auto",
-        width: "100%",
+        width: "100wh",
         height: "100vh",
-        display: "flex",
-        justifyContent: "center",
         backgroundRepeat: "no-repeat",
+        display: "flex",
+        justifyContent: "space-evenly",
       }}
     >
-      <Box display={"flex"} flexDirection="column" margin={"auto"}>
+      <Box
+        display={"flex"}
+        textAlign={"center"}
+        style={{ height: "30vh" }}
+        flexDirection="column"
+        margin={"auto"}
+      >
         <StartLogo />
+
         <Link
-          href="/mainpage"
+          onClick={onMoveToElement}
           style={{
             textDecoration: "none",
             fontWeight: "bold",
+            fontFamily: "IrishGrover",
+            color: "white",
           }}
         >
-          <Button sx={{ fontFamily: "IrishGrover", color: "black" }}>
-            start rebike ▶︎
-          </Button>
+          <Animation />
         </Link>
       </Box>
     </Box>
