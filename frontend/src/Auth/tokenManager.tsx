@@ -4,7 +4,6 @@ import { decodeToken } from "./tokenGetter";
 
 // 받아온 토큰을 만료일을 설정해 로컬 스토리지에 저장
 const setAccessToken = (accessToken: string) => {
-  console.log("잘 들r어왔나?", accessToken);
   const today = new Date();
   const accessExpires = new Date().setTime(today.getTime() + 1000 * 60 * 30); // 만료 30분
 
@@ -13,7 +12,6 @@ const setAccessToken = (accessToken: string) => {
   // accessExpires.setTime(today.getTime() + 1000 * 60 * 30); // 30 minute
 
   // decodeToken(accessToken);
-  console.log("만료시간 ac", accessExpires);
 
   const accessStorage: rs.TokenInfo = {
     value: accessToken,
@@ -23,7 +21,6 @@ const setAccessToken = (accessToken: string) => {
 };
 
 const setRefreshToken = (refreshtoken: string) => {
-  console.log("잘 들r어왔나?", refreshtoken);
   const today = new Date();
   // const refreshExpires = new Date().setTime(
   //   today.getTime() + 1000 * 60 * 60 * 24 * 14
@@ -37,7 +34,6 @@ const setRefreshToken = (refreshtoken: string) => {
   // refreshExpires.setTime(today.getTime() + 1000 * 60 * 60 * 24 * 7); // 7 day
 
   // decodeToken(accessToken);
-  console.log("만료시간 re", refreshExpires);
 
   const refreshStorage = {
     value: refreshtoken,
@@ -55,7 +51,6 @@ const getToken = () => {
 
 const getAccess = () => {
   const stringAccess = getToken().access;
-  console.log(stringAccess);
   if (stringAccess !== null) {
     const access: rs.TokenInfo = JSON.parse(stringAccess);
     return access;

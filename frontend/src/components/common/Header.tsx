@@ -1,14 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import {
-  Button,
-  Container,
-  Box,
-  Link,
-  CssBaseline,
-  Hidden,
-  Typography,
-  styled,
-} from "@mui/material";
+import { Button, Container, Box, Link, CssBaseline } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useSelector, useDispatch } from "react-redux";
 import { RootReducerType } from "../../index";
@@ -34,7 +25,6 @@ function Header() {
 
   useEffect(() => {
     if (token) {
-      console.log("header.js useEffect");
       dispatch(fetchDecodeData(token as string));
     } else {
       console.log("header.js not token");
@@ -49,7 +39,6 @@ function Header() {
   const handlePopoverClose = () => {
     setMouseOn(false);
   };
-  console.log(token);
 
   function deleteToken() {
     localStorage.clear();
