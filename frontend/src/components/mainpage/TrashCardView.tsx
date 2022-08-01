@@ -42,7 +42,7 @@ const ranklist: BaseContent[] =
   [
     {
       kind: "GLASS",
-      images: `https://i.ibb.co/cXcx6Q5/2022-07-30-11-19-38.png`
+      images: `https://i.ibb.co/g9rSyFX/31-OEv-Rve-V3-L-SY450.jpg`
     },
     {
       kind: "BIODEGRADABLE",
