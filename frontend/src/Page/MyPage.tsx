@@ -1,6 +1,6 @@
 import * as React from "react";
 import MyPageNavigation from "../components/Mypage/MyPageNavigation";
-import { Box, Container } from "@mui/material";
+import { Container } from "@mui/material";
 import { Outlet } from "react-router-dom";
 
 function MyPage() {

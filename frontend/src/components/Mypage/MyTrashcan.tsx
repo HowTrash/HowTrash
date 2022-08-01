@@ -34,7 +34,6 @@ function MyTrashcan(props: Props) {
   const [trashes, setTrashes] = useState(props.trashlist);
   const [more, setMore] = useState(false);
   const [page, setPage] = useState(1);
-
   const [last, setLast] = useState(true);
 
   const fetchMyTrash = async () => {
@@ -46,7 +45,6 @@ function MyTrashcan(props: Props) {
       if (res.data) {
         const newArray = trashes ? [...trashes, ...res.data] : res.data;
         setTrashes(newArray);
-        console.log(trashes);
       } else {
         setLast(false);
       }
@@ -64,7 +62,9 @@ function MyTrashcan(props: Props) {
     }
   }, [page]);
 
-  useEffect(() => {}, [trashes]);
+  useEffect(() => {
+    // console.log(trashes);
+  }, [trashes]);
 
   return (
     <Container
@@ -134,7 +134,7 @@ function MyTrashcan(props: Props) {
                 Object.values(trashes)?.map((item: rs.Trash, index: any) => (
                   <MultiActionAreaCard
                     image={item.image}
-                    id={item.uploaded_trash_image_id}
+                    id={item.trash_image_id}
                     key={index}
                   />
                 ))}
@@ -149,13 +149,13 @@ function MyTrashcan(props: Props) {
             {last === true ? (
               <Button
                 onClick={changePage}
-                style={{ color: "#76F2BE", fontFamily: "Itim" }}
+                style={{ color: "#737458", fontFamily: "Itim" }}
               >
                 more
                 <MoreIcon />
               </Button>
             ) : (
-              <Box style={{ color: "#76F2BE", fontFamily: "Itim" }}>
+              <Box style={{ color: "#737458", fontFamily: "Itim" }}>
                 no more data!
               </Box>
             )}

@@ -9,6 +9,10 @@ import {
   styled,
   Link,
 } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { save_ID } from "../../actions/ImgIDActions";
+import { useSelector } from "react-redux";
+import { RootReducerType } from "../../index";
 
 const MyTrashcanBtn = styled(Button)(({}) => ({
   backgroundColor: "#B0B09A",
@@ -21,7 +25,15 @@ const MyTrashcanBtn = styled(Button)(({}) => ({
 }));
 
 export default function MultiActionAreaCard({ image = "", id = 0 }) {
-  console.log(id);
+  const dispatch = useDispatch();
+  const itemID = useSelector((state: RootReducerType) => state.ImgIDReducer);
+  console.log(itemID);
+  const onDispatch = () => {
+    dispatch(save_ID(id));
+
+    console.log(itemID);
+  };
+
   return (
     <Card sx={{ maxWidth: 170, border: 1, margin: 1.4 }}>
       <CardActionArea>
@@ -46,7 +58,8 @@ export default function MultiActionAreaCard({ image = "", id = 0 }) {
           }}
         >
           <Link
-            href={`/mypage/trashNum/:${id}/howTo`}
+            href={`/mypage/${id}/howtopage`}
+            onClick={onDispatch}
             sx={{ fontSize: 2, color: "black", textDecoration: "none" }}
           >
             상세보기

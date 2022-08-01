@@ -16,6 +16,7 @@ const HowtoPage = () => {
   const userIdToRedux = ReduxModule().decodeInfo?.id;
 
   const reduxKindAndImg = ReduxImgApi(itemID, userIdToRedux);
+  console.log(userIdToRedux);
 
   return (
     <Box textAlign={"center"}>
@@ -67,7 +68,7 @@ const HowtoPage = () => {
               fontWeight: "bold",
               fontFamily: "Itim",
               padding: 100,
-              color: "black",
+              color: "#737458",
               fontSize: 30,
             }}
           >
