@@ -46,6 +46,7 @@ function MyTrashcan(props: Props) {
       if (res.data) {
         const newArray = trashes ? [...trashes, ...res.data] : res.data;
         setTrashes(newArray);
+        console.log(trashes);
       } else {
         setLast(false);
       }
@@ -72,30 +73,16 @@ function MyTrashcan(props: Props) {
         borderRadius: 5,
         borderColor: "transparent",
         minWidth: "100%",
+        marginTop: 30,
       }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
-      >
-        <Typography
-          color="black"
-          fontWeight="bold"
-          sx={{ mt: 1.2, mb: 1, fontSize: "medium" }}
-        >
-          내 분리수거함
-        </Typography>
-      </Box>
       <Container
         style={{
           borderRadius: 8,
           backgroundColor: "white",
         }}
         sx={{
-          mt: 2,
+          mt: 10,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -146,8 +133,8 @@ function MyTrashcan(props: Props) {
               {trashes &&
                 Object.values(trashes)?.map((item: rs.Trash, index: any) => (
                   <MultiActionAreaCard
-                    image={item.img}
-                    kind={item.trash_kind}
+                    image={item.image}
+                    id={item.uploaded_trash_image_id}
                     key={index}
                   />
                 ))}

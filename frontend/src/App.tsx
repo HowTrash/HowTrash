@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { getToken } from "./Auth/tokenManager";
 import Login from "./Page/Login";
 import LoginSuccess from "./Page/LoginSuccess";
 import MyPage from "./Page/MyPage";
@@ -8,8 +7,6 @@ import MainPage from "./Page/MainPage";
 import Header from "./components/common/Header";
 import Register from "./Page/Register";
 import HowtoPage from "./Page/HowtoPage";
-
-import GreenBack from "./images/greenBack";
 import MyTrashcan from "./components/Mypage/MyTrashcan";
 import MyTrashChart from "./components/Mypage/MyTrashChart";
 import MyChallenge from "./components/Mypage/MyChallenge";

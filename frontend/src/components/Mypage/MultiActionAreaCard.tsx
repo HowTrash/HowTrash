@@ -11,18 +11,17 @@ import {
 } from "@mui/material";
 
 const MyTrashcanBtn = styled(Button)(({}) => ({
-  backgroundColor: "#76F2BE",
-  borderColor: "#76F2BE",
+  backgroundColor: "#B0B09A",
+  borderColor: "#B0B09A",
   "&:hover": {
     color: "black",
     backgroundColor: "white",
-    borderColor: "#76F2BE",
+    borderColor: "#B0B09A",
   },
 }));
 
-export default function MultiActionAreaCard({ image = "", kind = "" }) {
-  // export default function MultiActionAreaCard() {
-
+export default function MultiActionAreaCard({ image = "", id = 0 }) {
+  console.log(id);
   return (
     <Card sx={{ maxWidth: 170, border: 1, margin: 1.4 }}>
       <CardActionArea>
@@ -30,20 +29,9 @@ export default function MultiActionAreaCard({ image = "", kind = "" }) {
           component="img"
           height="170"
           width="170"
-          // image='https://picsum.photos/400/300'
           image={image}
           style={{ padding: 3, borderRadius: 8 }}
         />
-        <Typography
-          fontWeight={"bold"}
-          fontSize={20}
-          component="div"
-          marginTop={1}
-          align="center"
-        >
-          {/* 물병 */}
-          {kind}
-        </Typography>
       </CardActionArea>
       <CardActions>
         <MyTrashcanBtn
@@ -52,13 +40,13 @@ export default function MultiActionAreaCard({ image = "", kind = "" }) {
             margin: "auto",
             width: 70,
             height: 20,
-            bgcolor: "#76F2BE",
-            borderColor: "#76F2BE",
+            bgcolor: "#B0B09A",
+            borderColor: "#B0B09A",
             color: "black",
           }}
         >
           <Link
-            href={`/mypage/trashNum/:${kind}/howTo`}
+            href={`/mypage/trashNum/:${id}/howTo`}
             sx={{ fontSize: 2, color: "black", textDecoration: "none" }}
           >
             상세보기
