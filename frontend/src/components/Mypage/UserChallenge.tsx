@@ -11,15 +11,10 @@ interface Props {
 }
 
 export default function UserChallenge({ num = 1, type }: Props) {
-  console.log(num);
-  console.log("참거짓", type);
-
   const [whatChallenge, setWhatChallenge] = useState<rs.ChallengeInfo>();
   useEffect(() => {
     constants.CHALLENGE.filter((item) => {
       if (item.id === num) {
-        console.log(item);
-        console.log(num);
         setWhatChallenge(item);
         return item;
       }

@@ -36,7 +36,6 @@ const trashlist: Contentlist = {
 
 function MyBadge() {
   const what: any = getAccess();
-  console.log(what.value);
 
   const [myChallenge, setMyChallenge] = useState<rs.Challenge[]>();
   const fetchMyChallenge = async () => {
@@ -65,7 +64,6 @@ function MyBadge() {
   useEffect(() => {
     fetchMyChallenge();
   }, [myChallenge]);
-  console.log("여기선 뭐가", trashlist.list);
 
   return (
     <Container
