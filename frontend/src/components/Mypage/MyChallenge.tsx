@@ -4,6 +4,7 @@ import { rs } from "src/utils/types";
 import Api from "../../utils/customApi";
 import UserChallenge from "../Mypage/UserChallenge";
 import { getAccess } from "src/Auth/tokenManager";
+import { ReduxModule } from "../../modules/ReduxModule";
 
 interface Contentlist {
   list: Array<rs.Challenge>;
@@ -36,17 +37,15 @@ const trashlist: Contentlist = {
 
 function MyBadge() {
   const what: any = getAccess();
+  const userIdtoRedux = ReduxModule().decodeInfo?.id;
 
   const [myChallenge, setMyChallenge] = useState<rs.Challenge[]>();
   const fetchMyChallenge = async () => {
-    const result = await Api.get(
-      "/trash/users/95fd1cd5-0461-4c27-aaea-9e0c838cae03/challenges",
-      {
-        headers: {
-          Authorization: `${what.value}`,
-        },
-      }
-    ).then((res) => res.data as rs.Challenge[]);
+    const result = await Api.get(`/trash/users/${userIdtoRedux}/challenges`, {
+      headers: {
+        Authorization: `${what.value}`,
+      },
+    }).then((res) => res.data as rs.Challenge[]);
     const challengeList = result;
 
     const temptList: rs.Challenge[] = trashlist.list?.map((trashlist: any) => {

@@ -6,6 +6,7 @@ import lottie from "lottie-web";
 import MoreIcon from "../../images/moreIcon";
 import { rs } from "src/utils/types";
 import { getAccess } from "src/Auth/tokenManager";
+import { ReduxModule } from "../../modules/ReduxModule";
 
 interface Props {
   trashlist?: Array<rs.Trash>;
@@ -28,6 +29,7 @@ const GetNoTrashLottie = () => {
 
 function MyTrashcan(props: Props) {
   const what: any = getAccess();
+  const userIdtoRedux = ReduxModule().decodeInfo?.id;
 
   const [trashes, setTrashes] = useState(props.trashlist);
   const [more, setMore] = useState(false);
@@ -36,14 +38,11 @@ function MyTrashcan(props: Props) {
   const [last, setLast] = useState(true);
 
   const fetchMyTrash = async () => {
-    await Api.get(
-      `/trash/users/95fd1cd5-0461-4c27-aaea-9e0c838cae03/pages/${page}`,
-      {
-        headers: {
-          Authorization: `${what.value}`,
-        },
-      }
-    ).then((res) => {
+    await Api.get(`/trash/users/${userIdtoRedux}/pages/${page}`, {
+      headers: {
+        Authorization: `${what.value}`,
+      },
+    }).then((res) => {
       if (res.data) {
         const newArray = trashes ? [...trashes, ...res.data] : res.data;
         setTrashes(newArray);

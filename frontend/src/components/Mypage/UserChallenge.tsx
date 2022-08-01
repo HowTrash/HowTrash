@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { Box, Card, Container, Hidden, Typography } from "@mui/material";
 import { rs } from "src/utils/types";
 import constants from "../../utils/constants";
-import DefaultChallenge from "../../images/challenges/challengeBack";
-import { borderColor } from "@mui/system";
 
 interface Props {
   num: number;
