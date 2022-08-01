@@ -1,8 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import Api from "src/utils/customApi";
-import { rs } from "src/utils/types";
-import { setAccessToken, setRefreshToken } from "src/Auth/tokenManager";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   CardActionArea,
@@ -70,10 +68,13 @@ const ranklist: BaseContent[] =
 
 
 function MultiActionAreaCard() {
+
+  let navigate = useNavigate();
+
   const [firstData, setFirstData] = useState<BaseContent | null>(null);
   const [secondData, setSecondData] = useState<BaseContent | null>(null);
   const [thridData, setThirdData] = useState<BaseContent | null>(null);
-  
+
   axios
     .get("http://localhost:8080/trash/statistics/ranking")
     .then((response) => {
@@ -85,17 +86,17 @@ function MultiActionAreaCard() {
           }
         }
       }
-     /*
-     trashlist.forEach(kindlist => {
-      kindlist.kind = response.data.kind
-      ranklist.forEach(imagelist => {
-        if (imagelist.kind === kindlist.kind)
-        kindlist.images = imagelist.images;
-      })})
-      */
-        setFirstData(trashlist[0]);
-        setSecondData(trashlist[1]);
-        setThirdData(trashlist[2]);
+      /*
+      trashlist.forEach(kindlist => {
+       kindlist.kind = response.data.kind
+       ranklist.forEach(imagelist => {
+         if (imagelist.kind === kindlist.kind)
+         kindlist.images = imagelist.images;
+       })})
+       */
+      setFirstData(trashlist[0]);
+      setSecondData(trashlist[1]);
+      setThirdData(trashlist[2]);
     })
     .catch((error) => {
       console.log("error", error.response);
@@ -125,6 +126,10 @@ function MultiActionAreaCard() {
           </CardActionArea>
           <CardActions>
             <Button
+              onClick={() => {
+                navigate(`/defaulthowpage`,
+                  { state: { needKind: firstData?.kind, needImages: firstData?.images } });
+              }}
               size="small"
               sx={{ margin: "auto", bgcolor: "#C0F0FF", border: 1 }}
             >
@@ -155,6 +160,10 @@ function MultiActionAreaCard() {
           </CardActionArea>
           <CardActions>
             <Button
+            onClick={() => {
+              navigate(`/defaulthowpage`,
+                { state: { needKind: secondData?.kind, needImages: secondData?.images } });
+            }}
               size="small"
               sx={{ margin: "auto", bgcolor: "#C0F0FF", border: 1 }}
             >
@@ -185,6 +194,10 @@ function MultiActionAreaCard() {
           </CardActionArea>
           <CardActions>
             <Button
+            onClick={() => {
+              navigate(`/defaulthowpage`,
+                { state: { needKind: thridData?.kind, needImages: thridData?.images } });
+            }}
               size="small"
               sx={{ margin: "auto", bgcolor: "#C0F0FF", border: 1 }}
             >

@@ -7,6 +7,7 @@ import MainPage from "./Page/MainPage";
 import Header from "./components/common/Header";
 import Register from "./Page/Register";
 import HowtoPage from "./Page/HowtoPage";
+import DefaultHowPage from "./Page/DefaultHowPage";
 
 import GreenBack from "./images/greenBack";
 import MyTrashcan from "./components/Mypage/MyTrashcan";
@@ -33,6 +34,7 @@ function App() {
             <Route path="/mainpage/resultpage" element={<UploadResult />} />
             <Route path="/mainpage" element={<MainPage />} />
             <Route path="/howtopage" element={<HowtoPage />} />
+            <Route path="/defaulthowpage" element={<DefaultHowPage />} />
           </Route>
 
           {/* mypage 에 접근 못하게 라우팅 */}
