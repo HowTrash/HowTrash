@@ -92,7 +92,7 @@ function UploadImage() {
             backgroundColor: "white",
             width: 600,
             height: 300,
-            mt: 10,
+            mt: 5,
             "&:hover": {
               backgroundColor: "#D4D4D4",
               borderColor: "#F7F8E9",
