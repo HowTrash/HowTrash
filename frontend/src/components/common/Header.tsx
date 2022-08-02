@@ -12,6 +12,7 @@ import {
   Menu,
   styled,
 } from "@mui/material";
+
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 
@@ -53,16 +54,12 @@ const theme = createTheme({
 
 const MypageNavi = styled(MenuItem)(({}) => ({
   border: 4,
-  borderColor: "black",
+  borderColor: "#F7F8E9",
   fontSize: "small",
+  color: "#F7F8E9",
   backgroundColor: "#B0B09A",
-
-  "&:focus": {
+  "&:hover": {
     color: "black",
-  },
-  "&:active": {
-    color: "black",
-    backgroundColor: "black",
   },
 }));
 
@@ -186,17 +183,12 @@ function Header() {
                     MenuListProps={{
                       "aria-labelledby": "lock-button",
                       role: "listbox",
-                    }}
-                    style={{
-                      borderCollapse: "collapse",
-                      borderSpacing: 0,
-                      display: "block",
-                      borderColor: "black",
-                      border: 3,
+                      disablePadding: true,
                     }}
                   >
                     {sidebarNavItems.map((option, index) => (
                       <MypageNavi
+                        id="what is this"
                         key={option.display}
                         selected={index === selectedIndex}
                         autoFocus={true}

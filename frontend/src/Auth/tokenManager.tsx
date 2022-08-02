@@ -26,7 +26,7 @@ const setRefreshToken = (refreshtoken: string) => {
   //   today.getTime() + 1000 * 60 * 60 * 24 * 14
   // );
   const refreshExpires = new Date().setTime(
-    today.getTime() + 1000 * 60 * 24 * 14
+    today.getTime() + 1000 * 60 * 60 * 24 * 14
   );
 
   // const refreshExpires = new Date();
