@@ -167,7 +167,7 @@ const Register = () => {
         setCheckName("");
       } else {
         setNameError("");
-        if (res.data.result == false) setCheckName("사용 중인 아이디입니다.");
+        if (res.data.result === false) setCheckName("사용 중인 아이디입니다.");
         else setCheckName("사용 가능한 아이디 입니다.");
       }
     }
@@ -176,7 +176,8 @@ const Register = () => {
         setEmailError("올바른 이메일 형식이 아닙니다.");
       } else {
         setEmailError("");
-        if (res.data.result == false) setCheckEmail("사용 중인 이메일 입니다.");
+        if (res.data.result === false)
+          setCheckEmail("사용 중인 이메일 입니다.");
         else setCheckEmail("사용 가능한 이메일 입니다.");
       }
     }

@@ -1,17 +1,9 @@
-import axios from "axios";
 import { rs } from "src/utils/types";
-import { decodeToken } from "./tokenGetter";
 
 // 받아온 토큰을 만료일을 설정해 로컬 스토리지에 저장
 const setAccessToken = (accessToken: string) => {
   const today = new Date();
   const accessExpires = new Date().setTime(today.getTime() + 1000 * 60 * 30); // 만료 30분
-
-  // const accessExpires = new Date();
-
-  // accessExpires.setTime(today.getTime() + 1000 * 60 * 30); // 30 minute
-
-  // decodeToken(accessToken);
 
   const accessStorage: rs.TokenInfo = {
     value: accessToken,
@@ -22,18 +14,10 @@ const setAccessToken = (accessToken: string) => {
 
 const setRefreshToken = (refreshtoken: string) => {
   const today = new Date();
-  // const refreshExpires = new Date().setTime(
-  //   today.getTime() + 1000 * 60 * 60 * 24 * 14
-  // );
+
   const refreshExpires = new Date().setTime(
-    today.getTime() + 1000 * 60 * 24 * 14
+    today.getTime() + 1000 * 60 * 60 * 24 * 14
   );
-
-  // const refreshExpires = new Date();
-
-  // refreshExpires.setTime(today.getTime() + 1000 * 60 * 60 * 24 * 7); // 7 day
-
-  // decodeToken(accessToken);
 
   const refreshStorage = {
     value: refreshtoken,
@@ -41,6 +25,7 @@ const setRefreshToken = (refreshtoken: string) => {
   };
   localStorage.setItem("refresh_token", JSON.stringify(refreshStorage));
 };
+
 // 로컬 스토리지에 있는 토큰을 확인
 const getToken = () => {
   const access = localStorage.getItem("access_token");
