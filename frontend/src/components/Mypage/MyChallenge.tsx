@@ -13,23 +13,23 @@ interface Contentlist {
 const trashlist: Contentlist = {
   list: [
     {
-      challenge_number: 1,
+      challenge_id: 1,
       type: false,
     },
     {
-      challenge_number: 2,
+      challenge_id: 2,
       type: false,
     },
     {
-      challenge_number: 3,
+      challenge_id: 3,
       type: false,
     },
     {
-      challenge_number: 4,
+      challenge_id: 4,
       type: false,
     },
     {
-      challenge_number: 5,
+      challenge_id: 5,
       type: false,
     },
   ],
@@ -40,6 +40,7 @@ function MyBadge() {
   const userIdtoRedux = ReduxModule().decodeInfo?.id;
 
   const [myChallenge, setMyChallenge] = useState<rs.Challenge[]>();
+
   const fetchMyChallenge = async () => {
     const result = await Api.get(`/trash/users/${userIdtoRedux}/challenges`, {
       headers: {
@@ -47,10 +48,10 @@ function MyBadge() {
       },
     }).then((res) => res.data as rs.Challenge[]);
     const challengeList = result;
-
+    console.log(result);
     const temptList: rs.Challenge[] = trashlist.list?.map((trashlist: any) => {
       challengeList?.map((getlist: any) => {
-        if (getlist?.challenge_number === trashlist.challenge_number) {
+        if (getlist?.challenge_id === trashlist.challenge_id) {
           trashlist.type = true;
         }
         return getlist;
@@ -58,11 +59,13 @@ function MyBadge() {
       return trashlist;
     });
     setMyChallenge(temptList);
+    console.log(temptList);
     return temptList;
   };
+
   useEffect(() => {
     fetchMyChallenge();
-  }, [myChallenge]);
+  }, []);
 
   return (
     <Container
@@ -100,7 +103,7 @@ function MyBadge() {
           {trashlist &&
             trashlist?.list?.map((list: rs.Challenge, index: any) => (
               <UserChallenge
-                num={list.challenge_number}
+                num={list.challenge_id}
                 type={list.type}
                 key={index}
               />

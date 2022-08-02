@@ -162,7 +162,9 @@ const Register = () => {
       if (!nameRegex.test(name as string) || (name as string).length < 1) {
         setCheckName("올바른 이름을 입력해주세요.");
       } else {
-        if (res.data.result == false) setCheckName("사용 중인 아이디입니다.");
+      
+        if (res.data.result === false) setCheckName("사용 중인 아이디입니다.");
+
         else setCheckName("사용 가능한 아이디 입니다.");
       }
     }
@@ -170,7 +172,7 @@ const Register = () => {
       if (!emailRegex.test(email as string)) {
         setCheckEmail("올바른 이메일 형식이 아닙니다.");
       } else {
-        if (res.data.result == false) setCheckEmail("사용 중인 이메일 입니다.");
+        if (res.data.result === false) setCheckEmail("사용 중인 이메일 입니다.");
         else setCheckEmail("사용 가능한 이메일 입니다.");
       }
     }
