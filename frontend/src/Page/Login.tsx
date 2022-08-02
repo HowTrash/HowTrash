@@ -64,8 +64,8 @@ function Login() {
       console.log("받아온 결과2", result.refresh_token);
 
       if (result.access_token !== null) {
-        setAccessToken(result.access_token);
-        setRefreshToken(result.refresh_token);
+        setAccessToken(result.access_token,false);
+        setRefreshToken(result.refresh_token,false);
         alert("로그인 성공♻️");
 
         // checkAccessToken();

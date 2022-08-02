@@ -39,7 +39,7 @@ const HowtoPage = () => {
           }}
         >
           <img
-            style={{ maxWidth: 500, maxHeight: 250 }}
+            style={{ width: 600, height: 320 }}
             src={reduxKindAndImg.imgUrl as string}
           />
         </Box>

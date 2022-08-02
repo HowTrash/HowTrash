@@ -2,6 +2,7 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
+  Grid,
   Button,
   CardActionArea,
   CardActions,
@@ -11,9 +12,6 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import FirstImg from "../../images/firstImg";
-import SecondImg from "../../images/secondImg";
-import ThirdImg from "../../images/thirdImg";
 import { decodeToken } from "src/Auth/tokenGetter";
 import axios from "axios";
 import { response } from "express";
@@ -100,64 +98,84 @@ function MultiActionAreaCard() {
     });
 
   return (
-    <Box
-      sx={{ display: "flex", flexWrap: "wrap", justifyContent: "space-evenly" }}
+    <Grid container
+      sx={{ display: "flex", direction:"column", flexWrap: "wrap"}}
     >
-      <Box sx={{ p: 2 }}>
-        <FirstImg />
-        <Card sx={{ width: 300, border: 1 }}>
+      <Grid item 
+        sx={{ p: 2, width:"100%", justifyContent : "flex-start"}}>
+        <Typography
+          sx={{ fontSize: 40, mt: 10, fontFamily: "Itim", color: "#737458" }}
+        >1st
+        </Typography>
+        <Box sx={{
+          width: 800, border: 0,
+          backgroundColor: "white",
+          borderColor: "#759F98",
+          borderRadius: 5,
+          boxShadow: "1px 3px 3px #B0B09A",
+          margin: "auto",
+          mt: 5
+        }}>
           <CardActionArea>
-            <CardMedia component="img" height="300" image={firstData?.images} />
+            <CardMedia component="img" height="500" width="450" image={firstData?.images} />
             <Typography
-              fontWeight={"bold"}
-              fontSize={20}
+              fontSize={40}
               component="div"
               margin={1}
               marginTop={2}
+              sx={{ fontFamily: "Itim", color: "#737458" }}
             >
               {firstData?.kind}
             </Typography>
           </CardActionArea>
-          <CardActions>
-            <Button
-              onClick={() => {
-                navigate(`/defaulthowpage`, {
-                  state: {
-                    needKind: firstData?.kind,
-                    needImages: firstData?.images,
-                  },
-                });
-              }}
-              size="small"
-              sx={{ margin: "auto", bgcolor: "#C0F0FF", border: 1 }}
-            >
-              더보기
-            </Button>
-          </CardActions>
-        </Card>
-      </Box>
+        </Box>
+        <Button
+          variant="text"
+          onClick={() => {
+            navigate(`/defaulthowpage`, {
+              state: {
+                needKind: firstData?.kind,
+                needImages: firstData?.images,
+              },
+            });
+          }}
+          sx={{ mt:3, margin: "auto", fontFamily: "Itim", color: "#737458", fontSize: 20 }}
+        >
+          How to Recycle this {firstData?.kind}??
+        </Button>
+      </Grid>
 
-      <Box sx={{ p: 2 }}>
-        <SecondImg />
-        <Card sx={{ width: 300, border: 1 }}>
+      <Grid item
+        sx={{ p: 2, width:"100%", marginLeft:"15cm",justifyContent:"flex-end"}}>
+        <Typography
+          sx={{ fontSize: 40, mt: 10, fontFamily: "Itim", color: "#737458" }}
+        >2nd
+        </Typography>
+        <Box sx={{
+          width: 650, border: 0,
+          backgroundColor: "white",
+          borderColor: "#759F98",
+          borderRadius: 5,
+          boxShadow: "1px 3px 3px #B0B09A",
+          margin: "auto",
+          mt: 5
+        }}>
           <CardActionArea>
-            <CardMedia
-              component="img"
-              height="300"
-              image={secondData?.images}
-            />
+            <CardMedia component="img" height="500" width="450" image={secondData?.images} />
             <Typography
-              fontWeight={"bold"}
-              fontSize={20}
+              fontSize={40}
               component="div"
               margin={1}
               marginTop={2}
+              sx={{ fontFamily: "Itim", color: "#737458" }}
             >
               {secondData?.kind}
             </Typography>
           </CardActionArea>
-          <CardActions>
-            <Button
+        </Box>
+
+        <Button
+              variant="text"
               onClick={() => {
                 navigate(`/defaulthowpage`, {
                   state: {
@@ -166,32 +184,42 @@ function MultiActionAreaCard() {
                   },
                 });
               }}
-              size="small"
-              sx={{ margin: "auto", bgcolor: "#C0F0FF", border: 1 }}
+              sx={{ mt:3, margin: "auto", fontFamily: "Itim", color: "#737458", fontSize: 20 }}
             >
-              더보기
+              How to Recycle this {secondData?.kind}??
             </Button>
-          </CardActions>
-        </Card>
-      </Box>
+      </Grid>
 
-      <Box sx={{ p: 2 }}>
-        <ThirdImg />
-        <Card sx={{ width: 300, border: 1 }}>
+      <Box
+        sx={{ p: 2, width:"100%", marginRight:"20cm" }}>
+        <Typography
+          sx={{ fontSize: 40, mt: 10, fontFamily: "Itim", color: "#737458" }}
+        >3rd
+        </Typography>
+        <Box sx={{
+          width: 450, border: 0,
+          backgroundColor: "white",
+          borderColor: "#759F98",
+          borderRadius: 5,
+          boxShadow: "1px 3px 3px #B0B09A",
+          margin: "auto",
+          mt: 5
+        }}>
           <CardActionArea>
-            <CardMedia component="img" height="300" image={thridData?.images} />
+            <CardMedia component="img" height="500" width="450" image={thridData?.images} />
             <Typography
-              fontWeight={"bold"}
-              fontSize={20}
+              fontSize={40}
               component="div"
               margin={1}
               marginTop={2}
+              sx={{ fontFamily: "Itim", color: "#737458" }}
             >
               {thridData?.kind}
             </Typography>
           </CardActionArea>
-          <CardActions>
-            <Button
+        </Box>
+        <Button
+              variant="text"
               onClick={() => {
                 navigate(`/defaulthowpage`, {
                   state: {
@@ -200,15 +228,12 @@ function MultiActionAreaCard() {
                   },
                 });
               }}
-              size="small"
-              sx={{ margin: "auto", bgcolor: "#C0F0FF", border: 1 }}
+              sx={{ mt:3, margin: "auto", fontFamily: "Itim", color: "#737458", fontSize: 20 }}
             >
-              더보기
+              How to Recycle this {thridData?.kind}??
             </Button>
-          </CardActions>
-        </Card>
       </Box>
-    </Box>
+    </Grid>
   );
 }
 
