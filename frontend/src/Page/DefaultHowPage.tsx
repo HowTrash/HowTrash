@@ -57,7 +57,7 @@ const HowtoPage = () => {
               fontWeight: "bold",
               fontFamily: "Itim",
               padding: 100,
-              color: "black",
+              color: "#737458",
               fontSize: 30,
             }}
           >
