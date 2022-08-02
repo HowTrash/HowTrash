@@ -7,7 +7,6 @@ import {
   CssBaseline,
   List,
   ListItem,
-  ListItemText,
   MenuItem,
   Menu,
   styled,

@@ -5,14 +5,11 @@ import {
   CardActions,
   Card,
   CardMedia,
-  Typography,
   styled,
-  Link,
 } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { save_ID } from "../../actions/ImgIDActions";
-import { useSelector } from "react-redux";
-import { RootReducerType } from "../../index";
+
 import { useNavigate } from "react-router-dom";
 
 const MyTrashcanBtn = styled(Button)(({}) => ({
@@ -31,13 +28,15 @@ export default function MultiActionAreaCard({ image = "", id = "" }) {
   const dispatch = useDispatch();
   //const itemID = useSelector((state: RootReducerType) => state.ImgIDReducer);
   const onDispatch = () => {
-    console.log(id);
+    // console.log(id);
     dispatch(save_ID(id));
     navigate(`/howtopage`);
   };
 
   return (
-    <Card sx={{ maxWidth: 170, border: 1, margin: 1.4 }}>
+    <Card
+      sx={{ maxWidth: 170, border: 1, margin: 1.4, borderColor: "#B0B09A" }}
+    >
       <CardActionArea>
         <CardMedia
           component="img"
