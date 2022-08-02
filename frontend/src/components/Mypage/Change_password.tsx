@@ -73,6 +73,7 @@ function ChangePassWord() {
                     setAccessToken(response.data.access_token, true); // 그 전의 access토큰 초기화
                     setRefreshToken(response.data.refresh_token, true); // 그 전의 refresh토큰 초기화
                     alert("비밀번호가 정상적으로 변경되었습니다!");
+                    window.location.reload();
                 })
                 .catch((e) => { // 의도치 않는 오류
                     alert("로그인 정보에 오류가 생겼습니다.");
@@ -82,6 +83,7 @@ function ChangePassWord() {
 
 
     const handleSubmit = (e: any) => {
+        e.preventDefault();
         const data = new FormData(e.currentTarget);
         const rePassword = data.get("rePassword");
         const changePassword = data.get("password");
