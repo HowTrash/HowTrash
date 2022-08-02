@@ -1,21 +1,65 @@
 import * as React from "react";
-import { Box, Grid, Typography, Link } from "@mui/material";
+import { Box, Grid, Typography, Link, Modal, Backdrop } from "@mui/material";
 import SearchBar from "../components/mainpage/SearchBar";
 import ExplanationTrash from "../components/howtopage/ExplanationTrash";
 import { ReduxModule } from "../modules/ReduxModule";
 import { useSelector } from "react-redux";
 import { RootReducerType } from "../index";
 import ReduxImgApi from "../modules/ReduxImgApi";
+import { useLocation } from "react-router";
+import constants from "../utils/constants";
+import { useEffect, useState } from "react";
 
-interface trashType {
-  type: string;
+interface TypeChallenge {
+  state: {
+    challenge: string;
+    challenge_content: string;
+  };
 }
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  borderRadius: 3,
+  boxShadow: 24,
+  p: 4,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+};
 
 const HowtoPage = () => {
   const itemID = useSelector((state: RootReducerType) => state.ImgIDReducer);
   const userIdToRedux = ReduxModule().decodeInfo?.id;
 
   const reduxKindAndImg = ReduxImgApi(itemID, userIdToRedux);
+
+  const { state } = useLocation() as TypeChallenge;
+
+  //❌
+
+  const [challengeText, setChallengeText] = useState("");
+  const [challengeImgURL, setChallengeImgURL] = useState("");
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  //❌
+
+  useEffect(() => {
+    if (state.challenge !== "NONE") {
+      handleOpen();
+    }
+    const x = state.challenge; // 형변환
+    var y: number = +x;
+    setChallengeImgURL(constants.CHALLENGE[y].imgT);
+    setChallengeText(constants.CHALLENGE[y].test);
+  }, []);
+
+  //none이 아니면 state.challenge를 인덱스로 state.challenge_content 를 갯수로
 
   return (
     <Box textAlign={"center"}>
@@ -74,6 +118,36 @@ const HowtoPage = () => {
             {" "}
             Go To Mypage{" 👉"}{" "}
           </Link>
+
+          {/* //❌ */}
+          <Modal
+            open={open}
+            onClose={handleClose}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 700,
+            }}
+          >
+            <Box sx={style}>
+              <Typography
+                id="modal-title"
+                variant="h4"
+                fontWeight="bold"
+                component="h1"
+                sx={{ mb: 3, color: "#737458", fontFamily: "Itim" }}
+              >
+                도전 과제 달성 !!
+              </Typography>
+              <div style={{ marginTop: 15, marginBottom: 30 }}>
+                <img width={200} height={200} src={challengeImgURL}></img>
+              </div>
+
+              <Typography>{challengeText}</Typography>
+            </Box>
+          </Modal>
+
+          {/* //❌ */}
         </Grid>
       </div>
     </Box>

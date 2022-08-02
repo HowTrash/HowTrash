@@ -79,11 +79,20 @@ function UploadImage() {
         Authorization: `${what.value}`,
       },
     })
-
       .then((res) => {
-        dispatch(save_ID(res.data.image_id));
+        dispatch(save_ID(res.data.image_id)); //얘도 ㅁ밑으로 옮겨야되네
+        // res.data.challenge ==
         //res.data.challenge : NONE 확인해야함
-        navigate(`/howtopage`);
+        console.log(res.data.challenge);
+        console.log(res.data.challenge_content);
+        navigate(`/howtopage`, {
+          state: {
+            challenge: res.data.challenge,
+            challenge_content: res.data.challenge_content,
+          },
+        });
+        // challenge : 첫번째 업적 달성
+        // challenge_content : 업적 달성시 버린 쓰레기 갯수
       })
       .catch((error) => {
         console.log("An error occurred:", error.response);
@@ -109,6 +118,14 @@ function UploadImage() {
         </Typography>
       </div>
     );
+
+  // function doSetTimeout(i: any) {
+  //   setTimeout(function () {
+  //     alert(i);
+  //   }, 100);
+  // }
+
+  // for (var i = 1; i <= 2; ++i) doSetTimeout(i);
 
   return (
     <Box>
