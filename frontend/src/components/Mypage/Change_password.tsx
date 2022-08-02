@@ -43,7 +43,7 @@ const UserInfoChange = styled(TextField)(({}) => ({
 
   const FormHelperTexts = styled(FormHelperText)`
   width: 100%;
-  padding: "auto;
+  padding-left:6px;
   font-weight: 600;
   color: #c65959;
   font-size: 12px;
@@ -114,6 +114,7 @@ function ChangePassWord() {
                 borderColor: "transparent",
                 minWidth: "100%",
                 height: "auto",
+                justifyContent: "center",
             }}>
             <ThemeProvider theme={theme}>
                 <Typography
@@ -149,7 +150,7 @@ function ChangePassWord() {
                             flexDirection: "column",
                             justifyContent: "center",
                             alignItems: "center",
-                            width: 300,
+                            width: "auto",
                             margin: "auto"
                         }}
 
@@ -163,15 +164,7 @@ function ChangePassWord() {
                             type="password"
                             id="password"
                         />
-                        <div
-                            style={{
-                                color: "red",
-                                fontSize: 13,
-                                marginRight: 90
-                            }}
-                        >
-                            {passwordState}
-                        </div>
+                        <FormHelperTexts>{passwordState}</FormHelperTexts>
 
                         <UserInfoChange
                             margin="normal"
@@ -182,15 +175,7 @@ function ChangePassWord() {
                             type="password"
                             id="rePassword"
                         />
-                        <div
-                            style={{
-                                color: "red",
-                                fontSize: 13,
-                                marginRight: 90
-                            }}
-                        >
-                            {passwordError}
-                        </div>
+                        <FormHelperTexts>{passwordError}</FormHelperTexts>
                         <Button
                             type="submit"
                             fullWidth

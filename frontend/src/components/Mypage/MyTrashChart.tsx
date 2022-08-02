@@ -29,14 +29,15 @@ function MyTrashchart() {
                 style={{
                     borderRadius: 5,
                     backgroundColor: "white",
-                    height: "80vh"
+                    height: "80vh",
+                    boxShadow: "1px 3px 3px #B0B09A",
                 }}
                 sx={{ mt: 3 }}>
                 <Container>
                     <Date onClickRetrieve={setUserData} />
                 </Container>
                 <Container
-                sx={{width:"100%", height: "80%"}}>
+                    sx={{ width: "100%", height: "80%" }}>
                     <Chart list={userData} />
                 </Container>
             </Container>

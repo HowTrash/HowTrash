@@ -84,6 +84,7 @@ function MyBadge() {
         style={{
           borderRadius: 8,
           backgroundColor: "white",
+          boxShadow: "1px 3px 3px #B0B09A",
         }}
         sx={{ mt: 3, mb: 3, pb: 5 }}
       >

@@ -80,6 +80,7 @@ function MyTrashcan(props: Props) {
         style={{
           borderRadius: 8,
           backgroundColor: "white",
+          boxShadow: "1px 3px 3px #B0B09A",
         }}
         sx={{
           mt: 10,

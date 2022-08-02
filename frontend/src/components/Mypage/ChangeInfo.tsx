@@ -54,18 +54,33 @@ function ChangeInfo() {
                         borderColor: "white",
                         justifyContent: "center",
                         height: "60vh",
-                        paddingTop: 50
+                        paddingTop: 50,
+                        boxShadow: "1px 3px 3px #B0B09A",
                     }}>
-                    <Grid item xs={5.8}>
+                    <Grid item xs={5}>
+                        <Box>
                             <ChangeNickName />
+                        </Box>
                     </Grid>
-                    <Grid item xs={5.8}>
+                    <Grid item xs={1}
+                    style={{justifyContent:"center"}}>
+                        <div style={{
+                            borderLeft: '3px',
+                            height: '90%',
+                            width: 1,
+                            backgroundColor: '#E4E4D9',
+                            margin: "auto"
+                        }}></div>
+                    </Grid>
+                    <Grid item xs={5}>
+                        <Box>
                             <ChangePassWord />
+                        </Box>
                     </Grid>
 
                 </Grid>
             </ThemeProvider>
-        </Container>
+        </Container >
 
     );
 }

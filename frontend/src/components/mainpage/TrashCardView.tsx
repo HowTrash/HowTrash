@@ -230,7 +230,7 @@ function MultiActionAreaCard() {
               }}
               sx={{ mt:3, margin: "auto", fontFamily: "Itim", color: "#737458", fontSize: 20 }}
             >
-              How to Recycle this {secondData?.kind}??
+              How to Recycle this {thridData?.kind}??
             </Button>
       </Box>
     </Grid>

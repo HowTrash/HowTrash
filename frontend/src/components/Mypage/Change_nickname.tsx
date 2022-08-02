@@ -9,6 +9,7 @@ import { useState } from "react";
 import Api from "../../utils/customApi";
 
 import {
+    FormHelperText,
     Typography,
     Container,
     styled,
@@ -26,16 +27,27 @@ const theme = createTheme({
     },
 });
 
-const UserInfoChange = styled(TextField)(({ }) => ({
+const UserInfoChange = styled(TextField)(({}) => ({
+    borderRadius: 5,
+    textAlign: "center",
     "&:hover": {
-        color: "#737458",
+      color: "#737458",
     },
+  
     "& .MuiOutlinedInput-root": {
-        "&:hover fieldset": {
-            borderColor: "#737458",
-        },
+      "&:hover fieldset": {
+        borderColor: "#737458",
+      },
     },
-}));
+  }));
+
+  const FormHelperTexts = styled(FormHelperText)`
+  width: 100%;
+  padding-left:6px;
+  font-weight: 600;
+  color: #c65959;
+  font-size: 12px;
+`;
 
 
 function ChangeNickName() {
@@ -137,7 +149,7 @@ function ChangeNickName() {
                             flexDirection: "column",
                             justifyContent: "center",
                             alignItems: "center",
-                            width: 300,
+                            width: "auto",
                             margin: "auto"
                         }}
 
@@ -156,16 +168,7 @@ function ChangeNickName() {
                                 onBlurInfo(["alias", alias], event);
                             }}
                         />
-                        <div
-                            style={{
-                                color: "red",
-                                fontSize: 13,
-                                marginRight: 90
-                                
-                            }}
-                        >
-                            {checkAilas}
-                        </div>
+                        <FormHelperTexts>{checkAilas}</FormHelperTexts>
                         <Button
                             type="submit"
                             fullWidth
@@ -176,7 +179,7 @@ function ChangeNickName() {
                                 height: 50,
                                 color: "white",
                                 fontWeight: "bold",
-                                borderRadius : 5
+                                borderRadius : 3
                             }}
                         >
                             변경하기
