@@ -197,16 +197,16 @@ function MultiActionAreaCard() {
         >3rd
         </Typography>
         <Box sx={{
-          width: 450, border: 0,
+          width: 450, border: 1,
           backgroundColor: "white",
-          borderColor: "#759F98",
+          borderColor: "white",
           borderRadius: 5,
           boxShadow: "1px 3px 3px #B0B09A",
           margin: "auto",
           mt: 5
         }}>
           <CardActionArea>
-            <CardMedia component="img" height="500" width="450" image={thridData?.images} />
+            <img height="500" width="450" src={thridData?.images} />
             <Typography
               fontSize={40}
               component="div"
