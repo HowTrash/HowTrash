@@ -199,7 +199,7 @@ function MyTrashcan(props: Props) {
                   Object.values(trashes)?.map((item: rs.Trash, index: any) => (
                     <MultiActionAreaCard
                       image={item.image}
-                      id={item.trash_image_id}
+                      id={item.id}
                       key={index}
                     />
                   ))}
