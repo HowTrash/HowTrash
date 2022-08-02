@@ -2,6 +2,7 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
+  Grid,
   Button,
   CardActionArea,
   CardActions,
@@ -97,17 +98,17 @@ function MultiActionAreaCard() {
     });
 
   return (
-    <Box
-      sx={{ display: "flex", flexWrap: "wrap", justifyContent: "space-evenly" }}
+    <Grid container
+      sx={{ display: "flex", direction:"column", flexWrap: "wrap"}}
     >
-      <Box
-        sx={{ p: 2 }}>
+      <Grid item 
+        sx={{ p: 2, width:"100%", justifyContent : "flex-start"}}>
         <Typography
           sx={{ fontSize: 40, mt: 10, fontFamily: "Itim", color: "#737458" }}
         >1st
         </Typography>
         <Box sx={{
-          width: 450, border: 0,
+          width: 800, border: 0,
           backgroundColor: "white",
           borderColor: "#759F98",
           borderRadius: 5,
@@ -116,7 +117,7 @@ function MultiActionAreaCard() {
           mt: 5
         }}>
           <CardActionArea>
-            <CardMedia component="img" height="500" image={firstData?.images} />
+            <CardMedia component="img" height="500" width="450" image={firstData?.images} />
             <Typography
               fontSize={40}
               component="div"
@@ -142,16 +143,16 @@ function MultiActionAreaCard() {
         >
           How to Recycle this {firstData?.kind}??
         </Button>
-      </Box>
+      </Grid>
 
-      <Box
-        sx={{ p: 2 }}>
+      <Grid item
+        sx={{ p: 2, width:"100%", marginLeft:"15cm",justifyContent:"flex-end"}}>
         <Typography
           sx={{ fontSize: 40, mt: 10, fontFamily: "Itim", color: "#737458" }}
         >2nd
         </Typography>
         <Box sx={{
-          width: 450, border: 0,
+          width: 650, border: 0,
           backgroundColor: "white",
           borderColor: "#759F98",
           borderRadius: 5,
@@ -160,7 +161,7 @@ function MultiActionAreaCard() {
           mt: 5
         }}>
           <CardActionArea>
-            <CardMedia component="img" height="500" image={secondData?.images} />
+            <CardMedia component="img" height="500" width="450" image={secondData?.images} />
             <Typography
               fontSize={40}
               component="div"
@@ -172,6 +173,7 @@ function MultiActionAreaCard() {
             </Typography>
           </CardActionArea>
         </Box>
+
         <Button
               variant="text"
               onClick={() => {
@@ -186,10 +188,10 @@ function MultiActionAreaCard() {
             >
               How to Recycle this {secondData?.kind}??
             </Button>
-      </Box>
+      </Grid>
 
       <Box
-        sx={{ p: 2 }}>
+        sx={{ p: 2, width:"100%", marginRight:"20cm" }}>
         <Typography
           sx={{ fontSize: 40, mt: 10, fontFamily: "Itim", color: "#737458" }}
         >3rd
@@ -204,7 +206,7 @@ function MultiActionAreaCard() {
           mt: 5
         }}>
           <CardActionArea>
-            <CardMedia component="img" height="500" image={thridData?.images} />
+            <CardMedia component="img" height="500" width="450" image={thridData?.images} />
             <Typography
               fontSize={40}
               component="div"
@@ -231,7 +233,7 @@ function MultiActionAreaCard() {
               How to Recycle this {secondData?.kind}??
             </Button>
       </Box>
-    </Box>
+    </Grid>
   );
 }
 
