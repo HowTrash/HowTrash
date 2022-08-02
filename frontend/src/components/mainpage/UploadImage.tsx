@@ -1,6 +1,6 @@
 import { Button, Typography, Box } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import React, { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Resizer from "react-image-file-resizer";
 import Api from "../../utils/customApi";
@@ -8,11 +8,29 @@ import { ReduxModule } from "../../modules/ReduxModule";
 import { getAccess } from "src/Auth/tokenManager";
 import { useDispatch } from "react-redux";
 import { save_ID } from "../../actions/ImgIDActions";
+import lottie from "lottie-web";
+
+const LoadingLottie = () => {
+  //lottie
+  const element = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    lottie.loadAnimation({
+      container: element.current as HTMLDivElement,
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      animationData: require("../../images/LottieLoading.json"),
+    });
+  }, []);
+  return <Box ref={element} style={{ marginTop: 60, height: 230 }}></Box>;
+};
 
 function UploadImage() {
   const [isImg, setIsImg] = useState(null);
   const [urlImg, setUrlImg] = useState("");
   const [respondImg, setRespondImg] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
   const userIdtoRedux = ReduxModule().decodeInfo?.id;
   console.log(userIdtoRedux, "in uploadImage");
@@ -76,9 +94,21 @@ function UploadImage() {
   const onClickImgResult = () => {
     if (isImg === null) return alert("no image");
     else {
+      setLoading(true);
       sendImage();
     }
   };
+  if (loading)
+    return (
+      <div>
+        <LoadingLottie />
+        <Typography
+          sx={{ fontFamily: "Nanum1", mt: 2, fontSize: 20, fontWeight: "bold" }}
+        >
+          결과 분석 중 ..
+        </Typography>
+      </div>
+    );
 
   return (
     <Box>

@@ -7,7 +7,7 @@ import { useRef, useEffect } from "react";
 import lottie from "lottie-web";
 import StartPage from "./StartPage";
 import StartLogo from "../images/startLogo";
-import Animation from "src/components/common/Animation";
+import Animation from "src/modules/Animation";
 import useMoveScroll from "src/modules/UseMoveScroll";
 
 const MainLottie = () => {
@@ -17,7 +17,7 @@ const MainLottie = () => {
     lottie.loadAnimation({
       container: element.current as HTMLDivElement,
       renderer: "svg",
-      loop: false,
+      loop: true,
       autoplay: true,
       animationData: require("../images/mainbike.json"),
     });
@@ -46,7 +46,7 @@ const MainPage = () => {
           <Box
             display={"flex"}
             textAlign={"center"}
-            style={{ height: "30vh" }}
+            style={{ height: "30vh", width: "30wh" }}
             flexDirection="column"
             margin={"auto"}
           >
@@ -67,6 +67,7 @@ const MainPage = () => {
         </Box>
         {/* <StartPage /> */}
         <div ref={element}></div>
+
         <MainLottie />
         <SearchBar />
         <UploadImage />

@@ -1,6 +1,6 @@
 import { Box, Button, Link } from "@mui/material";
 import StartLogo from "../images/startLogo";
-import Animation from "src/components/common/Animation";
+import Animation from "src/modules/Animation";
 import useMoveScroll from "src/modules/UseMoveScroll";
 
 const StartPage = () => {
