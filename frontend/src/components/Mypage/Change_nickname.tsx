@@ -53,6 +53,7 @@ function ChangeNickName() {
   const aliasRegex = /^[가-힣a-zA-Z0-9]+$/;
   const [checkAilas, setCheckAlias] = useState("");
   const [alias, setAlias] = useState("");
+  const [newAccess, getNewAccess] = useState("");
 
   const onBlurInfo = async (props: Array<string>, event: any) => {
     const res = await Api.get(
@@ -93,13 +94,13 @@ function ChangeNickName() {
           setAccessToken(response.data.access_token, true); // 그 전의 access토큰 초기화
           setRefreshToken(response.data.refresh_token, true); // 그 전의 refresh토큰 초기화
           alert("닉네임이 정상적으로 변경되었습니다!");
+          window.location.reload();
         })
         .catch((e) => {
           // 의도치 않는 오류
           alert("로그인 정보에 오류가 생겼습니다.");
         });
     }
-    alert("닉네임");
   };
 
   const handleSubmit = (e: any) => {
@@ -116,6 +117,9 @@ function ChangeNickName() {
   };
 
   React.useEffect(() => {}, [alias]);
+  React.useEffect(() => {
+    console.log("newAccess",newAccess);
+  }, [newAccess]);
 
   return (
     <Container
@@ -174,7 +178,6 @@ function ChangeNickName() {
               label="변경할 닉네임 입력"
               type="alias"
               id="alias"
-              autoComplete="current-nickname"
               onChange={(e) => setAlias(e.target.value)}
               onBlur={(event) => {
                 onBlurInfo(["alias", alias], event);
