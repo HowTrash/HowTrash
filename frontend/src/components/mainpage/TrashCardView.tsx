@@ -127,23 +127,21 @@ function MultiActionAreaCard() {
               {firstData?.kind}
             </Typography>
           </CardActionArea>
-          <CardActions>
-            <Button
-              variant="text"
-              onClick={() => {
-                navigate(`/defaulthowpage`, {
-                  state: {
-                    needKind: firstData?.kind,
-                    needImages: firstData?.images,
-                  },
-                });
-              }}
-              sx={{ margin: "auto", fontFamily: "Itim", color: "#737458", fontSize : 20}}
-            >
-              더보기
-            </Button>
-          </CardActions>
         </Box>
+        <Button
+          variant="text"
+          onClick={() => {
+            navigate(`/defaulthowpage`, {
+              state: {
+                needKind: firstData?.kind,
+                needImages: firstData?.images,
+              },
+            });
+          }}
+          sx={{ mt:3, margin: "auto", fontFamily: "Itim", color: "#737458", fontSize: 20 }}
+        >
+          How to Recycle this {firstData?.kind}??
+        </Button>
       </Box>
 
       <Box
@@ -173,8 +171,8 @@ function MultiActionAreaCard() {
               {secondData?.kind}
             </Typography>
           </CardActionArea>
-          <CardActions>
-            <Button
+        </Box>
+        <Button
               variant="text"
               onClick={() => {
                 navigate(`/defaulthowpage`, {
@@ -184,12 +182,10 @@ function MultiActionAreaCard() {
                   },
                 });
               }}
-              sx={{ margin: "auto", fontFamily: "Itim", color: "#737458", fontSize : 20}}
+              sx={{ mt:3, margin: "auto", fontFamily: "Itim", color: "#737458", fontSize: 20 }}
             >
-              더보기
+              How to Recycle this {secondData?.kind}??
             </Button>
-          </CardActions>
-        </Box>
       </Box>
 
       <Box
@@ -219,8 +215,8 @@ function MultiActionAreaCard() {
               {thridData?.kind}
             </Typography>
           </CardActionArea>
-          <CardActions>
-            <Button
+        </Box>
+        <Button
               variant="text"
               onClick={() => {
                 navigate(`/defaulthowpage`, {
@@ -230,12 +226,10 @@ function MultiActionAreaCard() {
                   },
                 });
               }}
-              sx={{ margin: "auto", fontFamily: "Itim", color: "#737458", fontSize : 20}}
+              sx={{ mt:3, margin: "auto", fontFamily: "Itim", color: "#737458", fontSize: 20 }}
             >
-              더보기
+              How to Recycle this {secondData?.kind}??
             </Button>
-          </CardActions>
-        </Box>
       </Box>
     </Box>
   );

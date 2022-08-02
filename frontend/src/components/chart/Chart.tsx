@@ -5,7 +5,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 
 interface Content {
   kind: string;
-  cnt: number;
+  count: number;
 }
 
 interface Contentlist {
@@ -17,27 +17,27 @@ const trashlist: Contentlist =
   list: [
     {
       kind: "GLASS",
-      cnt: 0
+      count: 0
     },
     {
       kind: "BIODEGRADABLE",
-      cnt: 0
+      count: 0
     },
     {
       kind: "CARDBOARD",
-      cnt: 0
+      count: 0
     },
     {
       kind: "PAPER",
-      cnt: 0
+      count: 0
     },
     {
       kind: "METAL",
-      cnt: 0
+      count: 0
     },
     {
       kind: "PLASTIC",
-      cnt: 0
+      count: 0
     },
   ]
 }
@@ -51,7 +51,7 @@ function TrashChart({ list }: Contentlist) {
       for (let i = 0; i < trashlist.list.length; i++) {
         for (let j = 0; j < list.length; j++) {
           if (list[j].trash_kind === trashlist.list[i].trash_kind) {
-            trashlist.list[i].cnt = list[j].cnt;
+            trashlist.list[i].count = list[j].cnt;
             console.log("같은 것을 발견");
           }
         }
@@ -66,7 +66,7 @@ function TrashChart({ list }: Contentlist) {
     if (list) {
       if (list.length === 0) { // 받아오는 데이터가 존재하지 않을 때
         const needList: Content[] = trashlist.list?.map((blanklist: any) => {
-          blanklist.cnt = 0;
+          blanklist.count = 0;
           return blanklist;
         })
         setBasicList(needList);
@@ -76,7 +76,7 @@ function TrashChart({ list }: Contentlist) {
         const tempList: Content[] = trashlist.list?.map((trashlist: any) => {
           list?.map((getlist: any) => {
             if (getlist?.kind === trashlist?.kind) {
-              trashlist.cnt = getlist.cnt;
+              trashlist.count = getlist.cnt;
               console.log("같은 것을 발견");
             }
             return getlist;
@@ -108,7 +108,7 @@ function TrashChart({ list }: Contentlist) {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey='cnt' fill="#737458" barSize={40} />
+        <Bar dataKey='count' fill="#737458" barSize={40} />
       </BarChart>
     </ResponsiveContainer>
   );
