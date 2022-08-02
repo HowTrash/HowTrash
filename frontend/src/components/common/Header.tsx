@@ -10,6 +10,7 @@ import {
   ListItemText,
   MenuItem,
   Menu,
+  styled,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
@@ -45,10 +46,25 @@ const sidebarNavItems = [
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#737458",
+      main: "# v",
     },
   },
 });
+
+const MypageNavi = styled(MenuItem)(({}) => ({
+  border: 4,
+  borderColor: "black",
+  fontSize: "small",
+  backgroundColor: "#B0B09A",
+
+  "&:focus": {
+    color: "black",
+  },
+  "&:active": {
+    color: "black",
+    backgroundColor: "black",
+  },
+}));
 
 function Header() {
   const token = localStorage.getItem("access_token");
@@ -75,7 +91,7 @@ function Header() {
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState(null);
-  const [selectedIndex, setSelectedIndex] = useState(1);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const open = Boolean(anchorEl);
   const handleClickListItem = (event: any) => {
     setAnchorEl(event.currentTarget);
@@ -127,12 +143,28 @@ function Header() {
                 style={{
                   position: "relative",
                   display: "inline-block",
+                  borderCollapse: "collapse",
+                  borderSpacing: 0,
                 }}
               >
-                <Button>
-                  <List component="nav">
+                <Button
+                  style={{
+                    borderCollapse: "collapse",
+                    borderSpacing: 0,
+                    border: 5,
+                    borderColor: "black",
+                  }}
+                >
+                  <List
+                    component="nav"
+                    style={{
+                      display: "inline-block",
+                      padding: 0,
+                    }}
+                  >
                     <ListItem
                       button
+                      id="lock-button"
                       aria-haspopup="listbox"
                       aria-controls="lock-menu"
                       aria-expanded={open ? "true" : undefined}
@@ -155,23 +187,29 @@ function Header() {
                       "aria-labelledby": "lock-button",
                       role: "listbox",
                     }}
-                    style={{ paddingTop: 0 }}
+                    style={{
+                      borderCollapse: "collapse",
+                      borderSpacing: 0,
+                      display: "block",
+                      borderColor: "black",
+                      border: 3,
+                    }}
                   >
                     {sidebarNavItems.map((option, index) => (
-                      <MenuItem
+                      <MypageNavi
                         key={option.display}
                         selected={index === selectedIndex}
+                        autoFocus={true}
                         onClick={(event) =>
                           handleMenuItemClick(event, index, option)
                         }
                         style={{
-                          backgroundColor: "#B0B09A",
-                          color: "#F7F8E9",
-                          fontSize: 12,
+                          borderCollapse: "collapse",
+                          borderSpacing: 0,
                         }}
                       >
                         {option.display}
-                      </MenuItem>
+                      </MypageNavi>
                     ))}
                   </Menu>
                 </Button>
