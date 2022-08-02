@@ -30,10 +30,18 @@ function UploadImage() {
   const [urlImg, setUrlImg] = useState("");
   const [respondImg, setRespondImg] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [task_id, setTask_id] = useState("");
+  const [checked, setChecked] = useState(false);
 
   const navigate = useNavigate();
   const userIdtoRedux = ReduxModule().decodeInfo?.id;
-  console.log(userIdtoRedux, "in uploadImage");
+
+  const dispatch = useDispatch();
+  const what: any = getAccess();
+
+  // useEffect(() => {
+  //   console.log("useeffect : ", task_id);
+  // }, [task_id]);
 
   const resizeFile = (file: Blob) =>
     new Promise((resolve) => {
@@ -51,8 +59,6 @@ function UploadImage() {
       );
     });
 
-  const dispatch = useDispatch();
-
   const onChangeImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
       const file: any =
@@ -68,36 +74,79 @@ function UploadImage() {
       console.log(err);
     }
   };
-  const what: any = getAccess();
 
   const sendImage: () => Promise<any> = async () => {
     const trashFormData = new FormData();
     trashFormData.append("filename", respondImg as any);
 
-    await Api.post(`/trash/users/${userIdtoRedux}/results`, trashFormData, {
-      headers: {
-        Authorization: `${what.value}`,
-      },
-    })
+    // await Api.post(`/trash/users/${userIdtoRedux}/results`, trashFormData, {
+    //   headers: {
+    //     Authorization: `${what.value}`,
+    //   },
+    // })
+    //   .then((res) => {
+    //     dispatch(save_ID(res.data.image_id));
+    //     console.log(res.data.challenge);
+    //     console.log(res.data.challenge_content);
+    //     navigate(`/howtopage`, {
+    //       state: {
+    //         challenge: res.data.challenge,
+    //         challenge_content: res.data.challenge_content,
+    //       },
+    //     });
+    //     // challenge : 첫번째 업적 달성
+    //     // challenge_content : 업적 달성시 버린 쓰레기 갯수
+    //   })
+    //   .catch((error) => {
+    //     console.log("An error occurred:", error.response);
+    //     navigate(`/errorpage`);
+    //   });
+    var ti = "";
+
+    await Api.post(
+      `/trash/users/${userIdtoRedux}/results/tasks`,
+      trashFormData,
+      {
+        headers: {
+          Authorization: `${what.value}`,
+        },
+      }
+    )
       .then((res) => {
-        dispatch(save_ID(res.data.image_id)); //얘도 ㅁ밑으로 옮겨야되네
-        // res.data.challenge ==
-        //res.data.challenge : NONE 확인해야함
-        console.log(res.data.challenge);
-        console.log(res.data.challenge_content);
-        navigate(`/howtopage`, {
-          state: {
-            challenge: res.data.challenge,
-            challenge_content: res.data.challenge_content,
-          },
-        });
-        // challenge : 첫번째 업적 달성
-        // challenge_content : 업적 달성시 버린 쓰레기 갯수
+        setTask_id(res.data.task_id); //set
+        console.log("uploadimage taskid :::", res.data.task_id);
+        ti = res.data.task_id;
+        setChecked(true);
       })
       .catch((error) => {
         console.log("An error occurred:", error.response);
         navigate(`/errorpage`);
       });
+    console.log("제발 나와라 좀 ", ti);
+
+    console.log("제대로 set됐는지 먼저 체크하자 ", checked);
+    if (ti !== "") {
+      console.log("두번쨰 api로 들어왔니?ㄴ");
+      await Api.get(`/trash/users/${userIdtoRedux}/results/tasks/${ti}`, {
+        headers: {
+          Authorization: `${what.value}`,
+        },
+      })
+        .then((res) => {
+          console.log("then 으로 안오나? ");
+          dispatch(save_ID(res.data.image_id));
+          navigate(`/howtopage`, {
+            state: {
+              challenge: res.data.challenge,
+              challenge_content: res.data.challenge_content,
+            },
+          });
+        })
+        .catch((error) => {
+          console.log("An error occurred: 여기는 두번째 api", error);
+          navigate(`/errorpage`);
+        });
+    }
   };
 
   const onClickImgResult = () => {
@@ -107,6 +156,7 @@ function UploadImage() {
       sendImage();
     }
   };
+
   if (loading)
     return (
       <div>
