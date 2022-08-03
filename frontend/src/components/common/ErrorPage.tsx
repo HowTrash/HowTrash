@@ -1,4 +1,4 @@
-import { Grid, Container, Box, Link, Typography } from "@mui/material";
+import { Grid, Container, Link, Typography } from "@mui/material";
 
 function Footer() {
   return (

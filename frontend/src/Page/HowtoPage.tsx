@@ -42,30 +42,21 @@ const HowtoPage = () => {
 
   const { state } = useLocation() as TypeChallenge;
 
-  console.log("state가 뭔대ㅔ요 ... ", state);
-  //❌
-
   const [challengeText, setChallengeText] = useState("");
   const [challengeImgURL, setChallengeImgURL] = useState("");
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  //❌
 
   useEffect(() => {
     if (state.challenge_id !== "NONE") {
       handleOpen();
-      console.log("challenge가 뭔데요 ...", state.challenge_id);
       const x = state.challenge_id; // 형변환
-      console.log("x가 뭔대ㅔ요 ... ", x);
       var y: number = +x;
-      console.log("y가 뭔데요 ㅠㅠ", y);
       setChallengeImgURL(constants.CHALLENGE[y].imgT);
       setChallengeText(constants.CHALLENGE[y].test);
     }
   }, []);
-
-  //none이 아니면 state.challenge를 인덱스로 state.challenge_content 를 갯수로
 
   return (
     <Box textAlign={"center"}>

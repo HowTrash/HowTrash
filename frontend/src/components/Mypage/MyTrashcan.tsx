@@ -88,7 +88,7 @@ function MyTrashcan(props: Props) {
     console.log(trashes);
   }, [trashes]);
 
-  //=============MyTrashCan API================
+  //=============AutoSave API================
   const isSaved = isAutoSave();
   const [checked, setChecked] = useState(true);
   isSaved.then((e) => {

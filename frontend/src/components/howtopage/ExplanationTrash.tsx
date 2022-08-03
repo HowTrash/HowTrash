@@ -20,7 +20,6 @@ const HowtoResult = (props: any) => {
 
   useEffect(() => {
     if (props.kind === "BIODEGRADABLE") {
-      //props 대신 imgkind
       setResTrash(constants.BIODEGRADABLE);
     }
     if (props.kind === "GLASS") {

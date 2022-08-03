@@ -2,7 +2,7 @@ import { rs } from "src/utils/types";
 
 // 받아온 토큰을 만료일을 설정해 로컬 스토리지에 저장
 const setAccessToken = (accessToken: string, changeToken: boolean) => {
-  if (changeToken = true) {
+  if (changeToken === true) {
     localStorage.removeItem("access_token");
   }
   const today = new Date();
@@ -16,14 +16,14 @@ const setAccessToken = (accessToken: string, changeToken: boolean) => {
 };
 
 const setRefreshToken = (refreshtoken: string, changeToken: boolean) => {
-  if (changeToken = true) {
+  if (changeToken === true) {
     localStorage.removeItem("refresh_token");
   }
   const today = new Date();
 
   const refreshExpires = new Date().setTime(
     today.getTime() + 1000 * 60 * 60 * 24 * 14
-  );
+  ); //만료 14일
 
   const refreshStorage = {
     value: refreshtoken,
@@ -40,6 +40,7 @@ const getToken = () => {
   return { access, refresh };
 };
 
+// access token의 value 값만 get
 const getAccess = () => {
   const stringAccess = getToken().access;
   if (stringAccess !== null) {

@@ -1,5 +1,4 @@
-import { useState, useRef, useEffect } from "react";
-import { Button, Container, CssBaseline, Box, Link } from "@mui/material";
+import { Container, CssBaseline, Box } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import GitLogo from "../../images/header/gitLogo";
 const theme = createTheme({
@@ -20,7 +19,6 @@ function Footer() {
           maxWidth: "1920px",
           backgroundColor: "#737458",
           padding: 0,
-          // marginTop: 70,
         }}
       >
         <div

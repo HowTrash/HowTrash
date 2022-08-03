@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Typography, Container, Box, listClasses } from "@mui/material";
+import { Typography, Container, Box } from "@mui/material";
 import { rs } from "src/utils/types";
 import Api from "../../utils/customApi";
 import UserChallenge from "../Mypage/UserChallenge";

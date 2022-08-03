@@ -67,31 +67,32 @@ function Dates({ onClickRetrieve }: { onClickRetrieve: any }) {
 
     const getDate = async () => {
       const stringAccess: any = getAccess();
-      console.log("잘 온거?", stringAccess);
-      if (stringAccess !== null) { // stringAccess if문 안써주면 코드 오류 발생
-        /* const access: rs.TokenInfo = JSON.parse(stringAccess); // string형태로 받는 토큰 JSON으로 만들어줌*/
+      if (stringAccess !== null) {
+        // stringAccess if문 안써주면 코드 오류 발생
         await axios
           .get(
-            `${API_BASE_URL}/trash/users/${userIdtoRedux}/statistics${periodStr}${startDateStr}${endDateStr}`, { //patch : 바디 -> 변경할 alias & 헤더 -> 확인해야되는 토큰 
-            headers: {
-              Authorization: `${stringAccess.value}`
+            `${API_BASE_URL}/trash/users/${userIdtoRedux}/statistics${periodStr}${startDateStr}${endDateStr}`,
+            {
+              //patch : 바디 -> 변경할 alias & 헤더 -> 확인해야되는 토큰
+              headers: {
+                Authorization: `${stringAccess.value}`,
+              },
             }
-          })
+          )
           .then((response) => {
             // Handle success.
             const responseUserData = response.data;
-            console.log("data saved!");
-            console.log(response.data);
+
             onClickRetrieve(responseUserData);
           })
           .catch((error) => {
             // Handle error.
             console.log("An error occurred:", error.response);
           });
-      };
-    }
+      }
+    };
     getDate();
-  }
+  };
 
   React.useEffect(() => {
     fetchUserData();
@@ -154,7 +155,7 @@ function Dates({ onClickRetrieve }: { onClickRetrieve: any }) {
                 variant="contained"
                 sx={{
                   "&:hover": {
-                    backgroundColor: "#737458"
+                    backgroundColor: "#737458",
                   },
                   margin: 2,
                   width: 80,

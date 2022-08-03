@@ -14,7 +14,6 @@ function ReduxModule() {
 
   useEffect(() => {
     if (token) {
-      console.log("header.js useEffect");
       dispatch(fetchDecodeData(token as string));
     } else {
       console.log("header.js not token");
