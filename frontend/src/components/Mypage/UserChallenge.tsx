@@ -26,7 +26,7 @@ export default function UserChallenge({ num = 1, type }: Props) {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        marginTop: 5,
+        marginTop: 20,
       }}
     >
       <img src={whatChallenge?.imgT} alt="008" style={{ width: 250 }} />

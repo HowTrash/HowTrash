@@ -272,7 +272,7 @@ function ChangePassWord() {
                                     <Lottie />
                                 </div>
 
-                                <Button href="/mainpage" sx={btnstyle}>
+                                <Button href="/mypage/userInfo" sx={btnstyle}>
                                     OK
                                 </Button>
                             </Box>

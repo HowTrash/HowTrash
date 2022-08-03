@@ -105,7 +105,7 @@ function Dates({ onClickRetrieve }: { onClickRetrieve: any }) {
         direction="row"
         justifyContent="center"
         alignItems="center"
-        sx={{ paddingTop: 2 }}
+        sx={{ paddingTop: 5 }}
         onSubmit={HandleSubmit}
         noValidate
       >

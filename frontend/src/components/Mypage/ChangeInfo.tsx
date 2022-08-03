@@ -33,6 +33,7 @@ function ChangeInfo() {
                 borderColor: "transparent",
                 minWidth: "100%",
                 height: "90vh",
+                marginTop: 20,
             }}>
             <ThemeProvider theme={theme}>
                 <Typography
@@ -43,7 +44,7 @@ function ChangeInfo() {
                         mb: 1,
                         fontSize: "medium"
                     }}>
-                    내 정보 변경
+
                 </Typography>
 
                 <Grid container
@@ -56,7 +57,7 @@ function ChangeInfo() {
                         height: "60vh",
                         paddingTop:50,
                         boxShadow: "1px 3px 3px #B0B09A",
-                    }} sx={{ mt: 3 }}>
+                    }} sx={{ mt: 5 }}>
                     <Grid item xs={5}>
                         <Box>
                             <ChangeNickName />
