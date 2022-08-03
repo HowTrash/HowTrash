@@ -43,7 +43,6 @@ function Login() {
       if (result.access_token !== null) {
         setAccessToken(result.access_token, false);
         setRefreshToken(result.refresh_token, false);
-        alert("로그인 성공♻️");
 
         decodeToken(result.access_token);
         window.location.replace("/login/welcome");
