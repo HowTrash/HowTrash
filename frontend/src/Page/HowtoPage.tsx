@@ -53,8 +53,9 @@ const HowtoPage = () => {
       handleOpen();
       const x = state.challenge_id; // 형변환
       var y: number = +x;
-      setChallengeImgURL(constants.CHALLENGE[y].imgT);
-      setChallengeText(constants.CHALLENGE[y].test);
+      console.log("y가 뭔데요 ㅠㅠ", y);
+      setChallengeImgURL(constants.CHALLENGE[y - 1].imgT);
+      setChallengeText(constants.CHALLENGE[y - 1].test);
     }
   }, []);
 
