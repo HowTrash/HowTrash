@@ -1,58 +1,22 @@
 import * as React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
-import { rs } from "src/utils/types";
 import { API_BASE_URL } from "src/utils/constants";
 import { getAccess } from "../../Auth/tokenManager";
 import { setAccessToken, setRefreshToken } from "src/Auth/tokenManager";
 import { useState } from "react";
 import Api from "../../utils/customApi";
 import {
-  Modal,
-  Backdrop,
   FormHelperText,
   Typography,
   Container,
   styled,
   TextField,
   Box,
-  Link,
   Button,
+  Hidden,
 } from "@mui/material";
-import lottie from "lottie-web";
-
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  borderRadius: 3,
-  boxShadow: 24,
-  p: 4,
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-};
-
-const btnstyle = {
-  borderColor: "transparent",
-  backgroundColor: "#B0B09A",
-  color: "#ffffff",
-  height: "40px",
-  width: "300px",
-  marginTop: "25px",
-  textAlign: "center",
-  fontSize: "15px",
-  textDecoration: "none",
-  borderRadius: 4,
-  p: 1,
-  fontFamily: "Itim",
-  "&:hover": { backgroundColor: "#737458", color: "#ffffff" },
-};
-
+import OpenModal from "./OpenModal"
 
 const theme = createTheme({
   palette: {
@@ -84,30 +48,13 @@ const FormHelperTexts = styled(FormHelperText)`
   font-size: 12px;
 `;
 
-const Lottie = () => {
-  //lottie
-  const element = React.useRef<HTMLDivElement>(null);
-  React.useEffect(() => {
-    lottie.loadAnimation({
-      container: element.current as HTMLDivElement,
-      renderer: "svg",
-      loop: false,
-      autoplay: true,
-      animationData: require("../../images/TrashLottie.json"),
-    });
-  }, []);
-  return <Box ref={element} style={{ height: 300 }}></Box>;
-};
-
 function ChangeNickName() {
   const aliasRegex = /^[가-힣a-zA-Z0-9]+$/;
   const [checkAilas, setCheckAlias] = useState("");
   const [alias, setAlias] = useState("");
   const [newAccess, getNewAccess] = useState("");
 
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [open, setOpen] = useState(false);
 
 
   const onBlurInfo = async (props: Array<string>, event: any) => {
@@ -148,8 +95,7 @@ function ChangeNickName() {
           console.log("response", response.data);
           setAccessToken(response.data.access_token, true); // 그 전의 access토큰 초기화
           setRefreshToken(response.data.refresh_token, true); // 그 전의 refresh토큰 초기화
-          // window.location.reload();
-          handleOpen();
+          setOpen(true);
         })
         .catch((e) => {
           // 의도치 않는 오류
@@ -254,37 +200,9 @@ function ChangeNickName() {
             >
               변경하기
             </Button>
-
-            <Modal
-              aria-labelledby="modal-title"
-              aria-describedby="modal-description"
-              open={open}
-              onClose={handleClose}
-              closeAfterTransition
-              BackdropComponent={Backdrop}
-              BackdropProps={{
-                timeout: 700,
-              }}
-            >
-              <Box sx={style}>
-                <Typography
-                  id="modal-title"
-                  variant="h4"
-                  fontWeight="bold"
-                  component="h1"
-                  sx={{ mb: 3, color: "#737458", fontFamily: "Itim" }}
-                >
-                  NickName Changed!
-                </Typography>
-                <div style={{ marginTop: 15 }}>
-                  <Lottie />
-                </div>
-
-                <Button href="/mypage/userInfo" sx={btnstyle}>
-                  OK
-                </Button>
-              </Box>
-            </Modal>
+            <>
+              {open ? <OpenModal open={open} /> : Hidden}
+            </>
           </Box>
         </Container>
       </ThemeProvider>

@@ -143,7 +143,7 @@ function MultiActionAreaCard() {
       </Grid>
 
       <Grid item
-        sx={{ p: 2, width: "100%", marginLeft: "15cm", justifyContent: "flex-end" }}>
+        sx={{ p: 2, width: "100%", marginLeft: "10cm", justifyContent: "flex-end" }}>
         <Typography
           sx={{ fontSize: 40, mt: 10, fontFamily: "Itim", color: "#737458" }}
         >2nd
