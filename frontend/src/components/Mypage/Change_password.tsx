@@ -54,7 +54,6 @@ function ChangePassWord() {
     const passwordRegex = /^[가-힣a-zA-Z0-9]+$/;
 
     const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
 
     const aliasChange = async (changePassword: string) => {
         const stringAccess: any = getAccess();
@@ -73,7 +72,7 @@ function ChangePassWord() {
                     console.log("response", response.data);
                     setAccessToken(response.data.access_token, true); // 그 전의 access토큰 초기화
                     setRefreshToken(response.data.refresh_token, true); // 그 전의 refresh토큰 초기화
-                    handleOpen();
+                    setOpen(true);
                 })
                 .catch((e) => { // 의도치 않는 오류
                     alert("로그인 정보에 오류가 생겼습니다.");
@@ -194,7 +193,9 @@ function ChangePassWord() {
                             변경하기
                         </Button>
                         <>
-                            {open ? <OpenModal open={open} /> : Hidden}
+                            {
+                                open ? <OpenModal open={open} /> : Hidden
+                            }
                         </>
                     </Box>
                 </Container>

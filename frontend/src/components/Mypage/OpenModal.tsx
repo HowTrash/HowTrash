@@ -3,11 +3,9 @@ import { useState } from "react";
 import {
     Modal,
     Backdrop,
-    FormHelperText,
     Typography,
     Box,
     Link,
-    Button,
 } from "@mui/material";
 import lottie from "lottie-web";
 
@@ -57,17 +55,13 @@ const Lottie = () => {
     return <Box ref={element} style={{ height: 300 }}></Box>;
 };
 
-function OpenModal(open : any) {
-
-    const [opens, setOpens] = useState(open);
-    const handleClose = () => setOpens(false);
+function OpenModal({ open }: any) {
 
     return (
         <Modal
             aria-labelledby="modal-title"
             aria-describedby="modal-description"
             open={open}
-            onClose={handleClose}
             closeAfterTransition
             BackdropComponent={Backdrop}
             BackdropProps={{

@@ -201,7 +201,9 @@ function ChangeNickName() {
               변경하기
             </Button>
             <>
-              {open ? <OpenModal open={open} /> : Hidden}
+              {
+                open ? <OpenModal open={open} /> : Hidden
+              }
             </>
           </Box>
         </Container>
