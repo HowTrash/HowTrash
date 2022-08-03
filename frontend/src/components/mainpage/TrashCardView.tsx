@@ -5,10 +5,8 @@ import {
   Grid,
   Button,
   CardActionArea,
-  CardActions,
-  Card,
+  styled,
   Box,
-  CardContent,
   CardMedia,
   Typography,
 } from "@mui/material";
@@ -19,6 +17,21 @@ interface BaseContent {
   kind: string;
   images: any;
 }
+
+const StyledBox =
+{
+  border: 0,
+  backgroundColor: "white",
+  borderColor: "#759F98",
+  borderRadius: 5,
+  boxShadow: "1px 3px 3px #B0B09A",
+  margin: "auto",
+  mt: 5
+};
+
+const styledTypo = {
+  fontSize: 40, component: "div", mt: 5, fontFamily: "Itim", color: "#737458"
+};
 
 const trashlist: BaseContent[] = [
   {
@@ -102,23 +115,11 @@ function MultiActionAreaCard() {
         >1st
         </Typography>
         <Box  {...useScrollFadeIn('up', 1, 0.1)}>
-          <Box sx={{
-            width: 800, border: 0,
-            backgroundColor: "white",
-            borderColor: "#759F98",
-            borderRadius: 5,
-            boxShadow: "1px 3px 3px #B0B09A",
-            margin: "auto",
-            mt: 5,
-          }}>
+          <Box style={StyledBox} sx={{ width: 800 }}>
             <CardActionArea sx={{ borderRadius: 5 }} >
               <CardMedia component="img" height="500" width="450" image={firstData?.images} sx={{ borderRadius: 5 }} />
               <Typography
-                fontSize={40}
-                component="div"
-                margin={1}
-                marginTop={2}
-                sx={{ fontFamily: "Itim", color: "#737458" }}
+                style={styledTypo}
               >
                 {firstData?.kind}
               </Typography>
@@ -148,23 +149,11 @@ function MultiActionAreaCard() {
         >2nd
         </Typography>
         <Box   {...useScrollFadeIn('left', 1, 0.1)}>
-          <Box sx={{
-            width: 650, border: 0,
-            backgroundColor: "white",
-            borderColor: "#759F98",
-            borderRadius: 5,
-            boxShadow: "1px 3px 3px #B0B09A",
-            margin: "auto",
-            mt: 5,
-          }}>
+          <Box style={StyledBox} sx={{ width: 650 }}>
             <CardActionArea sx={{ borderRadius: 5 }}>
               <CardMedia component="img" height="500" width="450" image={secondData?.images} sx={{ borderRadius: 5 }} />
               <Typography
-                fontSize={40}
-                component="div"
-                margin={1}
-                marginTop={2}
-                sx={{ fontFamily: "Itim", color: "#737458" }}
+                style={styledTypo}
               >
                 {secondData?.kind}
               </Typography>
@@ -195,23 +184,11 @@ function MultiActionAreaCard() {
         >3rd
         </Typography>
         <Box {...useScrollFadeIn('right', 1, 0.1)}>
-          <Box sx={{
-            width: 450, border: 1,
-            backgroundColor: "white",
-            borderColor: "white",
-            borderRadius: 5,
-            boxShadow: "1px 3px 3px #B0B09A",
-            margin: "auto",
-            mt: 5
-          }}>
+          <Box style={StyledBox} sx={{ width: 500 }}>
             <CardActionArea sx={{ borderRadius: 5 }}>
               <CardMedia component="img" height="500" width="450" image={thridData?.images} sx={{ borderRadius: 5 }} />
               <Typography
-                fontSize={40}
-                component="div"
-                margin={1}
-                marginTop={2}
-                sx={{ fontFamily: "Itim", color: "#737458" }}
+                style={styledTypo}
               >
                 {thridData?.kind}
               </Typography>

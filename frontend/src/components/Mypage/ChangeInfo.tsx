@@ -5,11 +5,7 @@ import {
     Grid,
     Typography,
     Container,
-    styled,
-    TextField,
     Box,
-    Link,
-    Button
 } from "@mui/material";
 import ChangePassWord from "./Change_password";
 import ChangeNickName from "./Change_nickname";
