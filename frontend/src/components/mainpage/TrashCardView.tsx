@@ -80,14 +80,8 @@ function MultiActionAreaCard() {
           }
         }
       }
-      /*
-      trashlist.forEach(kindlist => {
-       kindlist.kind = response.data.kind
-       ranklist.forEach(imagelist => {
-         if (imagelist.kind === kindlist.kind)
-         kindlist.images = imagelist.images;
-       })})
-       */
+
+
       setFirstData(trashlist[0]);
       setSecondData(trashlist[1]);
       setThirdData(trashlist[2]);
@@ -107,7 +101,7 @@ function MultiActionAreaCard() {
           sx={{ fontSize: 40, mt: 10, fontFamily: "Itim", color: "#737458" }}
         >1st
         </Typography>
-        <Box  {...useScrollFadeIn('up', 1)}>
+        <Box  {...useScrollFadeIn('up', 1, 0.1)}>
           <Box sx={{
             width: 800, border: 0,
             backgroundColor: "white",
@@ -153,7 +147,7 @@ function MultiActionAreaCard() {
           sx={{ fontSize: 40, mt: 10, fontFamily: "Itim", color: "#737458" }}
         >2nd
         </Typography>
-        <Box   {...useScrollFadeIn('up', 1)}>
+        <Box   {...useScrollFadeIn('left', 1, 0.1)}>
           <Box sx={{
             width: 650, border: 0,
             backgroundColor: "white",
@@ -200,7 +194,7 @@ function MultiActionAreaCard() {
           sx={{ fontSize: 40, mt: 10, fontFamily: "Itim", color: "#737458" }}
         >3rd
         </Typography>
-        <Box {...useScrollFadeIn('up', 1)}>
+        <Box {...useScrollFadeIn('right', 1, 0.1)}>
           <Box sx={{
             width: 450, border: 1,
             backgroundColor: "white",

@@ -22,12 +22,6 @@ const SearchBar = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //const data = new FormData(e.currentTarget);
-    // console.log(input);
-    // if (input === "A") window.location.href = "../Howto";
-    // else alert("그런 검색어는 없어요ㅜ");
-    // setInput("");
-
     if (input === "paper") {
       searchHowTrash("cardboard");
     } else alert("그런 검색어는 없어요ㅜ");

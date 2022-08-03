@@ -1,6 +1,5 @@
 import { Typography, Box } from "@mui/material";
 import TrashCardView from "./TrashCardView";
-import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import useScrollFadeIn from '../../actions/useScrollFadeIn';
 
 
