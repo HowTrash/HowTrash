@@ -194,7 +194,7 @@ function ChangePassWord() {
                         </Button>
                         <>
                             {
-                                open ? <OpenModal open={open} /> : Hidden
+                                open ? <OpenModal open={open} /> : <Hidden />
                             }
                         </>
                     </Box>
