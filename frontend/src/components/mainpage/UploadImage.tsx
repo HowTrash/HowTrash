@@ -31,7 +31,6 @@ function UploadImage() {
   const [urlImg, setUrlImg] = useState("");
   const [respondImg, setRespondImg] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [task_id, setTask_id] = useState("");
   const [checked, setChecked] = useState(false);
 
   const navigate = useNavigate();
@@ -92,43 +91,26 @@ function UploadImage() {
       }
     )
       .then((res) => {
-        setTask_id(res.data.task_id); //set
-        console.log("uploadimage taskid :::", res.data.task_id);
         task_id = res.data.task_id;
         setChecked(true);
       })
       .catch((error) => {
         console.log("An error occurred:", error.response);
-        // navigate(`/errorpage`);
+        navigate(`/errorpage`);
       });
-    console.log("제발 나와라 좀 ", task_id);
 
-    console.log("제대로 set됐는지 먼저 체크하자 ", checked);
-
-    //-----------------------------------------------------------------
-
-    //-----------------------------------------------------------------
     if (task_id !== "") {
       const getAnswer = () => {
-        console.log("두번쨰 api로 들어왔니?ㄴ");
         Api.get(`/trash/users/${userIdtoRedux}/results/tasks/${task_id}`, {
           headers: {
             Authorization: `${what.value}`,
           },
         })
           .then((res) => {
-            console.log("then 으로 안오나? ");
             dispatch(save_ID(res.data.image_id));
-            console.log(res);
-            console.log("반복 - 한요한");
 
-            // if (res.data.ai_result == "false") {
-            //   clearInterval(timer);
-            //   console.log("204 error");
-            //   //navi헤애힘 error
-            // }
-            // if (!res.data.challenge) {
             if (res.status === 200) {
+              //제대로 들어갔을 때
               console.log("successsuccesssuccesssuccess");
               navigate(`/howtopage`, {
                 state: {
@@ -140,22 +122,10 @@ function UploadImage() {
             }
           })
           .catch((error) => {
-            console.log("An error occurred: 여기는 두번째 api", error);
+            // 분류 안됐을때
             clearInterval(timer);
-
             navigate("/errorpage");
-            // clearInterval(timer);
           });
-
-        // var refreshId = setInterval(function() {
-        //   var properID = CheckReload();
-        //   if (properID > 0) {
-
-        //     clearInterval(refreshId);
-        //   }
-        // }, 10000);
-
-        //if end
       };
 
       const timer = setInterval(getAnswer, 2000);
@@ -182,14 +152,6 @@ function UploadImage() {
         </Typography>
       </div>
     );
-
-  // function doSetTimeout(i: any) {
-  //   setTimeout(function () {
-  //     alert(i);
-  //   }, 100);
-  // }
-
-  // for (var i = 1; i <= 2; ++i) doSetTimeout(i);
 
   return (
     <Box>
