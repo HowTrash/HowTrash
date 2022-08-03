@@ -12,9 +12,8 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import { decodeToken } from "src/Auth/tokenGetter";
 import axios from "axios";
-import { response } from "express";
+import useScrollFadeIn from '../../actions/useScrollFadeIn';
 
 interface BaseContent {
   kind: string;
@@ -99,139 +98,146 @@ function MultiActionAreaCard() {
 
   return (
     <Grid container
-      sx={{ display: "flex", direction:"column", flexWrap: "wrap"}}
+      sx={{ display: "flex", direction: "column", flexWrap: "wrap" }}
     >
-      <Grid item 
-        sx={{ p: 2, width:"100%", justifyContent : "flex-start"}}>
+      <Grid item
+        sx={{ p: 2, width: "100%", justifyContent: "flex-start" }}
+      >
         <Typography
           sx={{ fontSize: 40, mt: 10, fontFamily: "Itim", color: "#737458" }}
         >1st
         </Typography>
-        <Box sx={{
-          width: 800, border: 0,
-          backgroundColor: "white",
-          borderColor: "#759F98",
-          borderRadius: 5,
-          boxShadow: "1px 3px 3px #B0B09A",
-          margin: "auto",
-          mt: 5
-        }}>
-          <CardActionArea sx ={{borderRadius : 5}}>
-            <CardMedia component="img" height="500" width="450" image={firstData?.images} sx ={{borderRadius : 5}}/>
-            <Typography
-              fontSize={40}
-              component="div"
-              margin={1}
-              marginTop={2}
-              sx={{ fontFamily: "Itim", color: "#737458" }}
-            >
-              {firstData?.kind}
-            </Typography>
-          </CardActionArea>
+        <Box  {...useScrollFadeIn('up', 1)}>
+          <Box sx={{
+            width: 800, border: 0,
+            backgroundColor: "white",
+            borderColor: "#759F98",
+            borderRadius: 5,
+            boxShadow: "1px 3px 3px #B0B09A",
+            margin: "auto",
+            mt: 5,
+          }}>
+            <CardActionArea sx={{ borderRadius: 5 }} >
+              <CardMedia component="img" height="500" width="450" image={firstData?.images} sx={{ borderRadius: 5 }} />
+              <Typography
+                fontSize={40}
+                component="div"
+                margin={1}
+                marginTop={2}
+                sx={{ fontFamily: "Itim", color: "#737458" }}
+              >
+                {firstData?.kind}
+              </Typography>
+            </CardActionArea>
+          </Box>
+          <Button
+            variant="text"
+            onClick={() => {
+              navigate(`/defaulthowpage`, {
+                state: {
+                  needKind: firstData?.kind,
+                  needImages: firstData?.images,
+                },
+              });
+            }}
+            sx={{ mt: 3, margin: "auto", fontFamily: "Itim", color: "#737458", fontSize: 20 }}
+          >
+            How to Recycle this {firstData?.kind}??
+          </Button>
         </Box>
-        <Button
-          variant="text"
-          onClick={() => {
-            navigate(`/defaulthowpage`, {
-              state: {
-                needKind: firstData?.kind,
-                needImages: firstData?.images,
-              },
-            });
-          }}
-          sx={{ mt:3, margin: "auto", fontFamily: "Itim", color: "#737458", fontSize: 20 }}
-        >
-          How to Recycle this {firstData?.kind}??
-        </Button>
       </Grid>
 
       <Grid item
-        sx={{ p: 2, width:"100%", marginLeft:"15cm",justifyContent:"flex-end"}}>
+        sx={{ p: 2, width: "100%", marginLeft: "15cm", justifyContent: "flex-end" }}>
         <Typography
           sx={{ fontSize: 40, mt: 10, fontFamily: "Itim", color: "#737458" }}
         >2nd
         </Typography>
-        <Box sx={{
-          width: 650, border: 0,
-          backgroundColor: "white",
-          borderColor: "#759F98",
-          borderRadius: 5,
-          boxShadow: "1px 3px 3px #B0B09A",
-          margin: "auto",
-          mt: 5
-        }}>
-          <CardActionArea sx ={{borderRadius : 5}}>
-            <CardMedia component="img" height="500" width="450" image={secondData?.images} sx ={{borderRadius : 5}}/>
-            <Typography
-              fontSize={40}
-              component="div"
-              margin={1}
-              marginTop={2}
-              sx={{ fontFamily: "Itim", color: "#737458" }}
-            >
-              {secondData?.kind}
-            </Typography>
-          </CardActionArea>
-        </Box>
+        <Box   {...useScrollFadeIn('up', 1)}>
+          <Box sx={{
+            width: 650, border: 0,
+            backgroundColor: "white",
+            borderColor: "#759F98",
+            borderRadius: 5,
+            boxShadow: "1px 3px 3px #B0B09A",
+            margin: "auto",
+            mt: 5,
+          }}>
+            <CardActionArea sx={{ borderRadius: 5 }}>
+              <CardMedia component="img" height="500" width="450" image={secondData?.images} sx={{ borderRadius: 5 }} />
+              <Typography
+                fontSize={40}
+                component="div"
+                margin={1}
+                marginTop={2}
+                sx={{ fontFamily: "Itim", color: "#737458" }}
+              >
+                {secondData?.kind}
+              </Typography>
+            </CardActionArea>
+          </Box>
 
-        <Button
-              variant="text"
-              onClick={() => {
-                navigate(`/defaulthowpage`, {
-                  state: {
-                    needKind: secondData?.kind,
-                    needImages: secondData?.images,
-                  },
-                });
-              }}
-              sx={{ mt:3, margin: "auto", fontFamily: "Itim", color: "#737458", fontSize: 20 }}
-            >
-              How to Recycle this {secondData?.kind}??
-            </Button>
+          <Button
+            variant="text"
+            onClick={() => {
+              navigate(`/defaulthowpage`, {
+                state: {
+                  needKind: secondData?.kind,
+                  needImages: secondData?.images,
+                },
+              });
+            }}
+            sx={{ mt: 3, margin: "auto", fontFamily: "Itim", color: "#737458", fontSize: 20 }}
+          >
+            How to Recycle this {secondData?.kind}??
+          </Button>
+        </Box>
       </Grid>
 
       <Box
-        sx={{ p: 2, width:"100%", marginRight:"20cm" }}>
+        sx={{ p: 2, width: "100%", marginRight: "20cm" }}>
         <Typography
           sx={{ fontSize: 40, mt: 10, fontFamily: "Itim", color: "#737458" }}
         >3rd
         </Typography>
-        <Box sx={{
-          width: 450, border: 1,
-          backgroundColor: "white",
-          borderColor: "white",
-          borderRadius: 5,
-          boxShadow: "1px 3px 3px #B0B09A",
-          margin: "auto",
-          mt: 5
-        }}>
-          <CardActionArea sx ={{borderRadius : 5}}>
-          <CardMedia component="img" height="500" width="450" image ={thridData?.images} sx ={{borderRadius : 5}} />
-            <Typography
-              fontSize={40}
-              component="div"
-              margin={1}
-              marginTop={2}
-              sx={{ fontFamily: "Itim", color: "#737458" }}
-            >
-              {thridData?.kind}
-            </Typography>
-          </CardActionArea>
+        <Box {...useScrollFadeIn('up', 1)}>
+          <Box sx={{
+            width: 450, border: 1,
+            backgroundColor: "white",
+            borderColor: "white",
+            borderRadius: 5,
+            boxShadow: "1px 3px 3px #B0B09A",
+            margin: "auto",
+            mt: 5
+          }}>
+            <CardActionArea sx={{ borderRadius: 5 }}>
+              <CardMedia component="img" height="500" width="450" image={thridData?.images} sx={{ borderRadius: 5 }} />
+              <Typography
+                fontSize={40}
+                component="div"
+                margin={1}
+                marginTop={2}
+                sx={{ fontFamily: "Itim", color: "#737458" }}
+              >
+                {thridData?.kind}
+              </Typography>
+            </CardActionArea>
+          </Box>
+          <Button
+            variant="text"
+            onClick={() => {
+              navigate(`/defaulthowpage`, {
+                state: {
+                  needKind: thridData?.kind,
+                  needImages: thridData?.images,
+                },
+              });
+            }}
+            sx={{ mt: 3, margin: "auto", fontFamily: "Itim", color: "#737458", fontSize: 20 }}
+          >
+            How to Recycle this {thridData?.kind}??
+          </Button>
         </Box>
-        <Button
-              variant="text"
-              onClick={() => {
-                navigate(`/defaulthowpage`, {
-                  state: {
-                    needKind: thridData?.kind,
-                    needImages: thridData?.images,
-                  },
-                });
-              }}
-              sx={{ mt:3, margin: "auto", fontFamily: "Itim", color: "#737458", fontSize: 20 }}
-            >
-              How to Recycle this {thridData?.kind}??
-            </Button>
       </Box>
     </Grid>
   );
