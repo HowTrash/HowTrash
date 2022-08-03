@@ -37,6 +37,8 @@ const HowtoPage = () => {
   const userIdToRedux = ReduxModule().decodeInfo?.id;
 
   const reduxKindAndImg = ReduxImgApi(itemID, userIdToRedux);
+  console.log(userIdToRedux);
+  console.log(itemID);
 
   const { state } = useLocation() as TypeChallenge;
 
@@ -85,7 +87,7 @@ const HowtoPage = () => {
           }}
         >
           <img
-            style={{ maxWidth: 500, maxHeight: 250 }}
+            style={{ width: 600, height: 320 }}
             src={reduxKindAndImg.imgUrl as string}
           />
         </Box>
@@ -115,7 +117,7 @@ const HowtoPage = () => {
               fontWeight: "bold",
               fontFamily: "Itim",
               padding: 100,
-              color: "black",
+              color: "#737458",
               fontSize: 30,
             }}
           >

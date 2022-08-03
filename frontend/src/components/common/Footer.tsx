@@ -50,20 +50,50 @@ function Footer() {
                 color: "white",
                 fontSize: 10,
                 display: "flex",
-                flexDirection: "column",
+                flexDirection: "row",
                 justifyContent: "center",
                 alignItems: "center",
+                marginTop: 3,
               }}
             >
-              <div>FrontEnd</div>
-              <div>이채현</div>
-              <div>이정우</div>
-              <div>진호병</div>
-              <div>-</div>
-              <div>BackEnd</div>
-              <div>김용민</div>
-              <div>김유림</div>
-              <div>박성빈</div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <div>FrontEnd</div>
+                <div>이채현</div>
+                <div>이정우</div>
+                <div>진호병</div>
+              </div>
+              <div
+                style={{
+                  fontFamily: "IrishGrover",
+                  padding: 4,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                X
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <div>BackEnd</div>
+                <div>김용민</div>
+                <div>김유림</div>
+                <div>박성빈</div>
+              </div>
             </div>
           </Box>
           <div
