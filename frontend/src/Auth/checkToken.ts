@@ -63,7 +63,7 @@ const getRefreshToken = async () => {
 
     //access token 요청하는 axios
     const data = await axios
-      .get(`${API_BASE_URL}/users/auth/`, {
+      .get(`${API_BASE_URL}/users/auth`, {
         headers: {
           Authorization: `${newRe.value}`,
         },
