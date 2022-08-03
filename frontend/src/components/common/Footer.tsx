@@ -20,7 +20,7 @@ function Footer() {
           maxWidth: "1920px",
           backgroundColor: "#737458",
           padding: 0,
-          marginTop: 70,
+          // marginTop: 70,
         }}
       >
         <div

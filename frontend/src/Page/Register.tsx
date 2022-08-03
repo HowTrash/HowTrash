@@ -135,7 +135,9 @@ const Register = () => {
       nameRegex.test(user.name as string) &&
       aliasRegex.test(user.alias as string)
     ) {
-      Api.post<User>(`users/`, user)
+
+      Api.post<User>(`/users/`, user)
+
         .then((response) => {
           // Handle success.
           handleOpen();
@@ -172,7 +174,9 @@ const Register = () => {
       if (!emailRegex.test(email as string)) {
         setCheckEmail("올바른 이메일 형식이 아닙니다.");
       } else {
+
         if (res.data.result === false) setCheckEmail("사용 중인 이메일 입니다.");
+
         else setCheckEmail("사용 가능한 이메일 입니다.");
       }
     }
