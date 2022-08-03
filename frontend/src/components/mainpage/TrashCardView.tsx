@@ -83,7 +83,7 @@ function MultiActionAreaCard() {
   const [thridData, setThirdData] = useState<BaseContent | null>(null);
 
   axios
-    .get("http://localhost:8080/api/trash/statistics/ranking")
+    .get("http://localhost:8080/API/trash/statistics/ranking")
     .then((response) => {
       for (let i = 0; i < 3; i++) {
         trashlist[i].kind = response.data[i].kind;
