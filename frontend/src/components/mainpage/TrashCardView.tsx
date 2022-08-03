@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import axios from "axios";
+import Api from "src/utils/customApi";
 
 interface BaseContent {
   kind: string;
@@ -65,8 +66,7 @@ function MultiActionAreaCard() {
   const [secondData, setSecondData] = useState<BaseContent | null>(null);
   const [thridData, setThirdData] = useState<BaseContent | null>(null);
 
-  axios
-    .get("http://localhost:8080/api/trash/statistics/ranking")
+  Api.get("trash/statistics/ranking")
     .then((response) => {
       for (let i = 0; i < 3; i++) {
         trashlist[i].kind = response.data[i].kind;
