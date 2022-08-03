@@ -54,9 +54,9 @@ function ChangeInfo() {
                         borderColor: "white",
                         justifyContent: "center",
                         height: "60vh",
-                        paddingTop: 50,
+                        paddingTop:50,
                         boxShadow: "1px 3px 3px #B0B09A",
-                    }}>
+                    }} sx={{ mt: 3 }}>
                     <Grid item xs={5}>
                         <Box>
                             <ChangeNickName />
@@ -79,7 +79,7 @@ function ChangeInfo() {
                     </Grid>
 
                 </Grid>
-            </ThemeProvider>
+        </ThemeProvider>
         </Container >
 
     );

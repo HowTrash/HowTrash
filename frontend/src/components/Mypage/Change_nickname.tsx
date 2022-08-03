@@ -7,8 +7,9 @@ import { getAccess } from "../../Auth/tokenManager";
 import { setAccessToken, setRefreshToken } from "src/Auth/tokenManager";
 import { useState } from "react";
 import Api from "../../utils/customApi";
-
 import {
+  Modal,
+  Backdrop,
   FormHelperText,
   Typography,
   Container,
@@ -18,6 +19,40 @@ import {
   Link,
   Button,
 } from "@mui/material";
+import lottie from "lottie-web";
+
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  borderRadius: 3,
+  boxShadow: 24,
+  p: 4,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+};
+
+const btnstyle = {
+  borderColor: "transparent",
+  backgroundColor: "#B0B09A",
+  color: "#ffffff",
+  height: "40px",
+  width: "300px",
+  marginTop: "25px",
+  textAlign: "center",
+  fontSize: "15px",
+  textDecoration: "none",
+  borderRadius: 4,
+  p: 1,
+  fontFamily: "Itim",
+  "&:hover": { backgroundColor: "#737458", color: "#ffffff" },
+};
+
 
 const theme = createTheme({
   palette: {
@@ -27,7 +62,7 @@ const theme = createTheme({
   },
 });
 
-const UserInfoChange = styled(TextField)(({}) => ({
+const UserInfoChange = styled(TextField)(({ }) => ({
   borderRadius: 5,
   textAlign: "center",
   "&:hover": {
@@ -49,11 +84,31 @@ const FormHelperTexts = styled(FormHelperText)`
   font-size: 12px;
 `;
 
+const Lottie = () => {
+  //lottie
+  const element = React.useRef<HTMLDivElement>(null);
+  React.useEffect(() => {
+    lottie.loadAnimation({
+      container: element.current as HTMLDivElement,
+      renderer: "svg",
+      loop: false,
+      autoplay: true,
+      animationData: require("../../images/TrashLottie.json"),
+    });
+  }, []);
+  return <Box ref={element} style={{ height: 300 }}></Box>;
+};
+
 function ChangeNickName() {
   const aliasRegex = /^[가-힣a-zA-Z0-9]+$/;
   const [checkAilas, setCheckAlias] = useState("");
   const [alias, setAlias] = useState("");
   const [newAccess, getNewAccess] = useState("");
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
 
   const onBlurInfo = async (props: Array<string>, event: any) => {
     const res = await Api.get(
@@ -93,8 +148,8 @@ function ChangeNickName() {
           console.log("response", response.data);
           setAccessToken(response.data.access_token, true); // 그 전의 access토큰 초기화
           setRefreshToken(response.data.refresh_token, true); // 그 전의 refresh토큰 초기화
-          alert("닉네임이 정상적으로 변경되었습니다!");
-          window.location.reload();
+          // window.location.reload();
+          handleOpen();
         })
         .catch((e) => {
           // 의도치 않는 오류
@@ -116,9 +171,9 @@ function ChangeNickName() {
     //오류 생길때는 활성화 X 화면 넘어가지 않도록
   };
 
-  React.useEffect(() => {}, [alias]);
+  React.useEffect(() => { }, [alias]);
   React.useEffect(() => {
-    console.log("newAccess",newAccess);
+    console.log("newAccess", newAccess);
   }, [newAccess]);
 
   return (
@@ -199,6 +254,37 @@ function ChangeNickName() {
             >
               변경하기
             </Button>
+
+            <Modal
+              aria-labelledby="modal-title"
+              aria-describedby="modal-description"
+              open={open}
+              onClose={handleClose}
+              closeAfterTransition
+              BackdropComponent={Backdrop}
+              BackdropProps={{
+                timeout: 700,
+              }}
+            >
+              <Box sx={style}>
+                <Typography
+                  id="modal-title"
+                  variant="h4"
+                  fontWeight="bold"
+                  component="h1"
+                  sx={{ mb: 3, color: "#737458", fontFamily: "Itim" }}
+                >
+                  NickName Changed!
+                </Typography>
+                <div style={{ marginTop: 15 }}>
+                  <Lottie />
+                </div>
+
+                <Button href="/mainpage" sx={btnstyle}>
+                  OK
+                </Button>
+              </Box>
+            </Modal>
           </Box>
         </Container>
       </ThemeProvider>

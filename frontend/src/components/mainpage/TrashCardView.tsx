@@ -116,8 +116,8 @@ function MultiActionAreaCard() {
           margin: "auto",
           mt: 5
         }}>
-          <CardActionArea>
-            <CardMedia component="img" height="500" width="450" image={firstData?.images} />
+          <CardActionArea sx ={{borderRadius : 5}}>
+            <CardMedia component="img" height="500" width="450" image={firstData?.images} sx ={{borderRadius : 5}}/>
             <Typography
               fontSize={40}
               component="div"
@@ -160,8 +160,8 @@ function MultiActionAreaCard() {
           margin: "auto",
           mt: 5
         }}>
-          <CardActionArea>
-            <CardMedia component="img" height="500" width="450" image={secondData?.images} />
+          <CardActionArea sx ={{borderRadius : 5}}>
+            <CardMedia component="img" height="500" width="450" image={secondData?.images} sx ={{borderRadius : 5}}/>
             <Typography
               fontSize={40}
               component="div"
@@ -205,8 +205,8 @@ function MultiActionAreaCard() {
           margin: "auto",
           mt: 5
         }}>
-          <CardActionArea>
-            <img height="500" width="450" src={thridData?.images} />
+          <CardActionArea sx ={{borderRadius : 5}}>
+          <CardMedia component="img" height="500" width="450" image ={thridData?.images} sx ={{borderRadius : 5}} />
             <Typography
               fontSize={40}
               component="div"
