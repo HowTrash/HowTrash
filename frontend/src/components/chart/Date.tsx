@@ -13,7 +13,7 @@ import { ReduxModule } from "../../modules/ReduxModule";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#759F98",
+      main: "#737458",
     },
   },
 });
@@ -105,7 +105,7 @@ function Dates({ onClickRetrieve }: { onClickRetrieve: any }) {
         direction="row"
         justifyContent="center"
         alignItems="center"
-        sx={{ paddingTop: 2 }}
+        sx={{ paddingTop: 5 }}
         onSubmit={HandleSubmit}
         noValidate
       >
@@ -118,7 +118,7 @@ function Dates({ onClickRetrieve }: { onClickRetrieve: any }) {
           >
             <Box margin="4px">
               <DatePicker
-                label="Start Date"
+                label="시작 날짜"
                 inputFormat="yyyy/MM/dd"
                 value={StartDate}
                 onChange={HandleStartChange as any}
@@ -138,7 +138,7 @@ function Dates({ onClickRetrieve }: { onClickRetrieve: any }) {
             </Box>
             <Box margin="4px">
               <DatePicker
-                label="End Date"
+                label="종료 날짜"
                 inputFormat="yyyy/MM/dd"
                 value={EndDate}
                 onChange={HandleEndChange as any}

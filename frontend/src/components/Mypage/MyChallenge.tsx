@@ -74,6 +74,7 @@ function MyBadge() {
         borderRadius: 5,
         borderColor: "transparent",
         minWidth: "100%",
+        marginTop: 20,
       }}
     >
       <Typography
@@ -81,7 +82,7 @@ function MyBadge() {
         fontWeight="bold"
         sx={{ mt: 1.2, mb: 1, fontSize: "medium" }}
       >
-        내 도전! 재활용
+
       </Typography>
       <Container
         style={{
@@ -89,7 +90,7 @@ function MyBadge() {
           backgroundColor: "white",
           boxShadow: "1px 3px 3px #B0B09A",
         }}
-        sx={{ mt: 3, mb: 3, pb: 5 }}
+        sx={{ mt: 5, mb: 3, pb: 5 }}
       >
         <Box
           sx={{
