@@ -274,8 +274,8 @@ const Register = () => {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                onChange={(e) => setEmail(e.target.value)}
-                onBlur={(event) => {
+                onChange={(e : any) => setEmail(e.target.value)}
+                onBlur={(event : any) => {
                   onBlurInfo(["email", email], event);
                 }}
               />

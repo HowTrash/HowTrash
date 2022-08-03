@@ -178,8 +178,8 @@ function ChangeNickName() {
               label="변경할 닉네임 입력"
               type="alias"
               id="alias"
-              onChange={(e) => setAlias(e.target.value)}
-              onBlur={(event) => {
+              onChange={(e : any) => setAlias(e.target.value)}
+              onBlur={(event : any) => {
                 onBlurInfo(["alias", alias], event);
               }}
             />
