@@ -9,7 +9,6 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import axios from "axios";
 import Api from "src/utils/customApi";
 
 interface BaseContent {
