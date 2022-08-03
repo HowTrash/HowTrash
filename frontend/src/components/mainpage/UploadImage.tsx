@@ -9,7 +9,6 @@ import { getAccess } from "src/Auth/tokenManager";
 import { useDispatch } from "react-redux";
 import { save_ID } from "../../actions/ImgIDActions";
 import lottie from "lottie-web";
-import { isConstructorDeclaration } from "typescript";
 
 const LoadingLottie = () => {
   //lottie
@@ -38,10 +37,6 @@ function UploadImage() {
 
   const dispatch = useDispatch();
   const what: any = getAccess();
-
-  // useEffect(() => {
-  //   console.log("useeffect : ", task_id);
-  // }, [task_id]);
 
   const resizeFile = (file: Blob) =>
     new Promise((resolve) => {
