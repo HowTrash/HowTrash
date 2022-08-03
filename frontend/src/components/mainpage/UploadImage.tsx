@@ -9,6 +9,7 @@ import { getAccess } from "src/Auth/tokenManager";
 import { useDispatch } from "react-redux";
 import { save_ID } from "../../actions/ImgIDActions";
 import lottie from "lottie-web";
+import { isConstructorDeclaration } from "typescript";
 
 const LoadingLottie = () => {
   //lottie
@@ -79,29 +80,7 @@ function UploadImage() {
     const trashFormData = new FormData();
     trashFormData.append("filename", respondImg as any);
 
-    // await Api.post(`/trash/users/${userIdtoRedux}/results`, trashFormData, {
-    //   headers: {
-    //     Authorization: `${what.value}`,
-    //   },
-    // })
-    //   .then((res) => {
-    //     dispatch(save_ID(res.data.image_id));
-    //     console.log(res.data.challenge);
-    //     console.log(res.data.challenge_content);
-    //     navigate(`/howtopage`, {
-    //       state: {
-    //         challenge: res.data.challenge,
-    //         challenge_content: res.data.challenge_content,
-    //       },
-    //     });
-    //     // challenge : 첫번째 업적 달성
-    //     // challenge_content : 업적 달성시 버린 쓰레기 갯수
-    //   })
-    //   .catch((error) => {
-    //     console.log("An error occurred:", error.response);
-    //     navigate(`/errorpage`);
-    //   });
-    var ti = "";
+    var task_id = "";
 
     await Api.post(
       `/trash/users/${userIdtoRedux}/results/tasks`,
@@ -115,38 +94,73 @@ function UploadImage() {
       .then((res) => {
         setTask_id(res.data.task_id); //set
         console.log("uploadimage taskid :::", res.data.task_id);
-        ti = res.data.task_id;
+        task_id = res.data.task_id;
         setChecked(true);
       })
       .catch((error) => {
         console.log("An error occurred:", error.response);
-        navigate(`/errorpage`);
+        // navigate(`/errorpage`);
       });
-    console.log("제발 나와라 좀 ", ti);
+    console.log("제발 나와라 좀 ", task_id);
 
     console.log("제대로 set됐는지 먼저 체크하자 ", checked);
-    if (ti !== "") {
-      console.log("두번쨰 api로 들어왔니?ㄴ");
-      await Api.get(`/trash/users/${userIdtoRedux}/results/tasks/${ti}`, {
-        headers: {
-          Authorization: `${what.value}`,
-        },
-      })
-        .then((res) => {
-          console.log("then 으로 안오나? ");
-          dispatch(save_ID(res.data.image_id));
-          navigate(`/howtopage`, {
-            state: {
-              challenge: res.data.challenge,
-              challenge_content: res.data.challenge_content,
-            },
-          });
+
+    //-----------------------------------------------------------------
+
+    //-----------------------------------------------------------------
+    if (task_id !== "") {
+      const getAnswer = () => {
+        console.log("두번쨰 api로 들어왔니?ㄴ");
+        Api.get(`/trash/users/${userIdtoRedux}/results/tasks/${task_id}`, {
+          headers: {
+            Authorization: `${what.value}`,
+          },
         })
-        .catch((error) => {
-          console.log("An error occurred: 여기는 두번째 api", error);
-          navigate(`/errorpage`);
-        });
-    }
+          .then((res) => {
+            console.log("then 으로 안오나? ");
+            dispatch(save_ID(res.data.image_id));
+            console.log(res);
+            console.log("반복 - 한요한");
+
+            // if (res.data.ai_result == "false") {
+            //   clearInterval(timer);
+            //   console.log("204 error");
+            //   //navi헤애힘 error
+            // }
+            // if (!res.data.challenge) {
+            if (res.status === 200) {
+              console.log("successsuccesssuccesssuccess");
+              navigate(`/howtopage`, {
+                state: {
+                  challenge_id: res.data.challenge_id,
+                  challenge_content: res.data.challenge_content,
+                },
+              });
+              clearInterval(timer);
+            }
+          })
+          .catch((error) => {
+            console.log("An error occurred: 여기는 두번째 api", error);
+            clearInterval(timer);
+
+            navigate("/errorpage");
+            // clearInterval(timer);
+          });
+
+        // var refreshId = setInterval(function() {
+        //   var properID = CheckReload();
+        //   if (properID > 0) {
+
+        //     clearInterval(refreshId);
+        //   }
+        // }, 10000);
+
+        //if end
+      };
+
+      const timer = setInterval(getAnswer, 2000);
+      return () => clearInterval(timer);
+    } // if
   };
 
   const onClickImgResult = () => {
