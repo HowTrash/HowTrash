@@ -119,6 +119,7 @@ function UploadImage() {
           .catch((error) => {
             // 분류 안됐을때
             clearInterval(timer);
+            alert(error);
             navigate("/errorpage");
           });
       };

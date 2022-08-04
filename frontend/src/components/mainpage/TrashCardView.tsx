@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import axios from "axios";
-import useScrollFadeIn from '../../actions/useScrollFadeIn';
+import useScrollFadeIn from '../../modules/useScrollFadeIn';
 
 interface BaseContent {
   kind: string;
