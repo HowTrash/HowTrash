@@ -67,7 +67,7 @@ const SearchBar = () => {
 
     const onSubmit = (input: string) => {
         axios
-            .post(`http://localhost:8080/api/search`, { value: input })
+            .post(`http://localhost:8080/api/search/`, { value: input })
             .then((response) => {
                 let trashIMG = "";
                 for (let j = 0; j < 6; j++) {
