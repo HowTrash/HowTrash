@@ -1,7 +1,5 @@
 import * as React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import axios from "axios";
-import { API_BASE_URL } from "src/utils/constants";
 import { getAccess } from "../../Auth/tokenManager";
 import { setAccessToken, setRefreshToken } from "src/Auth/tokenManager";
 import { useState } from "react";
@@ -77,10 +75,8 @@ function ChangeNickName() {
 
     if (stringAccess !== null) {
 
-      await axios
-        .patch(
-          `${API_BASE_URL}/users/`,
-          { value: { alias: changeAlias } },
+      await Api
+        .patch(`/users/`, { value: { alias: changeAlias } },
           {
             //patch : 바디 -> 변경할 alias & 헤더 -> 확인해야되는 토큰
             headers: {

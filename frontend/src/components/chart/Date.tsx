@@ -5,10 +5,9 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import axios from "axios";
-import { API_BASE_URL } from "src/utils/constants";
 import { getAccess } from "../../Auth/tokenManager";
 import { ReduxModule } from "../../modules/ReduxModule";
+import Api from "../../utils/customApi";
 
 const theme = createTheme({
   palette: {
@@ -66,9 +65,9 @@ function Dates({ onClickRetrieve }: { onClickRetrieve: any }) {
     const getDate = async () => {
       const stringAccess: any = getAccess();
       if (stringAccess !== null) { 
-        await axios
+        await Api
           .get(
-            `${API_BASE_URL}/trash/users/${userIdtoRedux}/statistics${periodStr}${startDateStr}${endDateStr}`, { //patch : 바디 -> 변경할 alias & 헤더 -> 확인해야되는 토큰 
+            `/trash/users/${userIdtoRedux}/statistics${periodStr}${startDateStr}${endDateStr}`, { //patch : 바디 -> 변경할 alias & 헤더 -> 확인해야되는 토큰 
             headers: {
               Authorization: `${stringAccess.value}`
             }

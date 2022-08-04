@@ -101,8 +101,9 @@ function MultiActionAreaCard() {
       })
       .catch((error) => {
       });
-    getRanking();
   }
+
+  React.useEffect(()=>{},[getRanking()]);
 
   return (
     <Grid container
