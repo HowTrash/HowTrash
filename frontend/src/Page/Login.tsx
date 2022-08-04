@@ -14,11 +14,8 @@ import {
   Typography,
   Container,
   Link,
-  styled,
 } from "@mui/material";
-import { checkAccessToken, checkRefreshToken } from "src/Auth/checkToken";
 import { decodeToken } from "src/Auth/tokenGetter";
-import Footer from "src/components/common/Footer";
 
 const theme = createTheme({
   palette: {
@@ -27,17 +24,6 @@ const theme = createTheme({
     },
   },
 });
-
-// const UserInfoTf = styled(TextField)(({}) => ({
-//   "&:hover": {
-//     color: "#B0B09A",
-//   },
-//   "& .MuiOutlinedInput-root": {
-//     "&:hover fieldset": {
-//       borderColor: "#B0B09A",
-//     },
-//   },
-// }));
 
 function Login() {
   const userInfo = [] as unknown as rs.UserAuth;

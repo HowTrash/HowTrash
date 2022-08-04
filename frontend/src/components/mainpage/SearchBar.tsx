@@ -84,6 +84,7 @@ const SearchBar = () => {
             });
     };
 
+
     return (
         <SearchBarBox>
             <Box

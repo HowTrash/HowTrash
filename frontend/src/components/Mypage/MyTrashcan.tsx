@@ -104,10 +104,10 @@ function MyTrashcan(props: Props) {
     <Container
       style={{
         border: "solid",
-        borderRadius: 5,
+        borderRadius: 8,
         borderColor: "transparent",
         minWidth: "100%",
-        marginTop: 30,
+        marginTop: 20,
       }}
     >
       {" "}

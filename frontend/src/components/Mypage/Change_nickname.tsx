@@ -1,13 +1,11 @@
 import * as React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
-import { rs } from "src/utils/types";
 import { API_BASE_URL } from "src/utils/constants";
 import { getAccess } from "../../Auth/tokenManager";
 import { setAccessToken, setRefreshToken } from "src/Auth/tokenManager";
 import { useState } from "react";
 import Api from "../../utils/customApi";
-
 import {
   FormHelperText,
   Typography,
@@ -15,9 +13,10 @@ import {
   styled,
   TextField,
   Box,
-  Link,
   Button,
+  Hidden,
 } from "@mui/material";
+import OpenModal from "./OpenModal"
 
 const theme = createTheme({
   palette: {
@@ -27,7 +26,7 @@ const theme = createTheme({
   },
 });
 
-const UserInfoChange = styled(TextField)(({}) => ({
+const UserInfoChange = styled(TextField)(({ }) => ({
   borderRadius: 5,
   textAlign: "center",
   "&:hover": {
@@ -54,6 +53,9 @@ function ChangeNickName() {
   const [checkAilas, setCheckAlias] = useState("");
   const [alias, setAlias] = useState("");
   const [newAccess, getNewAccess] = useState("");
+
+  const [open, setOpen] = useState(false);
+
 
   const onBlurInfo = async (props: Array<string>, event: any) => {
     const res = await Api.get(
@@ -93,8 +95,7 @@ function ChangeNickName() {
           console.log("response", response.data);
           setAccessToken(response.data.access_token, true); // 그 전의 access토큰 초기화
           setRefreshToken(response.data.refresh_token, true); // 그 전의 refresh토큰 초기화
-          alert("닉네임이 정상적으로 변경되었습니다!");
-          window.location.reload();
+          setOpen(true);
         })
         .catch((e) => {
           // 의도치 않는 오류
@@ -116,9 +117,9 @@ function ChangeNickName() {
     //오류 생길때는 활성화 X 화면 넘어가지 않도록
   };
 
-  React.useEffect(() => {}, [alias]);
+  React.useEffect(() => { }, [alias]);
   React.useEffect(() => {
-    console.log("newAccess",newAccess);
+    console.log("newAccess", newAccess);
   }, [newAccess]);
 
   return (
@@ -199,6 +200,11 @@ function ChangeNickName() {
             >
               변경하기
             </Button>
+            <>
+              {
+                open ? <OpenModal open={open} /> : <Hidden />
+              }
+            </>
           </Box>
         </Container>
       </ThemeProvider>

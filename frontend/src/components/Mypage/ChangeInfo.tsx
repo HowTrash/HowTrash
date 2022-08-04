@@ -5,11 +5,7 @@ import {
     Grid,
     Typography,
     Container,
-    styled,
-    TextField,
     Box,
-    Link,
-    Button
 } from "@mui/material";
 import ChangePassWord from "./Change_password";
 import ChangeNickName from "./Change_nickname";
@@ -33,6 +29,7 @@ function ChangeInfo() {
                 borderColor: "transparent",
                 minWidth: "100%",
                 height: "90vh",
+                marginTop: 20,
             }}>
             <ThemeProvider theme={theme}>
                 <Typography
@@ -43,7 +40,7 @@ function ChangeInfo() {
                         mb: 1,
                         fontSize: "medium"
                     }}>
-                    내 정보 변경
+
                 </Typography>
 
                 <Grid container
@@ -54,9 +51,9 @@ function ChangeInfo() {
                         borderColor: "white",
                         justifyContent: "center",
                         height: "60vh",
-                        paddingTop: 50,
+                        paddingTop:50,
                         boxShadow: "1px 3px 3px #B0B09A",
-                    }}>
+                    }} sx={{ mt: 5 }}>
                     <Grid item xs={5}>
                         <Box>
                             <ChangeNickName />
@@ -79,9 +76,9 @@ function ChangeInfo() {
                     </Grid>
 
                 </Grid>
-            </ThemeProvider>
+        </ThemeProvider>
         </Container >
-
+        
     );
 }
 

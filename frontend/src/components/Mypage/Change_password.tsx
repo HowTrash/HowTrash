@@ -1,12 +1,10 @@
 import * as React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
-import { rs } from "src/utils/types";
 import { API_BASE_URL } from "src/utils/constants";
 import { getAccess } from "../../Auth/tokenManager";
 import { setAccessToken, setRefreshToken } from "src/Auth/tokenManager";
 import { useState } from "react";
-import Api from "../../utils/customApi";
 
 import {
     FormHelperText,
@@ -15,9 +13,10 @@ import {
     styled,
     TextField,
     Box,
-    Link,
-    Button
+    Button,
+    Hidden
 } from "@mui/material";
+import OpenModal from "./OpenModal"
 
 const theme = createTheme({
     palette: {
@@ -49,13 +48,14 @@ const FormHelperTexts = styled(FormHelperText)`
   font-size: 12px;
 `;
 
-
 function ChangePassWord() {
     const [passwordState, setPasswordState] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const passwordRegex = /^[가-힣a-zA-Z0-9]+$/;
 
-    const aliasChange = async (changePassword : string) => {
+    const [open, setOpen] = useState(false);
+
+    const aliasChange = async (changePassword: string) => {
         const stringAccess: any = getAccess();
 
         if (stringAccess !== null) { // stringAccess if문 안써주면 코드 오류 발생
@@ -72,8 +72,7 @@ function ChangePassWord() {
                     console.log("response", response.data);
                     setAccessToken(response.data.access_token, true); // 그 전의 access토큰 초기화
                     setRefreshToken(response.data.refresh_token, true); // 그 전의 refresh토큰 초기화
-                    alert("비밀번호가 정상적으로 변경되었습니다!");
-                    window.location.reload();
+                    setOpen(true);
                 })
                 .catch((e) => { // 의도치 않는 오류
                     alert("로그인 정보에 오류가 생겼습니다.");
@@ -193,6 +192,11 @@ function ChangePassWord() {
                         >
                             변경하기
                         </Button>
+                        <>
+                            {
+                                open ? <OpenModal open={open} /> : <Hidden />
+                            }
+                        </>
                     </Box>
                 </Container>
             </ThemeProvider>

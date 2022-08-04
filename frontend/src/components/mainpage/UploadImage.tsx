@@ -1,6 +1,6 @@
 import { Button, Typography, Box } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import React, { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Resizer from "react-image-file-resizer";
 import Api from "../../utils/customApi";
@@ -8,14 +8,35 @@ import { ReduxModule } from "../../modules/ReduxModule";
 import { getAccess } from "src/Auth/tokenManager";
 import { useDispatch } from "react-redux";
 import { save_ID } from "../../actions/ImgIDActions";
+import lottie from "lottie-web";
+
+const LoadingLottie = () => {
+  //lottie
+  const element = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    lottie.loadAnimation({
+      container: element.current as HTMLDivElement,
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      animationData: require("../../images/LottieLoading.json"),
+    });
+  }, []);
+  return <Box ref={element} style={{ marginTop: 60, height: 230 }}></Box>;
+};
 
 function UploadImage() {
   const [isImg, setIsImg] = useState(null);
   const [urlImg, setUrlImg] = useState("");
   const [respondImg, setRespondImg] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [checked, setChecked] = useState(false);
+
   const navigate = useNavigate();
   const userIdtoRedux = ReduxModule().decodeInfo?.id;
-  console.log(userIdtoRedux, "in uploadImage");
+
+  const dispatch = useDispatch();
+  const what: any = getAccess();
 
   const resizeFile = (file: Blob) =>
     new Promise((resolve) => {
@@ -33,8 +54,6 @@ function UploadImage() {
       );
     });
 
-  const dispatch = useDispatch();
-
   const onChangeImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
       const file: any =
@@ -50,35 +69,84 @@ function UploadImage() {
       console.log(err);
     }
   };
-  const what: any = getAccess();
 
   const sendImage: () => Promise<any> = async () => {
     const trashFormData = new FormData();
     trashFormData.append("filename", respondImg as any);
 
-    await Api.post(`/trash/users/${userIdtoRedux}/results`, trashFormData, {
-      headers: {
-        Authorization: `${what.value}`,
-      },
-    })
+    var task_id = "";
 
+    await Api.post(
+      `/trash/users/${userIdtoRedux}/results/tasks`,
+      trashFormData,
+      {
+        headers: {
+          Authorization: `${what.value}`,
+        },
+      }
+    )
       .then((res) => {
-        dispatch(save_ID(res.data.image_id));
-        //res.data.challenge : NONE 확인해야함
-        navigate(`/howtopage`);
+        task_id = res.data.task_id;
+        setChecked(true);
       })
       .catch((error) => {
         console.log("An error occurred:", error.response);
         navigate(`/errorpage`);
       });
+
+    if (task_id !== "") {
+      const getAnswer = () => {
+        Api.get(`/trash/users/${userIdtoRedux}/results/tasks/${task_id}`, {
+          headers: {
+            Authorization: `${what.value}`,
+          },
+        })
+          .then((res) => {
+            dispatch(save_ID(res.data.image_id));
+
+            if (res.status === 200) {
+              //제대로 들어갔을 때
+              console.log("successsuccesssuccesssuccess");
+              navigate(`/howtopage`, {
+                state: {
+                  challenge_id: res.data.challenge_id,
+                  challenge_content: res.data.challenge_content,
+                },
+              });
+              clearInterval(timer);
+            }
+          })
+          .catch((error) => {
+            // 분류 안됐을때
+            clearInterval(timer);
+            navigate("/errorpage");
+          });
+      };
+
+      const timer = setInterval(getAnswer, 2000);
+      return () => clearInterval(timer);
+    } // if
   };
 
   const onClickImgResult = () => {
     if (isImg === null) return alert("no image");
     else {
+      setLoading(true);
       sendImage();
     }
   };
+
+  if (loading)
+    return (
+      <div>
+        <LoadingLottie />
+        <Typography
+          sx={{ fontFamily: "Nanum1", mt: 2, fontSize: 20, fontWeight: "bold" }}
+        >
+          결과 분석 중 ..
+        </Typography>
+      </div>
+    );
 
   return (
     <Box>
@@ -92,7 +160,7 @@ function UploadImage() {
             backgroundColor: "white",
             width: 600,
             height: 300,
-            mt: 10,
+            mt: 5,
             "&:hover": {
               backgroundColor: "#D4D4D4",
               borderColor: "#F7F8E9",
