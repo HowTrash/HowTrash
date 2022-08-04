@@ -75,7 +75,6 @@ function Header() {
     if (token) {
       dispatch(fetchDecodeData(token as string));
     } else {
-      console.log("header.js not token");
     }
   }, []);
 

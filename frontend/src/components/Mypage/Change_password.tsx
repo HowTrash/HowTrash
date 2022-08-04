@@ -58,9 +58,7 @@ function ChangePassWord() {
     const aliasChange = async (changePassword: string) => {
         const stringAccess: any = getAccess();
 
-        if (stringAccess !== null) { // stringAccess if문 안써주면 코드 오류 발생
-            /* const access: rs.TokenInfo = JSON.parse(stringAccess); // string형태로 받는 토큰 JSON으로 만들어줌*/
-            console.log("넘겨줄 토큰값", stringAccess);
+        if (stringAccess !== null) { 
 
             await axios
                 .patch(`${API_BASE_URL}/users/`, { "value": { password: changePassword } }, { //patch : 바디 -> 변경할 alias & 헤더 -> 확인해야되는 토큰 
@@ -69,7 +67,6 @@ function ChangePassWord() {
                     },
                 })
                 .then((response) => {
-                    console.log("response", response.data);
                     setAccessToken(response.data.access_token, true); // 그 전의 access토큰 초기화
                     setRefreshToken(response.data.refresh_token, true); // 그 전의 refresh토큰 초기화
                     setOpen(true);
