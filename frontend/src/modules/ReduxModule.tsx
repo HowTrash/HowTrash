@@ -16,7 +16,7 @@ function ReduxModule() {
     if (token) {
       dispatch(fetchDecodeData(token as string));
     } else {
-      alert("잘못된 접근입니다.");
+      alert("로그아웃 상태입니다.");
     }
   }, []);
 

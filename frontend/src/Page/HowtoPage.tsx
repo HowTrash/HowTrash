@@ -68,7 +68,7 @@ const HowtoPage = () => {
   //none이 아니면 state.challenge를 인덱스로 state.challenge_content 를 갯수로
 
   return (
-    <Box textAlign={"center"}>
+    <Box textAlign={"center"} sx={{ mt: 10 }}>
       <div>
         <SearchBar />
         <Box
