@@ -4,8 +4,8 @@ import {
     Typography,
     Container,
     Box,
-    Button,
-    Link
+    Link,
+    Button
 } from "@mui/material";
 import lottie from "lottie-web";
 
@@ -16,18 +16,6 @@ const theme = createTheme({
         },
     },
 });
-
-const btnstyle = {
-    backgroundColor: "#B0B09A",
-    color: "#ffffff",
-    marginTop: "25px",
-    fontSize: "15px",
-    textDecoration: "none",
-    borderRadius: 4,
-    p: 1,
-    fontFamily: "Itim",
-    "&:hover": { backgroundColor: "#737458", color: "#ffffff" },
-};
 
 const Lottie = () => {
     const element = React.useRef<HTMLDivElement>(null);
@@ -95,6 +83,7 @@ function LogOut() {
                                 height: "auto",
                                 paddingTop: 30,
                                 alignItems: "center",
+                                textAlign: "center"
                             }}
                         >
                             <Typography
@@ -106,18 +95,31 @@ function LogOut() {
                             >
                                 로그아웃 하시겠습니까?
                             </Typography>
-                            <div style={{ marginTop: 25 }}>
+                            
+                            <div style={{ marginTop: 20 }}>
                                 <Lottie />
                             </div>
-                            <Container sx={{alignItems:"center", justifyContent:"center"}}>
-                                <Link href="/mainpage" onClick={deleteToken} sx={btnstyle}>
+
+                            <Link href="/mainpage" onClick={deleteToken}>
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    sx={{
+                                        mt: 3,
+                                        mb: 2,
+                                        height: 50,
+                                        color: "white",
+                                        fontWeight: "bold",
+                                        borderRadius: 3,
+                                        width: 400
+                                    }}>
                                     Log Out
-                                </Link>
-                            </Container>
+                                </Button>
+                            </Link>
                         </Container>
                     </Container>
                 </Container>
-            </ThemeProvider>
+            </ThemeProvider >
         </Container >
     );
 }
