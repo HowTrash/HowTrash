@@ -78,10 +78,6 @@ function Header() {
     }
   }, []);
 
-  function deleteToken() {
-    localStorage.clear();
-  }
-
   //============Mypage List============
   const navigate = useNavigate();
 
@@ -206,8 +202,6 @@ function Header() {
               </div>
               <Button>
                 <Link
-                  href="/mainpage"
-                  onClick={deleteToken}
                   sx={{
                     textDecoration: "none",
                     color: "#F7F8E9",
