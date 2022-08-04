@@ -1,10 +1,9 @@
 import { Box, TextField, IconButton, styled } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import Api from "../../utils/customApi";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 const ranklist: { kind: string; image: string }[] = [
     {

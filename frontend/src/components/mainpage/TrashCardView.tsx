@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Grid,
@@ -10,7 +10,6 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import axios from "axios";
 import useScrollFadeIn from '../../modules/useScrollFadeIn';
 import Api from "../../utils/customApi";
 
@@ -101,7 +100,6 @@ function MultiActionAreaCard() {
         setThirdData(trashlist[2]);
       })
       .catch((error) => {
-        console.log("error", error.response);
       });
     getRanking();
   }

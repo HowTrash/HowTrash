@@ -1,6 +1,5 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState} from "react";
 import Api from "src/utils/customApi";
 import { rs } from "src/utils/types";
 import { setAccessToken, setRefreshToken } from "src/Auth/tokenManager";
