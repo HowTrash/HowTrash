@@ -11,26 +11,29 @@ import {
   Typography,
 } from "@mui/material";
 import axios from "axios";
-import useScrollFadeIn from '../../actions/useScrollFadeIn';
+import useScrollFadeIn from "../../actions/useScrollFadeIn";
 
 interface BaseContent {
   kind: string;
   images: any;
 }
 
-const StyledBox =
-{
+const StyledBox = {
   border: 0,
   backgroundColor: "white",
   borderColor: "#759F98",
   borderRadius: 5,
   boxShadow: "1px 3px 3px #B0B09A",
   margin: "auto",
-  mt: 5
+  mt: 5,
 };
 
 const styledTypo = {
-  fontSize: 40, component: "div", mt: 5, fontFamily: "Itim", color: "#737458"
+  fontSize: 40,
+  component: "div",
+  mt: 5,
+  fontFamily: "Itim",
+  color: "#737458",
 };
 
 const trashlist: BaseContent[] = [
@@ -83,7 +86,7 @@ function MultiActionAreaCard() {
   const [thridData, setThirdData] = useState<BaseContent | null>(null);
 
   axios
-    .get("http://localhost:8080/API/trash/statistics/ranking")
+    .get("http://localhost:8080/api/trash/statistics/ranking")
     .then((response) => {
       for (let i = 0; i < 3; i++) {
         trashlist[i].kind = response.data[i].kind;
@@ -94,7 +97,6 @@ function MultiActionAreaCard() {
         }
       }
 
-
       setFirstData(trashlist[0]);
       setSecondData(trashlist[1]);
       setThirdData(trashlist[2]);
@@ -104,25 +106,27 @@ function MultiActionAreaCard() {
     });
 
   return (
-    <Grid container
+    <Grid
+      container
       sx={{ display: "flex", direction: "column", flexWrap: "wrap" }}
     >
-      <Grid item
-        sx={{ p: 2, width: "100%", justifyContent: "flex-start" }}
-      >
+      <Grid item sx={{ p: 2, width: "100%", justifyContent: "flex-start" }}>
         <Typography
           sx={{ fontSize: 40, mt: 10, fontFamily: "Itim", color: "#737458" }}
-        >1st
+        >
+          1st
         </Typography>
-        <Box  {...useScrollFadeIn('up', 1, 0.1)}>
+        <Box {...useScrollFadeIn("up", 1, 0.1)}>
           <Box style={StyledBox} sx={{ width: 800 }}>
-            <CardActionArea sx={{ borderRadius: 5 }} >
-              <CardMedia component="img" height="500" width="450" image={firstData?.images} sx={{ borderRadius: 5 }} />
-              <Typography
-                style={styledTypo}
-              >
-                {firstData?.kind}
-              </Typography>
+            <CardActionArea sx={{ borderRadius: 5 }}>
+              <CardMedia
+                component="img"
+                height="500"
+                width="450"
+                image={firstData?.images}
+                sx={{ borderRadius: 5 }}
+              />
+              <Typography style={styledTypo}>{firstData?.kind}</Typography>
             </CardActionArea>
           </Box>
           <Button
@@ -135,28 +139,44 @@ function MultiActionAreaCard() {
                 },
               });
             }}
-            sx={{ mt: 3, margin: "auto", fontFamily: "Itim", color: "#737458", fontSize: 20 }}
+            sx={{
+              mt: 3,
+              margin: "auto",
+              fontFamily: "Itim",
+              color: "#737458",
+              fontSize: 20,
+            }}
           >
             How to Recycle this {firstData?.kind}??
           </Button>
         </Box>
       </Grid>
 
-      <Grid item
-        sx={{ p: 2, width: "100%", marginLeft: "10cm", justifyContent: "flex-end" }}>
+      <Grid
+        item
+        sx={{
+          p: 2,
+          width: "100%",
+          marginLeft: "10cm",
+          justifyContent: "flex-end",
+        }}
+      >
         <Typography
           sx={{ fontSize: 40, mt: 10, fontFamily: "Itim", color: "#737458" }}
-        >2nd
+        >
+          2nd
         </Typography>
-        <Box   {...useScrollFadeIn('left', 1, 0.1)}>
+        <Box {...useScrollFadeIn("left", 1, 0.1)}>
           <Box style={StyledBox} sx={{ width: 650 }}>
             <CardActionArea sx={{ borderRadius: 5 }}>
-              <CardMedia component="img" height="500" width="450" image={secondData?.images} sx={{ borderRadius: 5 }} />
-              <Typography
-                style={styledTypo}
-              >
-                {secondData?.kind}
-              </Typography>
+              <CardMedia
+                component="img"
+                height="500"
+                width="450"
+                image={secondData?.images}
+                sx={{ borderRadius: 5 }}
+              />
+              <Typography style={styledTypo}>{secondData?.kind}</Typography>
             </CardActionArea>
           </Box>
 
@@ -170,28 +190,36 @@ function MultiActionAreaCard() {
                 },
               });
             }}
-            sx={{ mt: 3, margin: "auto", fontFamily: "Itim", color: "#737458", fontSize: 20 }}
+            sx={{
+              mt: 3,
+              margin: "auto",
+              fontFamily: "Itim",
+              color: "#737458",
+              fontSize: 20,
+            }}
           >
             How to Recycle this {secondData?.kind}??
           </Button>
         </Box>
       </Grid>
 
-      <Box
-        sx={{ p: 2, width: "100%", marginRight: "20cm" }}>
+      <Box sx={{ p: 2, width: "100%", marginRight: "20cm" }}>
         <Typography
           sx={{ fontSize: 40, mt: 10, fontFamily: "Itim", color: "#737458" }}
-        >3rd
+        >
+          3rd
         </Typography>
-        <Box {...useScrollFadeIn('right', 1, 0.1)}>
+        <Box {...useScrollFadeIn("right", 1, 0.1)}>
           <Box style={StyledBox} sx={{ width: 500 }}>
             <CardActionArea sx={{ borderRadius: 5 }}>
-              <CardMedia component="img" height="500" width="450" image={thridData?.images} sx={{ borderRadius: 5 }} />
-              <Typography
-                style={styledTypo}
-              >
-                {thridData?.kind}
-              </Typography>
+              <CardMedia
+                component="img"
+                height="500"
+                width="450"
+                image={thridData?.images}
+                sx={{ borderRadius: 5 }}
+              />
+              <Typography style={styledTypo}>{thridData?.kind}</Typography>
             </CardActionArea>
           </Box>
           <Button
@@ -204,7 +232,13 @@ function MultiActionAreaCard() {
                 },
               });
             }}
-            sx={{ mt: 3, margin: "auto", fontFamily: "Itim", color: "#737458", fontSize: 20 }}
+            sx={{
+              mt: 3,
+              margin: "auto",
+              fontFamily: "Itim",
+              color: "#737458",
+              fontSize: 20,
+            }}
           >
             How to Recycle this {thridData?.kind}??
           </Button>

@@ -16,7 +16,6 @@ import MyChallenge from "./components/Mypage/MyChallenge";
 import ChangeInfo from "./components/Mypage/ChangeInfo";
 import UploadResult from "./components/mainpage/UploadResult";
 import AuthRouter from "./Auth/AuthRouter";
-import StartPage from "./Page/StartPage";
 import Footer from "./components/common/Footer";
 
 function App() {
@@ -25,7 +24,6 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path="/" element={<StartPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/login/welcome" element={<LoginSuccess />} />
           <Route path="/register" element={<Register />} />

@@ -65,8 +65,9 @@ function UploadImage() {
       setIsImg(img);
       setUrlImg(URL.createObjectURL(img));
       console.log("success upload image!");
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      alert("파일 형식이 잘못되었습니다.");
+      console.log("file Type error", error);
     }
   };
 
@@ -106,7 +107,6 @@ function UploadImage() {
 
             if (res.status === 200) {
               //제대로 들어갔을 때
-              console.log("successsuccesssuccesssuccess");
               navigate(`/howtopage`, {
                 state: {
                   challenge_id: res.data.challenge_id,
@@ -125,7 +125,7 @@ function UploadImage() {
 
       const timer = setInterval(getAnswer, 2000);
       return () => clearInterval(timer);
-    } // if
+    }
   };
 
   const onClickImgResult = () => {

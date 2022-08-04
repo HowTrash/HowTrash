@@ -15,5 +15,4 @@ export interface decodeSucccessDispatch {
   payload: DecodePropsType;
 }
 
-//성공햇을떄 넘어온 데이터를 payload 에 저장
 export type DecodeDispatchType = decodeFailDispatch | decodeSucccessDispatch;

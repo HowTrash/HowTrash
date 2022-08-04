@@ -60,8 +60,8 @@ const HowtoPage = () => {
       console.log("x가 뭔대ㅔ요 ... ", x);
       var y: number = +x;
       console.log("y가 뭔데요 ㅠㅠ", y);
-      setChallengeImgURL(constants.CHALLENGE[y].imgT);
-      setChallengeText(constants.CHALLENGE[y].test);
+      setChallengeImgURL(constants.CHALLENGE[y - 1].imgT);
+      setChallengeText(constants.CHALLENGE[y - 1].test);
     }
   }, []);
 
