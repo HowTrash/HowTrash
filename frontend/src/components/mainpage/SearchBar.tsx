@@ -65,9 +65,9 @@ const SearchBar = () => {
     const [input, setInput] = useState("");
     let navigate = useNavigate();
 
-    const onSubmit = (input: string) => {
-        axios
-            .post(`http://localhost:8080/api/search/`, { value: input })
+    const onSubmit = async(input: string) => {
+        await
+            Api.post(`/search/`, { value: input })
             .then((response) => {
                 let trashIMG = "";
                 for (let j = 0; j < 6; j++) {
