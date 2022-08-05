@@ -53,15 +53,29 @@ const HowtoPage = () => {
   //❌
 
   useEffect(() => {
-    if (state.challenge_id !== "NONE") {
-      handleOpen();
-      console.log("challenge가 뭔데요 ...", state.challenge_id);
-      const x = state.challenge_id; // 형변환
-      console.log("x가 뭔대ㅔ요 ... ", x);
-      var y: number = +x;
-      console.log("y가 뭔데요 ㅠㅠ", y);
-      setChallengeImgURL(constants.CHALLENGE[y].imgT);
-      setChallengeText(constants.CHALLENGE[y].test);
+    // if (state.challenge_id !== "NONE") {
+    //   handleOpen();
+    //   console.log("challenge가 뭔데요 ...", state.challenge_id);
+    //   const x = state.challenge_id; // 형변환
+    //   console.log("x가 뭔대ㅔ요 ... ", x);
+    //   var y: number = +x;
+    //   console.log("y가 뭔데요 ㅠㅠ", y);
+    //   setChallengeImgURL(constants.CHALLENGE[y].imgT);
+    //   setChallengeText(constants.CHALLENGE[y].test);
+    // }
+    if (state.challenge_id === "no") {
+      console.log("Multi에서 넘어옴 ");
+    } else {
+      if (state.challenge_id !== "NONE") {
+        handleOpen();
+        console.log("challenge가 뭔데요 ...", state.challenge_id);
+        const x = state.challenge_id; // 형변환
+        console.log("x가 뭔대ㅔ요 ... ", x);
+        var y: number = +x;
+        console.log("y가 뭔데요 ㅠㅠ", y);
+        setChallengeImgURL(constants.CHALLENGE[y - 1].imgT);
+        setChallengeText(constants.CHALLENGE[y - 1].test);
+      }
     }
   }, []);
 

@@ -64,8 +64,7 @@ function UploadImage() {
       const img: any = await resizeFile(file);
       setIsImg(img);
       setUrlImg(URL.createObjectURL(img));
-    } catch (err) {
-    }
+    } catch (err) {}
   };
 
   const sendImage: () => Promise<any> = async () => {
@@ -114,6 +113,7 @@ function UploadImage() {
           })
           .catch((error) => {
             // 분류 안됐을때
+            console.log(error.data.ai_result);
             clearInterval(timer);
             navigate("/errorpage");
           });

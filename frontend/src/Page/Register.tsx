@@ -73,7 +73,7 @@ const UserInfoTf = styled(TextField)(({}) => ({
 
 const FormHelperTexts = styled(FormHelperText)`
   width: 100%;
-  padding:6px;
+  padding: 6px;
   font-weight: 600;
   color: #c65959;
   font-size: 12px;
@@ -135,7 +135,6 @@ const Register = () => {
       nameRegex.test(user.name as string) &&
       aliasRegex.test(user.alias as string)
     ) {
-
       Api.post<User>(`/users/`, user)
 
         .then((response) => {
@@ -164,9 +163,7 @@ const Register = () => {
       if (!nameRegex.test(name as string) || (name as string).length < 1) {
         setCheckName("올바른 이름을 입력해주세요.");
       } else {
-      
         if (res.data.result === false) setCheckName("사용 중인 아이디입니다.");
-
         else setCheckName("사용 가능한 아이디 입니다.");
       }
     }
@@ -174,9 +171,8 @@ const Register = () => {
       if (!emailRegex.test(email as string)) {
         setCheckEmail("올바른 이메일 형식이 아닙니다.");
       } else {
-
-        if (res.data.result === false) setCheckEmail("사용 중인 이메일 입니다.");
-
+        if (res.data.result === false)
+          setCheckEmail("사용 중인 이메일 입니다.");
         else setCheckEmail("사용 가능한 이메일 입니다.");
       }
     }
@@ -199,11 +195,11 @@ const Register = () => {
         border: "solid",
         borderColor: "#F7F8E9",
         minWidth: "100%",
-        height: "100vh",
+        height: "100%",
       }}
     >
       <ThemeProvider theme={theme}>
-        <Container component="main" maxWidth="xs" sx={{ mb: 25, mt: 15 }}>
+        <Container component="main" maxWidth="xs" sx={{ mt: 15, mb: 20 }}>
           <CssBaseline />
           <Box
             sx={{
@@ -303,7 +299,6 @@ const Register = () => {
                   variant="contained"
                   sx={{
                     mt: 3,
-                    mb: 50,
                     height: 50,
                     color: "white",
                     fontWeight: "bold",

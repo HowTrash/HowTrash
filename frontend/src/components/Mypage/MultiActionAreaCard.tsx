@@ -27,7 +27,11 @@ export default function MultiActionAreaCard({ image = "", id = "" }) {
   const dispatch = useDispatch();
   const onDispatch = () => {
     dispatch(save_ID(id));
-    navigate(`/howtopage`);
+    navigate(`/howtopage`, {
+      state: {
+        challenge_id: "no",
+      },
+    });
   };
 
   return (

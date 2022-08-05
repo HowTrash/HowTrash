@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState} from "react";
+import { useState } from "react";
 import Api from "src/utils/customApi";
 import { rs } from "src/utils/types";
 import { setAccessToken, setRefreshToken } from "src/Auth/tokenManager";
@@ -42,8 +42,8 @@ function Login() {
       setSaveInfo(result);
 
       if (result.access_token !== null) {
-        setAccessToken(result.access_token,false);
-        setRefreshToken(result.refresh_token,false);
+        setAccessToken(result.access_token, false);
+        setRefreshToken(result.refresh_token, false);
         alert("로그인 성공♻️");
 
         decodeToken(result.access_token);
